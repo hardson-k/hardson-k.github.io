@@ -1,0 +1,219 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body{
+	font-family:"Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+	text-align: center;
+	background-image:url("../image/PSX_20191027_233339.jpg")
+	
+}
+.title{/*头部*/
+	display: flex;
+	padding: 0px,20px,0px,0px;
+	justify-content:space-around;
+	align-items: center;
+	height: 15rem;
+	background-color: deepskyblue;
+	 
+}
+.title div{
+	margin-left: 20%; 
+	flex-grow: 2
+}
+
+.title img{
+	width:auto;
+        height:auto;
+        max-width:10rem;
+        max-height:10rem;
+}
+
+.title h1{
+	text-align: center;
+	padding: 0,10rem;
+	font-size: 50px;
+	flex-grow:1;	
+}
+
+/*...................*/
+
+
+.lead{/*导航适应设置*/
+	float:right;
+	margin:0,auto;
+	position:fixed;
+	padding: 20px,5px;
+	background-color:#BEBEBE;
+	height:30px;width: auto;
+	top:0px;
+	transition: 1s;
+}
+
+
+.navigation {/*普通导航栏适应布局*/
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0px,5px; 
+  background:#bebebe;
+}
+.navigation a {
+  display: block;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #bebebe;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+	transition: 1s;
+}
+
+.navigation a:hover {/*导航悬停样式*/
+  background:deepskyblue;
+}
+@media all and (max-width: 800px) {
+  .navigation {
+    justify-content: space-around;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .navigation {
+    flex-flow: column wrap;
+    padding: 0;
+  }
+  .navigation a { 
+    text-align: center; 
+    padding: 10px; 
+  }
+  .navigation li:last-of-type a {
+    border-bottom: none;
+	  text-align: center;
+  }
+}
+
+/*.............计算器................*/
+.stage {
+  display: flex;
+	justify-content: center;
+  margin: 5% auto;
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing: 5px;
+  font-size: 1.8rem;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.calculator {
+	width: 470px;
+  padding: 40px;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.7);
+  border-radius:30px;
+	background-color: aliceblue
+}
+
+.input {
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  height: 60px;
+  padding-right: 15px;
+  padding-top: 10px;
+  text-align: right;
+  margin-right: 6px;
+  font-size: 2.5rem;
+  overflow-x: auto;
+  transition: all .2s ease-in-out;
+}
+
+.input:hover {
+  border: 1px solid #bbb;
+  -webkit-box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.buttons {}
+
+.operators {}
+
+.operators div {
+  display: inline-block;
+  border: 1px solid #bbb;
+  border-radius: 1px;
+  width: 80px;
+  text-align: center;
+  padding: 10px;
+  margin: 20px 4px 10px 0;
+  cursor: pointer;
+  background-color: #ddd;
+  transition: border-color .2s ease-in-out, background-color .2s, box-shadow .2s;
+}
+
+.operators div:hover {
+  background-color: #ddd;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  border-color: #aaa;
+}
+
+.operators div:active {
+  font-weight: bold;
+}
+
+.leftPanel {
+  display: inline-block;
+}
+
+.numbers div {
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  width: 80px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px 4px 10px 0;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: border-color .2s ease-in-out, background-color .2s, box-shadow .2s;
+}
+
+.numbers div:hover {
+  background-color: #f1f1f1;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  border-color: #bbb;
+}
+
+.numbers div:active {
+  font-weight: bold;
+}
+
+div.equal {
+  display: inline-block;
+  border: 1px solid #3079ED;
+  border-radius: 1px;
+  width: 17%;
+  text-align: center;
+  padding: 127px 10px;
+  margin: 10px 6px 10px 0;
+  vertical-align: top;
+  cursor: pointer;
+  color: #FFF;
+  background-color: #4d90fe;
+  transition: all .2s ease-in-out;
+}
+
+div.equal:hover {
+  background-color: #307CF9;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  border-color: #1857BB;
+}
+
+div.equal:active {
+  font-weight: bold;
+}
