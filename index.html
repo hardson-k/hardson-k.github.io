@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康辉的个人作品集 - 主页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 保持与其他页面一致的样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans SC", sans-serif;
+        }
+        :root {
+            --primary-color: #202de1;
+            --primary-light: #4a5ae9;
+            --primary-dark: #1a25b4;
+            --accent-color: #ff6b6b;
+            --text-dark: #000000;
+            --text-light: #666666;
+            --bg-light: #f5f7fa;
+            --border-color: #e1e5eb;
+        }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 15px 30px;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-light);
+        }
+        /* 主页内容样式 */
+        .hero {
+            padding: 60px 40px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-title {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 40px;
+        }
+        .card {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .card-image {
+            height: 160px;
+            background-color: #e9e9e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 36px;
+        }
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        .card-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .card-link:hover {
+            background-color: var(--primary-light);
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: var(--text-light);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                margin: 5px;
+            }
+            .hero {
+                padding: 40px 20px;
+            }
+            .hero-title {
+                font-size: 32px;
+            }
+            .card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="logo">康辉的个人作品集</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">主页</a>
+                <a href="html/resume.html" class="nav-link">个人简历</a>
+                <a href="html/graphic-design.html" class="nav-link">平面设计作品</a>
+                <a href="html/spatial-planning.html" class="nav-link">国空规划作品</a>
+                <a href="html/video-works.html" class="nav-link">视频作品</a>
+            </div>
+        </nav>
+
+        <!-- 主页内容 -->
+        <div class="hero">
+            <h1 class="hero-title">康辉的个人作品集</h1>
+            <p class="hero-subtitle">地理学硕士 | 平面设计师 | 国土空间规划师</p>
+            <div class="intro">
+                <p>欢迎访问我的个人作品集网站。我是哈尔滨师范大学地理学硕士，同时拥有数字媒体技术和地理学专业背景，擅长国土空间规划、二维、三维设计与影视后期。</p>
+                <p>通过本网站，您可以了解我的个人经历、学术成果以及各类设计作品。感谢您的访问！</p>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="card-image">📄</div>
+                <div class="card-content">
+                    <h3 class="card-title">个人简历</h3>
+                    <p class="card-desc">查看我的教育背景、项目经历和所获荣誉</p>
+                    <a href="html/resume.html" class="card-link">查看详情</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-image">🎨</div>
+                <div class="card-content">
+                    <h3 class="card-title">平面设计作品</h3>
+                    <p class="card-desc">浏览我的海报、VI设计等平面作品</p>
+                    <a href="html/graphic-design.html" class="card-link">查看详情</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-image">🗺️</div>
+                <div class="card-content">
+                    <h3 class="card-title">国空规划作品</h3>
+                    <p class="card-desc">查看我的国土空间规划项目成果</p>
+                    <a href="html/spatial-planning.html" class="card-link">查看详情</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-image">🎥</div>
+                <div class="card-content">
+                    <h3 class="card-title">视频作品</h3>
+                    <p class="card-desc">观看我的各类视频制作成果</p>
+                    <a href="html/video-works.html" class="card-link">查看详情</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2025 康辉的个人作品集 | 联系方式: hardsonk@163.com</p>
+        </footer>
+    </div>
+</body>
+</html>

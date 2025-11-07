@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康辉的个人简历</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 保留原有的完整CSS样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans SC", sans-serif;
+        }
+        :root {
+            --primary-color: #202de1;
+            --primary-light: #4a5ae9;
+            --primary-dark: #1a25b4;
+            --accent-color: #ff6b6b;
+            --text-dark: #000000;
+            --text-light: #666666;
+            --bg-light: #f5f7fa;
+            --border-color: #e1e5eb;
+        }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 15px 30px;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-light);
+        }
+        /* 页面内容样式 */
+        .page-content {
+            padding: 40px;
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        .page-subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        /* 简历内容样式 */
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+        }
+        .personal-info {
+            flex: 1;
+        }
+        .name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        .basic-info {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .basic-info div {
+            margin-right: 20px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .contact-info div {
+            margin-right: 20px;
+            margin-bottom: 5px;
+        }
+        .photo-container {
+            width: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .photo-frame {
+            width: 120px;
+            height: 150px;
+            border: 2px solid var(--border-color);
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-label {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .education-item, .experience-item {
+            margin-bottom: 20px;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .item-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+        .item-time {
+            color: var(--text-light);
+        }
+        .item-details {
+            margin-left: 20px;
+        }
+        .item-details ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .item-details li {
+            margin-bottom: 5px;
+        }
+        .honor-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .honor-item {
+            width: 50%;
+            margin-bottom: 10px;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: var(--text-light);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                margin: 5px;
+            }
+            .page-content {
+                padding: 20px;
+            }
+            .resume-header {
+                flex-direction: column;
+            }
+            .photo-container {
+                width: 100%;
+                margin-top: 20px;
+                order: -1;
+            }
+            .basic-info, .contact-info {
+                flex-direction: column;
+            }
+            .basic-info div, .contact-info div {
+                margin: 5px 0;
+            }
+            .honor-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 - 新增主页按钮 -->
+        <nav class="navbar">
+            <div class="logo">康辉的个人作品集</div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">主页</a>
+                <a href="resume.html" class="nav-link active">个人简历</a>
+                <a href="graphic-design.html" class="nav-link">平面设计作品</a>
+                <a href="spatial-planning.html" class="nav-link">国空规划作品</a>
+                <a href="video-works.html" class="nav-link">视频作品</a>
+            </div>
+        </nav>
+
+        <!-- 页面内容 (保持不变) -->
+        <div class="page-content">
+            <div id="resume" class="page active">
+                <h1 class="page-title">康辉的个人简历</h1>
+                
+                <!-- 头部信息 -->
+                <div class="resume-header">
+                    <div class="personal-info">
+                        <div class="name">康辉</div>
+                        <div class="basic-info">
+                            <div>男</div>
+                            <div>硕士</div>
+                            <div>中共党员</div>
+                            <div>CET-4</div>
+                        </div>
+                        <div class="contact-info">
+                            <div>电话: 13704615667</div>
+                            <div>邮箱: hardsonk@163.com</div>
+                        </div>
+                    </div>
+                    <div class="photo-container">
+                        <div class="photo-frame">
+                        <img src="../image/2024HIMO-w.jpg" width="3954" height="5271" alt=""/> </div>
+                        <div class="photo-label">个人照片</div>
+                    </div>
+                </div>
+                
+                <!-- 教育背景 -->
+                <div class="section">
+                    <div class="section-title">教育背景</div>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div class="item-title">硕士 - 哈尔滨师范大学地理学</div>
+                            <div class="item-time">2022.09-2025.06</div>
+                        </div>
+                        <div class="item-details">
+                            <p>GPA: 4.1/5.0 (专业排名: 2/25)</p>
+                            <p>主修课程: 3S技术应用、区域经济地理研究、旅游地理学、城市地理学等</p>
+                            <p>学术成果:</p>
+                            <ul>
+                                <li>黑龙江乡村生活质量空间格局及影响因素《农业与技术》(省级，一作)</li>
+                                <li>The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China.《Front.Sustain. Food Syst.》(SCI二区，二作)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div class="item-title">本科 - 哈尔滨师范大学数字媒体技术</div>
+                            <div class="item-time">2018.09-2022.06</div>
+                        </div>
+                        <div class="item-details">
+                            <p>GPA: 4/5.0 (专业排名: 10/70)</p>
+                            <p>主修课程: Unity3D游戏制作、3D模型设计、三维动画、二维动画、web前端设计、ui设计等</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目经历 -->
+                <div class="section">
+                    <div class="section-title">项目经历</div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">国土空间总体规划编制</div>
+                            <div class="item-time">2022.09-2025.03</div>
+                        </div>
+                        <div class="item-details">
+                            <p>深度参与导师平台的横向国土空间规划编制项目，项目总价值超100万元，理论与实践得到充分结合</p>
+                            <ul>
+                                <li>全域调研: 带队完成40个多行政单位调研，运用无人机航拍+GIS技术建立初步现状模型</li>
+                                <li>图纸绘制: 通过Illustrator+ArcGIS制图，独立完成国空20余项图件绘制，绘制修改超500张，支撑团队工作效率提高至每两周一次成果汇总</li>
+                                <li>文本规范: 编制规划文本总页数超500页，获省自然资源厅专家组逻辑清晰、可实施性强等评价</li>
+                                <li>技术贡献: 开展ArcGIS与Adobe软件协同培训达12场，累计培训超30人，提升团队出图效率35%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">县域城乡融合对耕地利用绿色转型的影响机制与调控</div>
+                            <div class="item-time">2024.12-2027.12</div>
+                        </div>
+                        <div class="item-details">
+                            <p>省部级政府资助项目，项目经费十万元，成果为学术论文</p>
+                            <ul>
+                                <li>数据获取: 带队完成走访调研,通过调取年鉴、爬取等方式获得统计数据,并完成数据的初步整理、清洗、标准化</li>
+                                <li>图纸绘制: 充分利用制图技术，团队合作完成论文图件的绘制与修订</li>
+                                <li>帮助支持: 为团队后续成员展开培训并在毕业期间完成工作交接，毕业后仍进行技术支持</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 校园经历 -->
+                <div class="section">
+                    <div class="section-title">校园经历</div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">地理科学学院 - 班长(人文地理学)</div>
+                            <div class="item-time">2022.09-2025.06</div>
+                        </div>
+                        <div class="item-details">
+                            <ul>
+                                <li>搭建双向沟通机制: 精准传达200+项政策通知，创新采用「信息分级+FAQ答疑」模式降低信息失真率</li>
+                                <li>统筹团结班级: 发扬善于交际特长，组织学术沙龙、节庆联欢等10余场课余活动，同学满意度100%(学院最高)</li>
+                                <li>开创共享文档协作体系: 实现课程资料/科研成果云端实时同步，累计节省800+小时沟通成本</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">哈尔滨师范大学学生会 - 副主席</div>
+                            <div class="item-time">2020.09-2021.06</div>
+                        </div>
+                        <div class="item-details">
+                            <ul>
+                                <li>学生会管理: 统筹宣传部与其他部门协同工作，带领新媒体矩阵粉丝量从2.5万至3.5万(40%)，创单篇推文转发量10w+记录</li>
+                                <li>技术支持: 培训、操刀海报、H5等物料的制作，成功为校各大典礼、团省委宣讲活动等20余场大型活动提供全案视觉支持</li>
+                                <li>活动执行: 深度参与10余场校级赛事活动的全周期运营，统筹宣传、场控等，优化人员协作效率</li>
+                                <li>对外联络: 代表学校对接22个二级学院及省内40余所高校，维系常态化沟通，促成联合活动10余场</li>
+                                <li>社会责任: 疫情期间组建抗疫青年突击队，组织线上活动若干，获优秀抗疫青年志愿者称号</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 实习经历 -->
+                <div class="section">
+                    <div class="section-title">实习经历</div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">哈尔滨市城乡规划设计研究院 - 国土空间规划助理实习生</div>
+                            <div class="item-time">2023.03-2023.06</div>
+                        </div>
+                        <div class="item-details">
+                            <ul>
+                                <li>数据处理: 运用ArcGIS完成绥化市20余个县域的三调数据及基础设施现状的整理和规划意见收集</li>
+                                <li>文本编制: 独立完成200余页规划文本中"三区三线"等内容的撰写及相关图表和图件的制作</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div class="item-title">哈尔滨维塔视觉传媒有限公司 - 平面设计师实习生</div>
+                            <div class="item-time">2021.09-2021.12</div>
+                        </div>
+                        <div class="item-details">
+                            <ul>
+                                <li>设计经验: 独立完成教育/零售行业80+张高点击率海报</li>
+                                <li>流程优化: 建立PSD图层标准化模板，减少无效沟通10小时/周，团队作品效率提升40%</li>
+                                <li>跨界执行: 主导3场500人+线下活动舞美设计，实现后期制作到现场实施的完美落地</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 荣誉与奖励 -->
+                <div class="section">
+                    <div class="section-title">荣誉与奖励</div>
+                    <div class="honor-list">
+                        <div class="honor-item">2020.05 哈尔滨师范大学优秀学生团员</div>
+                        <div class="honor-item">2021.05 哈尔滨师范大学优秀学生团员</div>
+                        <div class="honor-item">2021.05 哈尔滨师范大学抗疫优秀青年志愿者</div>
+                        <div class="honor-item">2023.04 哈尔滨师范大学优秀共青团员</div>
+                        <div class="honor-item">2023.11 哈尔滨师范大学优秀研究生干部</div>
+                        <div class="honor-item">2024.06 哈尔滨师范大学二等硕士生学业奖学金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2025 康辉的个人作品集 | 联系方式: hardsonk@163.com</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康辉的视频作品</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 保留原有的完整CSS样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans SC", sans-serif;
+        }
+        :root {
+            --primary-color: #202de1;
+            --primary-light: #4a5ae9;
+            --primary-dark: #1a25b4;
+            --accent-color: #ff6b6b;
+            --text-dark: #000000;
+            --text-light: #666666;
+            --bg-light: #f5f7fa;
+            --border-color: #e1e5eb;
+        }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 15px 30px;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-light);
+        }
+        /* 页面内容样式 */
+        .page-content {
+            padding: 40px;
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        .page-subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        /* 视频展示样式 */
+        .video-container {
+            margin-bottom: 40px;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 宽高比 */
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            color: white;
+            text-align: center;
+        }
+        .video-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .video-caption {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: var(--text-light);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                margin: 5px;
+            }
+            .page-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 - 新增主页按钮 -->
+        <nav class="navbar">
+            <div class="logo">康辉的个人作品集</div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">主页</a>
+                <a href="resume.html" class="nav-link">个人简历</a>
+                <a href="graphic-design.html" class="nav-link">平面设计作品</a>
+                <a href="spatial-planning.html" class="nav-link">国空规划作品</a>
+                <a href="video-works.html" class="nav-link active">视频作品</a>
+            </div>
+        </nav>
+
+        <!-- 页面内容 (保持不变) -->
+        <div class="page-content">
+            <div id="video-works" class="page">
+                <h1 class="page-title">康辉的作品集</h1>
+                <h2 class="page-subtitle">视频作品</h2>
+                
+                <!-- 视频展示 -->
+                <div class="section">
+                    <h3 class="section-title">平面设计</h3>
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="width: 100% ; height: inherit"  src="//player.bilibili.com/player.html?isOutside=true&aid=331515770&bvid=BV1ZA411u7Fk&cid=295586555&p=0 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="video-caption">使用Iillstrator 绘制红包封面&nbsp;</div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="section">
+                    <h3 class="section-title">后期制作</h3>
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="width: 100% ; height: inherit" src="//player.bilibili.com/player.html?isOutside=true&aid=333457792&bvid=BV1Ww411Z7DB&cid=348978290&p=1 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="video-caption">AE制作应用开屏动画</div>
+                    </div>
+                    
+					<div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="width: 100% ; height: inherit" src="//player.bilibili.com/player.html?isOutside=true&aid=803414716&bvid=BV1ey4y137iV&cid=348979835&p=1  &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>			
+                            </div>
+                        </div>
+                        <div class="video-caption">AE制作LOGO动画</div>
+                    </div>
+					
+					<div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="height: 100%; width: inherit" src="//player.bilibili.com/player.html?isOutside=true&aid=333441952&bvid=BV1vA41137zU&cid=348985295&p=1 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="video-caption">AE制作节日主题动画&nbsp;</div>
+                    </div>
+					
+					<div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="height: 100%; width: inherit"src="//player.bilibili.com/player.html?isOutside=true&aid=376102814&bvid=BV1bo4y1y7Z8&cid=350531635&p=1 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="video-caption">AE制作三维演绎效果&nbsp;</div>
+                    </div>
+                    
+					<div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="width: 100% ; height: inherit" src="//player.bilibili.com/player.html?isOutside=true&aid=897710795&bvid=BV1eN4y137FP&cid=752511594&p=0 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+								
+                            </div>
+                        </div>
+                        <div class="video-caption">结合AE flash C4D等制作的三维动画与场景视频</div>
+                    </div>
+					
+					<div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="width: 100% ; height: inherit" src="//player.bilibili.com/player.html?isOutside=true&aid=115508263460844&bvid=BV1rZ2gB7EWf&cid=25903566896&p=1 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="video-caption">LOGO演绎动画&nbsp;</div>
+                    </div>
+			 </div>
+                
+                <div class="section">
+                    <h3 class="section-title">模型动画</h3>
+					<div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <iframe style="width: 100% ; height: inherit" src="//player.bilibili.com/player.html?isOutside=true&aid=115508850466258&bvid=BV1W111BEEdc&cid=25903697947&p=1 &autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                            </div>
+                        </div>
+                        <div class="video-caption">使用C4D和PR制作的3d小动画&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2024 康辉的个人作品集 | 联系方式: hardsonk@163.com</p>
+        </footer>
+    </div>
+</body>
+</html>

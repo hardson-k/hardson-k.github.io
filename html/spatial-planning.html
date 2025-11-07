@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康辉的国空规划作品</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans SC", sans-serif;
+        }
+        :root {
+            --primary-color: #202de1;
+            --primary-light: #4a5ae9;
+            --primary-dark: #1a25b4;
+            --accent-color: #ff6b6b;
+            --text-dark: #000000;
+            --text-light: #666666;
+            --bg-light: #f5f7fa;
+            --border-color: #e1e5eb;
+        }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 15px 30px;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-light);
+        }
+        /* 页面内容样式 */
+        .page-content {
+            padding: 40px;
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        .page-subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        /* 图片展示样式 */
+        .image-container {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+			align-item: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .image-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .image-placeholder {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .image-caption {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        /* A4尺寸展示 */
+        .a4-container {
+            display: inline-flex;
+           // flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+			max-width: 700px;
+			
+        }
+        .a4-item {
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            max-width: 100%;
+			margin: 10px;
+        }
+        .a4-item:hover {
+            transform: scale(1.03);
+			
+        }
+        .a4-portrait {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+        }
+        .a4-landscape {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+        }
+        .a4-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+            border: 1px solid #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+        .a4-placeholder img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        /* 瀑布流布局 */
+        .waterfall-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .waterfall-item {
+            width: 100%;
+            max-width: 700px;
+			margin: 10px; 
+        }
+        .waterfall-item .image-placeholder {
+            height: auto;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: var(--text-light);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+		  #backToTop {
+    /* 按钮定位：固定在右下角 */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    
+    /* 按钮样式 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color); /* 使用现有主题色 */
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    
+    /* 初始隐藏 */
+    opacity: 0;
+    visibility: hidden;
+    
+    /* 过渡动画：显示/隐藏时平滑过渡 */
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    transform: translateY(20px); /* 初始位置向下偏移，增强动画效果 */
+  }
+
+  /* 按钮悬停效果 */
+  #backToTop:hover {
+    background-color: var(--primary-dark); /* 深色主题色 */
+    transform: translateY(-2px); /* 轻微上浮 */
+  }
+
+  /* 显示按钮的类 */
+  #backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* 回到正常位置 */
+  }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                margin: 5px;
+            }
+            .page-content {
+                padding: 20px;
+            }
+            .waterfall-item,
+            .a4-portrait, 
+            .a4-landscape {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+	
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="logo">康辉的个人作品集</div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">主页</a>
+                <a href="resume.html" class="nav-link">个人简历</a>
+                <a href="graphic-design.html" class="nav-link">平面设计作品</a>
+                <a href="spatial-planning.html" class="nav-link active">国空规划作品</a>
+                <a href="video-works.html" class="nav-link">视频作品</a>
+            </div>
+        </nav>
+
+        <!-- 页面内容 -->
+        <div class="page-content">
+            <div id="spatial-planning" class="page">
+                <h1 class="page-title">康辉的作品集</h1>
+                <h2 class="page-subtitle">国空规划作品</h2>
+              
+                <!-- 瀑布流布局 -->
+                <div class="section">
+                    <h3 class="section-title">案例1（部分图件）&nbsp;</h3>
+                    <div class="waterfall-container">
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_01-用地现状.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域A</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_04-总体格局.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_02-三区三线.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_06-用地规划.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域C</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_00-农业空间.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域D</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_00-产业空间.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域E</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_08-生活圈.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_10-基础设施.png" width="3508" height="2481" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_16-驻地规划.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_18-驻地绿地.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div><div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/SJ_20-驻地防灾减灾.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+						<div class="a4-container">
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/SJ_YCYB-2A.png" width="3508" height="2481" alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案一</div>
+                        </div>
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/SJ_YCYB-2B.png" width="3508" height="2481" alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案二</div>
+                        </div>
+                    </div>
+						<div class="a4-container">
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/SJ_YCYB-1A.png" width="3508" height="2481" alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案一</div>
+                        </div>
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/SJ_YCYB-1B.png" width="3508" height="2481" alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案二</div>
+                        </div>
+                    </div>
+                        </div>
+					</div>
+				</div>
+				
+                <div class="section">
+                    <h3 class="section-title">案例2（部分图件） </h3>
+                    <div class="waterfall-container">
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_01 乡镇域现状.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域A</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_02 控制线.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_04 总体格局.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_05 规划分区.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域C</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_06 乡镇域用地规划.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域D</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_08 生活圈.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域E</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_11 生态.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_13 驻地现状.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_14 驻地规划分区.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_15 驻地规划.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						<div class="a4-container">
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/YX_16 驻地公服.png" width="2481" height="3508" alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案一</div>
+                        </div>
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/YX_17 驻地绿地.png" 50% alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案二</div>
+                        </div>
+                    </div>
+						<div class="a4-container">
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/YX_18 驻地交通.png" width=50% alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案一</div>
+                        </div>
+                        <div class="a4-item">
+                            <div class="a4-landscape a4-placeholder"><img src="../image/YX_20 驻地五线.png" width=50% alt=""/></div>
+                            <div class="image-caption">城市发展规划图 - 方案二</div>
+                        </div>
+                    </div>
+                  </div>
+			  </div>
+				
+				<div class="section">
+                    <h3 class="section-title">案例3（部分图件） </h3>
+                    <div class="waterfall-container">
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_01 乡镇域现状.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域A</div>
+                            </div>
+                      </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_02 控制线.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_05 规划分区.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_06 乡镇域用地规划.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域C</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_07 发展布局.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域D</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_08 生活圈.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域E</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_11 生态.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/YX_13 驻地现状.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域B</div>
+                            </div>
+                        </div>
+                        <div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_13 驻地现状.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_15 驻地规划.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_15 驻地规划.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						<div class="waterfall-item">
+                            <div class="image-container">
+                                <div class="image-placeholder"><img src="../image/GR_16 驻地公服.png" width="2481" height="3508" alt=""/></div>
+                                <div class="image-caption">国土空间规划方案 - 区域F</div>
+                            </div>
+                        </div>
+						
+                  </div>
+			  </div>
+		  </div>              
+            </div>
+       
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2024 康辉的个人作品集 | 联系方式: hardsonk@163.com</p>
+        </footer>
+    </div>
+	<button id="backToTop" title="回到顶部">↑</button>
+	<script>
+  // 获取按钮元素
+  const backToTopBtn = document.getElementById('backToTop');
+
+  // 监听页面滚动事件
+  window.addEventListener('scroll', () => {
+    // 当页面滚动超过 300px 时显示按钮，否则隐藏
+    if (window.pageYOffset > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+
+  // 点击按钮回到顶部（平滑滚动）
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // 平滑滚动效果
+    });
+  });
+</script>
+</body>
+</html>

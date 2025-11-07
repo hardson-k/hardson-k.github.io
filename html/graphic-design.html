@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康辉的平面设计作品</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Noto Sans SC", sans-serif;
+    }
+    :root {
+        --primary-color: #202de1;
+        --primary-light: #4a5ae9;
+        --primary-dark: #1a25b4;
+        --accent-color: #ff6b6b;
+        --text-dark: #000000;
+        --text-light: #666666;
+        --bg-light: #f5f7fa;
+        --border-color: #e1e5eb;
+    }
+    body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    /* 导航栏样式 */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--primary-color);
+        padding: 15px 30px;
+        color: white;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: 700;
+    }
+    .nav-links {
+        display: flex;
+    }
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        padding: 8px 15px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        font-weight: 500;
+    }
+    .nav-links a:hover, .nav-links a.active {
+        background-color: var(--primary-light);
+    }
+    /* 页面内容样式 */
+    .page-content {
+        padding: 40px;
+    }
+    .page-title {
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+    }
+    .page-subtitle {
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+    }
+    .section {
+        margin-bottom: 40px;
+    }
+    .section-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-dark);
+        border-left: 4px solid var(--primary-color);
+        margin-bottom: 20px;
+    }
+    
+    /* 图片展示样式 - 改良版本 */
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding-left: 10px;
+        margin-bottom: 30px;
+        align-items: stretch;
+        /* 新增：阴影和圆角效果给gallery */
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 15px;
+        background-color: white;
+        transition: box-shadow 0.3s ease;
+    }
+    
+    .gallery:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .image-container {
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: none;
+        flex-grow: 1;
+    }
+    
+    .image-placeholder {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        overflow: hidden;
+        position: relative;
+        flex: 1;
+        min-height: 150px;
+        /* 新增：圆角和交互效果给placeholder */
+        border-radius: 6px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .image-placeholder:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    
+    .image-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 6px;
+    }
+    
+    .image-caption {
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        background-color: transparent;
+        border-radius: 0;
+        z-index: 1;
+        margin-top: 8px;
+    }
+    
+    /* 单图布局 */
+    .single-image {
+        width: 100%;
+    }
+    
+    /* 双图布局 */
+    .double-image {
+        flex: 1 1 calc(50% - 15px);
+        min-width: 250px;
+    }
+    
+    /* 三图布局 */
+    .triple-image {
+        flex: 1 1 calc(33.333% - 15px);
+        min-width: 200px;
+    }
+    
+    /* 四图布局 */
+    .quadruple-image {
+        flex: 1 1 calc(25% - 15px);
+        min-width: 150px;
+    }
+    
+    /* 特殊处理：当同行图片高度差异大时，使用align-items: center确保垂直居中 */
+    .gallery.double,
+    .gallery.triple,
+    .gallery.quadruple {
+        align-items: center;
+    }
+    
+    /* 页脚样式 */
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #f0f0f0;
+        color: var(--text-light);
+        font-size: 14px;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            padding: 10px;
+        }
+        .nav-links {
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-links a {
+            margin: 5px;
+        }
+        .page-content {
+            padding: 20px;
+        }
+        
+        /* 移动端优化：图片容器全宽显示 */
+        .double-image, 
+        .triple-image, 
+        .quadruple-image {
+            flex: 1 1 100%;
+        }
+        
+        .gallery {
+            gap: 10px;
+            padding: 10px;
+        }
+    }
+		#backToTop {
+    /* 按钮定位：固定在右下角 */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    
+    /* 按钮样式 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color); /* 使用现有主题色 */
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    
+    /* 初始隐藏 */
+    opacity: 0;
+    visibility: hidden;
+    
+    /* 过渡动画：显示/隐藏时平滑过渡 */
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    transform: translateY(20px); /* 初始位置向下偏移，增强动画效果 */
+  }
+
+  /* 按钮悬停效果 */
+  #backToTop:hover {
+    background-color: var(--primary-dark); /* 深色主题色 */
+    transform: translateY(-2px); /* 轻微上浮 */
+  }
+
+  /* 显示按钮的类 */
+  #backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* 回到正常位置 */
+  }
+    
+    /* 针对小屏幕的进一步优化 */
+    @media (max-width: 480px) {
+        .image-placeholder {
+            min-height: 120px;
+        }
+        
+        .gallery {
+            gap: 8px;
+            padding: 8px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 - 新增主页按钮 -->
+        <nav class="navbar">
+            <div class="logo">康辉的个人作品集</div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">主页</a>
+                <a href="resume.html" class="nav-link">个人简历</a>
+                <a href="graphic-design.html" class="nav-link active">平面设计作品</a>
+                <a href="spatial-planning.html" class="nav-link">国空规划作品</a>
+                <a href="video-works.html" class="nav-link">视频作品</a>
+            </div>
+        </nav>
+
+        <!-- 页面内容 (保持不变) -->
+        <div class="page-content">
+            <div id="graphic-design" class="page">
+                <h1 class="page-title">康辉的作品集</h1>
+                <h2 class="page-subtitle">平面设计作品</h2>
+                
+                <!-- 单张图展示 -->
+                <div class="section">
+                    <h3 class="section-title">海报设计</h3>
+                    <div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/imagepng.png" width="1500" height="544" alt=""/>                            </div>
+                            <div class="image-caption">某文艺活动DM单、招贴海报、KV</div>
+                        </div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                                <img src="../image/海报1.jpg" width="1812" height="906" alt=""/>                                                   </div>
+                            <div class="image-caption">某文艺活动海报、KV</div>
+                        </div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                                <img src="../image/HB10.jpg" width="940" height="366" alt=""/>   </div>
+                            <div class="image-caption">某主题活动宣传海报、KV</div>
+                        </div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/HB11.jpg" width="728" height="412" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/HB13.jpg" width="728" height="412" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">节日主题海报</div>
+                    </div>
+              					
+					<div class="gallery">
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/HB2.jpg" width="549" height="732" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 中间作品图片占位符 -->
+                            <img src="../image/HB3.jpg" width="550" height="732" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/HB4.jpg" width="549" height="731" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">某活动线上宣传海报系列</div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/HB7.png" width="548" height="764" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 中间作品图片占位符 -->
+                            <img src="../image/HB9.jpg" width="510" height="764" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/HB8.jpg" width="509" height="764" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">活动宣传海报、DM系列</div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/WL10.png" width="1706" height="687" alt=""/>                            </div>
+                            <div class="image-caption">某企业宣传展板</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- B展示 -->
+                <div class="section">
+                    <h3 class="section-title">物料设计制作</h3>
+                    <div class="gallery">
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 --><img src="../image/HB5.png" width="1344" height="627" alt=""/>
+                            </div>
+                        </div>
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 --><img src="../image/HB5a.png" width="1134" height="638" alt=""/>
+                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">某体育赛事A字展板</div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/WL5.png" width="1634" height="621" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 中间作品图片占位符 -->
+                            <img src="../image/WL4.png" width="827" height="311" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/WL5a.png" width="2730" height="1535" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">某体育赛事纪念奖牌设计</div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/WL1.png" width="1356" height="673" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 中间作品图片占位符 -->
+                            <img src="../image/WL2.png" width="341" height="209" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/WL3.png" width="341" height="209" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">UI设计系列</div>
+                    </div>
+										
+                    <div class="gallery">
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第一张作品图片占位符 -->
+                            <img src="../image/WL6.jpg" width="645" height="456" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第二张作品图片占位符 -->
+                            <img src="../image/WL7.png" width="645" height="363" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第三张作品图片占位符 -->
+                            <img src="../image/WL8.png" width="472" height="415" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第四张作品图片占位符 -->
+                            <img src="../image/WL9.png" width="472" height="415" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">某地方助民活动VI设计 被央视报导 </div>
+                    </div>
+
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/WL11.png" width="1655" height="1122" alt=""/>                            </div>
+                            <div class="image-caption">某文创产品物料设计</div>
+                        </div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/WL15B.png" width="615" height="870" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 中间作品图片占位符 -->
+                            <img src="../image/WL15A.png" width="615" height="870" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container triple-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/WL12.png" width="563" height="562" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">某文创系列物料设计</div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/WL17.png" width="1705" height="866" alt=""/>                            </div>
+                            <div class="image-caption">某文创产品包装标签设计</div>
+                        </div>
+                    </div>
+										
+                    <div class="gallery">
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第一张作品图片占位符 -->
+                            <img src="../image/WL18.png" width="601" height="748" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第二张作品图片占位符 -->
+                            <img src="../image/WL21.png" width="1182" height="864" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第三张作品图片占位符 -->
+                            <img src="../image/WL19.jpg" width="601" height="401" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第四张作品图片占位符 -->
+                            <img src="../image/WL20.jpg" width="1080" height="720" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">某体育活动服装、旗帜等物料设计 被央视报导</div>
+                    </div>
+					
+                </div>
+                
+                <!-- C展示 -->
+                <div class="section">
+                    <h3 class="section-title">LOGO设计</h3>
+                    <div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/LG1.png" width="1536" height="409" alt=""/>                            </div>
+                            <div class="image-caption">英文LOGO设计</div>
+                        </div>
+                    </div>
+										
+                    <div class="gallery">
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/LG7.png" width="2048" height="1452" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/LG8.png" width="2800" height="2566" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">风格化英文LOGO设计</div>
+                    </div>
+					
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/LG2.png" width="1822" height="931" alt=""/>                            </div>
+                            <div class="image-caption">某文创VI系列 LOGO</div>
+                        </div>
+                    </div>
+										
+                    <div class="gallery">
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第一张作品图片占位符 -->
+                            <img src="../image/LG3.png" width="835" height="926" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第二张作品图片占位符 -->
+                            <img src="../image/LG4.png" width="942" height="879" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第三张作品图片占位符 -->
+                            <img src="../image/LG5.png" width="1131" height="893" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container quadruple-image">
+                            <div class="image-placeholder">
+                                <!-- 第四张作品图片占位符 -->
+                            <img src="../image/LG6.png" width="667" height="859" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">图标设计系列</div>
+                    </div>
+
+                </div>
+                
+                <!-- 四图展示 -->
+                <div class="section">
+                    <h3 class="section-title">UI设计</h3>
+                    <div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/UI3.png" width="1748" height="271" alt=""/>                            </div>
+                            
+                        </div>
+                    </div>
+				  	<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/UI4.png" width="1748" height="271" alt=""/>                            </div>                           
+                    </div>
+                    </div>
+					<div class="gallery">
+                        <div class="image-container single-image">
+                            <div class="image-placeholder">
+                                <!-- 单张作品图片占位符 -->
+                            <img src="../image/UI5.png" width="964" height="638" alt=""/>                            </div>
+                            <div class="image-caption">手机社交软件UI设计</div>
+                        </div>
+                    </div>
+										
+                    <div class="gallery">
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 左侧作品图片占位符 -->
+                            <img src="../image/UI2.png" width="834" height="455" alt=""/>                            </div>
+                        </div>
+                        <div class="image-container double-image">
+                            <div class="image-placeholder">
+                                <!-- 右侧作品图片占位符 -->
+                            <img src="../image/UI1.png" width="834" height="455" alt=""/>                            </div>
+                        </div>
+                        <div class="image-caption" style="width: 100%; text-align: center;">音乐软件UI设计</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2024 康辉的个人作品集 | 联系方式: hardsonk@163.com</p>
+        </footer>
+    </div>
+	<button id="backToTop" title="回到顶部">↑</button>
+	<script>
+  // 获取按钮元素
+  const backToTopBtn = document.getElementById('backToTop');
+
+  // 监听页面滚动事件
+  window.addEventListener('scroll', () => {
+    // 当页面滚动超过 300px 时显示按钮，否则隐藏
+    if (window.pageYOffset > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+
+  // 点击按钮回到顶部（平滑滚动）
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // 平滑滚动效果
+    });
+  });
+</script>
+</body>
+</html>
