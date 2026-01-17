@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>康辉的个人简历</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
+     <style>
         /* 保留原有的完整CSS样式 */
         * {
             margin: 0;
@@ -189,6 +189,69 @@
             width: 50%;
             margin-bottom: 10px;
         }
+        
+        /* 新增：论文按钮样式 */
+        .paper-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .paper-info {
+            flex: 1;
+            margin-right: 15px;
+        }
+        .paper-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        .paper-journal {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .paper-buttons {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+			padding: inherit;
+        }
+        .paper-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 60px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+			margin:3px;				;
+        }
+        .paper-btn:active {
+            transform: translateY(0);
+        }
+        .cnki-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .cnki-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        .official-btn {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .official-btn:hover {
+            background-color: #e05555;
+        }
+        
         /* 页脚样式 */
         footer {
             text-align: center;
@@ -231,6 +294,14 @@
             }
             .honor-item {
                 width: 100%;
+            }
+            /* 响应式：论文按钮在小屏幕下换行 */
+            .paper-item {
+                flex-direction: column;
+            }
+            .paper-buttons {
+                margin-top: 10px;
+                align-self: flex-end;
             }
         }
     </style>
@@ -278,7 +349,8 @@
                 </div>
                 
                 <!-- 教育背景 -->
-                <div class="section">
+                		
+				<div class="section">
                     <div class="section-title">教育背景</div>
                     <div class="education-item">
                         <div class="item-header">
@@ -289,10 +361,27 @@
                             <p>GPA: 4.1/5.0 (专业排名: 2/25)</p>
                             <p>主修课程: 3S技术应用、区域经济地理研究、旅游地理学、城市地理学等</p>
                             <p>学术成果:</p>
-                            <ul>
-                                <li>黑龙江乡村生活质量空间格局及影响因素《农业与技术》(省级，一作)</li>
-                                <li>The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China.《Front.Sustain. Food Syst.》(SCI二区，二作)</li>
-                            </ul>
+                            <!-- 修改后的学术成果部分 - 添加按钮 -->
+                            <div class="paper-item">
+                                <div class="paper-info">
+                                    <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
+                                    <div class="paper-journal">《农业与技术》(省级，一作)</div>
+                                </div>
+                                <div class="paper-buttons">
+                                    <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-btn cnki-btn" padding=1px >知网链接</a>
+                                    <a href="http://www.nyyjs.net/CN/10.19754/j.nyyjs.20231030031" target="_blank" class="paper-btn official-btn">官网链接</a>
+                                </div>
+                            </div>
+                            <div class="paper-item">
+                                <div class="paper-info">
+                                    <div class="paper-title">The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</div>
+                                    <div class="paper-journal">《Front.Sustain. Food Syst.》(SCI二区，二作)</div>
+                                </div>
+                                <div class="paper-buttons">
+                                    <a href=" " target="_blank" class="paper-btn cnki-btn" ><del>知网链接</del></a>
+                                    <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-btn official-btn">官网链接</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="education-item">
@@ -425,4 +514,5 @@
         </footer>
     </div>
 </body>
+	<script>onmouseover="this.style.color='#2980b9'" onmouseout="this.style.color='#3498db'" onclick="this.style.color='#1c5a7d'; setTimeout(() => {this.style.color='#3498db'}, 300)"</script>
 </html>
