@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>康辉｜博士申请简历</title>
+  <meta
+    name="description"
+    content="康辉博士申请简历：县域发展、城乡与国土规划、区域经济发展、耕地利用绿色转型、GIS空间分析与国土空间规划实践。"
+  />
+
+  <style>
+    :root {
+      --main-blue: #004b8d;
+      --deep-blue: #003b73;
+      --light-blue: #e8f3fb;
+      --cyan: #00a5c8;
+      --gold: #c69c32;
+
+      --text-main: #1f2933;
+      --text-muted: #5f6f7e;
+      --text-light: #f8fbff;
+
+      --bg: #f4f8fb;
+      --card: #ffffff;
+      --border: #d8e3ec;
+
+      --shadow: 0 10px 28px rgba(0, 55, 105, 0.10);
+      --shadow-soft: 0 4px 14px rgba(0, 55, 105, 0.08);
+
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.78;
+      font-size: 15.5px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    ul {
+      padding-left: 1.15em;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .container {
+      width: min(var(--container), 92%);
+      margin: 0 auto;
+    }
+
+    /* =========================
+       顶部导航：继承当前网站相对路径
+       当前文件位置：/html/resume.html
+       ========================= */
+
+    .topbar {
+      background: var(--deep-blue);
+      color: #ffffff;
+      border-bottom: 4px solid var(--cyan);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-inner {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .site-title span {
+      color: #bfefff;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.86);
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+      border-bottom-color: var(--cyan);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      color: #ffffff;
+      background: transparent;
+      width: 40px;
+      height: 38px;
+      border-radius: 8px;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      padding: 8px 0 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 9px 0;
+      font-size: 15px;
+    }
+
+    /* =========================
+       顶部横幅
+       ========================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: var(--text-light);
+      background:
+        radial-gradient(circle at 12% 20%, rgba(0, 165, 200, 0.36), transparent 28%),
+        radial-gradient(circle at 88% 28%, rgba(198, 156, 50, 0.18), transparent 24%),
+        linear-gradient(135deg, #003b73 0%, #004b8d 46%, #006a9e 100%);
+      padding: 58px 0 46px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.32;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 14px;
+    }
+
+    .breadcrumb a {
+      color: #d9f4ff;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.16;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 small {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(18px, 2.4vw, 24px);
+      color: #d9f4ff;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .hero-summary {
+      max-width: 840px;
+      margin: 18px 0 20px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 16px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0px;
+    }
+
+    .hero-tags span {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ecfbff;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: var(--deep-blue);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #e8f8ff;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-outline:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .profile-panel {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 18px 40px rgba(0, 35, 75, 0.2);
+    }
+
+    .photo-wrap {
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+    }
+
+    .photo {
+      width: 132px;
+      height: 160px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 10px;
+      border: 4px solid rgba(255, 255, 255, 0.75);
+      background: #ffffff;
+    }
+
+    .profile-panel h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .profile-panel .sub {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .profile-list div {
+      padding: 9px 11px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    /* =========================
+       页面主体：侧栏 + 正文
+       ========================= */
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 245px minmax(0, 1fr);
+      gap: 26px;
+      padding: 34px 0 62px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .sidebar-title {
+      background: var(--main-blue);
+      color: #ffffff;
+      padding: 15px 18px;
+      font-size: 17px;
+      font-weight: 800;
+      border-bottom: 4px solid var(--cyan);
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 12px 18px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      transition: 0.18s;
+    }
+
+    .side-nav a:hover {
+      background: var(--light-blue);
+      color: var(--deep-blue);
+      padding-left: 22px;
+    }
+
+    .side-note {
+      padding: 16px 18px;
+      color: var(--text-muted);
+      font-size: 13px;
+      background: #f8fbfd;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 22px;
+      background: linear-gradient(90deg, var(--light-blue), #ffffff);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      color: #ffffff;
+      background: var(--main-blue);
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 4px 10px rgba(0, 75, 141, 0.2);
+      flex: 0 0 auto;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      color: var(--deep-blue);
+      line-height: 1.35;
+    }
+
+    .section-body {
+      padding: 22px;
+    }
+
+    .lead {
+      font-size: 16px;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .mini-card h3 {
+      font-size: 16px;
+      color: var(--deep-blue);
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .mini-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .info-item {
+      padding: 13px 14px;
+      background: #f7fbfe;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .info-item strong {
+      display: block;
+      color: var(--deep-blue);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .info-item span {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .foundation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .foundation-card {
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--main-blue);
+      border-radius: 12px;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .foundation-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--deep-blue);
+    }
+
+    .foundation-card ul {
+      color: var(--text-main);
+      font-size: 14.5px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag-list span {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--light-blue);
+      color: var(--deep-blue);
+      border: 1px solid #cfe3f2;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 16px 16px 16px 18px;
+      border-left: 4px solid var(--main-blue);
+      background: #ffffff;
+      border-radius: 0 12px 12px 0;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item h3 {
+      color: var(--deep-blue);
+      font-size: 17px;
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
+
+    .time {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-bottom: 8px;
+      font-weight: 650;
+    }
+
+    .paper-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .paper {
+      padding: 16px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+    }
+
+    .paper h3 {
+      color: var(--deep-blue);
+      font-size: 16px;
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+
+    .paper p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .paper-links a {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 7px;
+      background: var(--main-blue);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 650;
+      transition: 0.18s;
+    }
+
+    .paper-links a:hover {
+      background: var(--deep-blue);
+      transform: translateY(-1px);
+    }
+
+    .paper-links a.secondary {
+      background: #e8f3fb;
+      color: var(--deep-blue);
+      border: 1px solid #cfe3f2;
+    }
+
+    .paper-links a.secondary:hover {
+      background: #d7ecf8;
+    }
+
+    .skill-groups {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 16px;
+    }
+
+    .skill-box h3 {
+      color: var(--deep-blue);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .skill-box p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+
+    .quote-box {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-left: 5px solid var(--gold);
+      background: #fffaf0;
+      color: #6b4c10;
+      border-radius: 0 12px 12px 0;
+      font-size: 14.5px;
+    }
+
+    .footer {
+      background: var(--deep-blue);
+      color: rgba(255, 255, 255, 0.82);
+      text-align: center;
+      padding: 28px 0;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #d9f4ff;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 888;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: var(--main-blue);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+    }
+
+    .back-to-top.show {
+      display: block;
+    }
+
+    @media (max-width: 960px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-menu.open {
+        display: block;
+      }
+
+      .hero-grid,
+      .main-layout,
+      .two-col,
+      .foundation-grid,
+      .skill-groups {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .info-grid,
+      .three-col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        font-size: 15px;
+      }
+
+      .hero {
+        padding: 42px 0 36px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .info-grid,
+      .three-col {
+        grid-template-columns: 1fr;
+      }
+
+      .section-body {
+        padding: 18px;
+      }
+
+      .section-head {
+        padding: 14px 18px;
+      }
+
+      .profile-panel {
+        padding: 18px;
+      }
+
+      .site-title {
+        font-size: 16px;
+      }
+    }
+
+    @media print {
+      .topbar,
+      .sidebar,
+      .hero-actions,
+      .paper-links,
+      .back-to-top,
+      .footer {
+        display: none !important;
+      }
+
+      body {
+        background: #ffffff;
+        color: #000000;
+      }
+
+      .hero {
+        background: #ffffff;
+        color: #000000;
+        padding: 24px 0;
+      }
+
+      .hero::before {
+        display: none;
+      }
+
+      .hero-summary,
+      .profile-panel .sub,
+      .profile-list div {
+        color: #000000;
+      }
+
+      .profile-panel {
+        background: #ffffff;
+        border: 1px solid #cccccc;
+        box-shadow: none;
+      }
+
+      .profile-list div,
+      .card,
+      .mini-card,
+      .foundation-card,
+      .timeline-item,
+      .paper,
+      .skill-box {
+        box-shadow: none;
+        background: #ffffff;
+      }
+
+      .main-layout {
+        display: block;
+        padding: 20px 0;
+      }
+
+      .card {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部导航：继承当前网站相对路径与文件名 -->
+  <header class="topbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="site-title">康辉的个人作品集 <span>| 博士申请简历</span></a>
+
+      <!-- <nav class="nav-links" aria-label="网站导航">
+        <a href="../index.html">主页</a>
+        <a href="resume.html" class="active">个人简历</a>
+        <a href="graphic-design.html">平面设计作品</a>
+        <a href="spatial-planning.html">国空规划作品</a>
+        <a href="video-works.html">视频作品</a>
+        <a href="article.html">精选推文</a>
+      </nav> -->
+
+      <button class="menu-btn" id="menuBtn" aria-label="打开导航">☰</button>
+    </div>
+
+    <div class="container mobile-menu" id="mobileMenu">
+      <a href="../index.html">主页</a>
+      <a href="resume.html">个人简历</a>
+      <a href="graphic-design.html">平面设计作品</a>
+      <a href="spatial-planning.html">国空规划作品</a>
+      <a href="video-works.html">视频作品</a>
+      <a href="article.html">精选推文</a>
+    </div>
+  </header>
+
+  <!-- 首屏 -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span>›</span>
+        <span>博士申请简历</span>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1>
+            康辉
+            <small>研究方向｜城乡与国土规划 × 区域协同发展</small>
+          </h1>
+
+          <p class="hero-summary">
+            哈尔滨师范大学地理学硕士，研究方向为城乡与国土规划、区域协同发展。
+            主要关注县域尺度城乡融合、乡村发展、耕地利用绿色转型、县域协同发展能力、绿色发展水平、国土空间治理等问题。</p>
+          <p class="hero-summary">
+            具备 GIS 空间分析、实地调研、数据处理、规划图件与科研图件绘制、国空文本汇编和项目汇报能力。
+          </p>
+
+          <div class="hero-tags">
+            <span>城乡与国土规划</span>
+            <span>县域协同发展</span>
+            <span>县域城乡融合</span>
+            <span>耕地利用绿色转型</span>
+            <span>乡村振兴</span>
+            <span>区域经济发展</span>
+            <span>国土空间规划实践</span>
+          </div>
+          <hr>
+          <div class="hero-actions">
+            <a href="#research-foundation" class="btn btn-primary">研究基础</a>
+            <a href="spatial-planning.html" class="btn btn-outline">国空规划作品</a>
+            <a href="../image/2022301161.pdf" target="_blank" rel="noopener" class="btn btn-outline">硕士学位论文</a>
+            <a href="mailto:hardsonk@163.com" class="btn btn-outline">联系方式</a>
+          </div>
+        </div>
+
+        <aside class="profile-panel">
+          <div class="photo-wrap">
+            <img src="../image/2024HIMO-w.jpg" alt="康辉个人照片" class="photo" />
+          </div>
+
+          <h2>康辉</h2>
+          <p class="sub">中共党员｜硕士｜CET-4</p>
+
+          <div class="profile-list">
+            <div><strong>申请方向：</strong>县域发展、城乡与国土规划、国土空间治理、经济地理相关方向</div>
+            <div><strong>毕业院校：</strong>哈尔滨师范大学 地理学</div>
+            <div><strong>邮箱：</strong><a href="mailto:hardsonk@163.com">hardsonk@163.com</a></div>
+            <div><strong>电话：</strong>13704615667</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主体 -->
+  <div class="container main-layout">
+    <!-- 侧栏目录 -->
+    <aside class="sidebar">
+      <div class="sidebar-title">个人简历</div>
+
+      <nav class="side-nav" aria-label="简历目录">
+        <a href="#profile">1. 个人概况</a>
+        <a href="#research-foundation">2. 研究基础</a>
+        <a href="#education">3. 教育背景</a>
+        <a href="#research">4. 学术成果</a>
+        <a href="#projects">5. 科研与项目经历</a>
+        <a href="#skills">6. 掌握工具</a>
+        <a href="#experience">7. 实习与组织经历</a>
+        <a href="#awards">8. 荣誉奖励</a>
+      </nav>
+
+
+    </aside>
+
+    <!-- 正文内容 -->
+    <main class="content">
+      <!-- 1. 个人概况 -->
+      <section class="card" id="profile">
+        <div class="section-head">
+          <span class="section-index">1</span>
+          <h2>个人概况</h2>
+        </div>
+
+        <div class="section-body">
+          <p class="lead">
+            本人目前主要研究内容集中在东北地区县域尺度的人文地理学分支研究，包括城乡融合、产业发展、土地利用等议题。
+          </p> 
+          <p class="lead"> 
+            此外，也有全流程参与多个国土空间规划编制项目的经历。
+          </p> 
+          <p class="lead"> 
+           形成了“文献梳理—数据整理—实地调研—GIS 制图—空间分析—规划文本表达”的综合训练。
+          </p>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <strong>学历</strong>
+              <span>硕士，地理学</span>
+            </div>
+            <div class="info-item">
+              <strong>政治面貌</strong>
+              <span>中共党员</span>
+            </div>
+            <div class="info-item">
+              <strong>外语</strong>
+              <span>CET-4</span>
+            </div>
+            <div class="info-item">
+              <strong>本科背景</strong>
+              <span>数字媒体技术</span>
+            </div>
+          </div>
+
+          <div class="quote-box">
+            个人优势：主要体现在能够把地理学研究问题、县域数据、规划实践、GIS 空间表达和政策文本理解结合起来，服务于县域发展、城乡融合、国土空间治理与乡村振兴相关研究。
+            我拥有完整的学生工作与项目主导经历，锻炼了良好的组织、沟通、协调与管理能力，善于在团队协作中凝聚共识、优化流程。我具备出色的快速学习能力，能高效掌握新领域知识与技术规范，以支撑项目安全、质量与进度的管控要求。
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 目前研究基础 -->
+      <section class="card" id="research-foundation">
+        <div class="section-head">
+          <span class="section-index">2</span>
+          <h2>研究基础</h2>
+        </div>
+
+        <div class="section-body">
+          <p class="lead">
+            本人的研究基础主要集中在县域尺度的城乡关系、区域协同发展、乡村发展、
+            耕地利用绿色转型与国土空间治理等方向。硕士阶段围绕城乡与国土规划、
+            区域经济发展开展学习与研究，并通过论文写作、科研项目和国土空间规划实践，
+            形成了较为系统的空间分析、数据整理、实地调研和规划文本编撰的工作能力。
+          </p>
+
+          <div class="foundation-grid">
+            <div class="foundation-card">
+              <h3>研究基础</h3>
+              <ul>
+                <li>硕士研究方向为城乡与国土规划、区域经济发展。</li>
+                <li>参与县域城乡融合对耕地利用绿色转型影响机制与调控相关项目。</li>
+                <li>聚焦县域城乡融合、乡村振兴、耕地利用绿色转型与区域协调发展。</li>
+                <li>以黑龙江省县域协同发展能力的空间分异特征与形成机制为核心展开实证分析。</li>
+              </ul>
+            </div>
+
+            <div class="foundation-card">
+              <h3>技能基础</h3>
+              <ul>
+                <li>具备统计数据、空间数据、政策文本和规划资料的分析经验。</li>
+                <li>能够运用 GIS 开展县域差异、空间格局和区域发展研究。</li>
+                <li>响应二十大精神内涵，以人文地理视角展开研究，推进实现乡村全面振兴、发展乡村新质生产力、
+                  实现高质量发展；通过参与国土空间规划编制，探索基层空间治理，乡村发展与资源配置等多个实践场景。
+                  </li>
+                <li>具备国土空间规划实地调研、数据整理、文本编制、图件绘制和研究成果可视化表达全流程能力。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tag-list">
+            <span>县域城乡融合</span>
+            <span>乡村全面振兴</span>
+            <span>耕地利用绿色转型</span>
+            <span>县域协同发展</span>
+            <span>三生空间</span>
+            <span>区域经济发展</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 教育背景 -->
+      <section class="card" id="education">
+        <div class="section-head">
+          <span class="section-index">3</span>
+          <h2>教育背景</h2>
+        </div>
+
+        <div class="section-body">
+          <div class="timeline">
+            <article class="timeline-item">
+              <h3>哈尔滨师范大学｜硕士｜地理学</h3>
+              <div class="time">2022.09 - 2025.06</div>
+              <ul>
+                <li><strong>研究方向：</strong>城乡与国土规划 × 区域经济发展</li>
+                <li><strong>GPA：</strong>4.1/5.0，专业排名 2/25</li>
+                <li><strong>主修课程：</strong>3S 技术应用、区域经济地理研究、旅游地理学、城市地理学等</li>
+                <li><strong>阶段特点：</strong>以县域空间、城乡关系、规划实践和区域发展研究为主要训练方向</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <h3>哈尔滨师范大学｜本科｜数字媒体技术</h3>
+              <div class="time">2018.09 - 2022.06</div>
+              <ul>
+                <li><strong>GPA：</strong>4.0/5.0，专业排名 10/70</li>
+                <li><strong>主修课程：</strong>Unity3D 游戏制作、3D 模型设计、三维动画、二维动画、Web 前端设计、UI 设计等</li>
+                <li><strong>阶段特点：</strong>形成较好的图件表达、视觉呈现、网页制作和多媒体内容处理基础</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 学术成果 -->
+      <section class="card" id="research">
+        <div class="section-head">
+          <span class="section-index">4</span>
+          <h2>学术成果</h2>
+        </div>
+
+        <div class="section-body">
+          <div class="paper-list">
+            <article class="paper">
+              <h3>黑龙江省乡村生活质量空间格局及影响因素</h3>
+              <p>《农业与技术》｜省级期刊｜一作</p>
+              <p class="muted">
+                该论文围绕乡村生活质量的空间格局与影响因素展开，体现了对乡村发展、区域差异和空间分析问题的基础研究能力。
+              </p>
+              <div class="paper-links">
+              <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-btn cnki-btn" padding=1px >知网链接</a>
+              </div>
+            </article>
+
+            <article class="paper">
+              <h3>The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</h3>
+              <p>Frontiers in Sustainable Food Systems｜SCI 二区｜二作</p>
+              <p class="muted">
+                论文以东北地区县域为研究对象，关注县域城镇化对农村振兴的影响及空间梯度，
+                与县域发展、农村转型和城乡关系研究具有较强相关性。
+              </p>
+              <div class="paper-links">
+                <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" rel="noopener">官网链接</a>
+              </div>
+            </article>
+
+            <article class="paper">
+              <h3>黑龙江省县域协同发展能力空间分异特征及形成机制</h3>
+              <p>硕士学位论文</p>
+              <p class="muted">
+                论文聚焦黑龙江省县域协同发展能力的空间分异与形成机制，延续了县域尺度、区域协调发展能力和空间分析的研究路线。
+              </p>
+              <div class="paper-links">
+                <a href="../image/2022301161.pdf" target="_blank" rel="noopener">查看全文</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. 科研与项目经历 -->
+      <section class="card" id="projects">
+        <div class="section-head">
+          <span class="section-index">5</span>
+          <h2>科研与项目经历</h2>
+        </div>
+
+        <div class="section-body">
+          <div class="timeline">
+            <article class="timeline-item">
+              <h3>国土空间总体规划编制｜区域经济资源配置优化</h3>
+              <div class="time">2022.09 - 2025.03</div>
+              <p class="muted">
+                深度参与导师平台的横向国土空间规划编制项目，项目总价值超 100 万元，
+                聚焦区域经济协调发展与资源优化配置。
+              </p>
+              <ul>
+                <li><strong>调研与空间分析：</strong>带队完成 40 多个行政单位调研，运用无人机航拍与 GIS 技术建立现状模型，为国土空间规划提供数据支撑。</li>
+                <li><strong>绘图与可视化：</strong>通过 Illustrator 与 ArcGIS 制图，独立完成国空 20 余项图件绘制，处理调研数据与图斑数据并进行可视化表达，绘制修改超 500 张。</li>
+                <li><strong>文本汇编与修整：</strong>参与编制规划文本总页数超 500 页，成果获省自然资源厅专家组“逻辑清晰、可实施性强”等评价。</li>
+                <li><strong>团队协作与流程优化：</strong>开展 ArcGIS 与 Adobe 软件协同培训 12 场，累计培训超 30 人，提升团队出图效率约 35%。</li>
+              </ul>
+              <div class="paper-links">
+                <a href="spatial-planning.html" class="secondary">查看国空规划作品</a>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <h3>县域城乡融合对耕地利用绿色转型的影响机制与调控</h3>
+              <div class="time">2024.12 - 2027.12</div>
+              <p class="muted">
+                省部级政府资助项目，项目经费十万元，成果形式为学术论文。
+              </p>
+              <ul>
+                <li><strong>数据获取：</strong>带队完成走访调研，通过调取年鉴、爬取等方式获得统计数据，并完成数据初步清洗与标准化。</li>
+                <li><strong>图件绘制：</strong>结合制图技术，团队合作完成论文图件的绘制与修订。</li>
+                <li><strong>帮助支持：</strong>为团队后续成员开展培训并完成工作交接，毕业后仍进行技术支持。</li>
+                <li><strong>方向关联：</strong>项目主题与县域城乡融合、耕地利用绿色转型、农业农村发展和资源环境治理研究具有较强联系。</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. 方法与工具能力 -->
+      <section class="card" id="skills">
+        <div class="section-head">
+          <span class="section-index">6</span>
+          <h2>掌握工具</h2>
+        </div>
+
+        <div class="section-body">
+          <p class="lead">
+            以下是本人掌握的能够服务于科研的工具与方法，重点在于数据整理、
+            空间分析、制图表达。
+          </p>
+
+          <div class="skill-groups">
+            <div class="skill-box">
+              <h3>空间分析与地理制图</h3>
+              <p>ArcGIS、QGIS、ENVI、国土空间规划图件绘制、图斑数据处理、专题地图表达。</p>
+            </div>
+
+            <div class="skill-box">
+              <h3>数据整理与文献归纳</h3>
+              <p>Excel、Python 基础、统计年鉴数据整理、字段清洗、指标标准化、文献与政策材料归纳。</p>
+            </div>
+
+            <div class="skill-box">
+              <h3>文字能力与办公技能</h3>
+              <p>Word、PPT、LaTeX、图表报表制作、图文排版、HTML 前端开发。</p>
+            </div>
+
+            <div class="skill-box">
+              <h3>图件与视觉呈现</h3>
+              <p>Illustrator、Photoshop、InDesign、Premiere Pro、After Effects、Canvas、Visio。</p>
+            </div>
+
+            <div class="skill-box">
+              <h3>辅助工具与流程优化</h3>
+              <p>Openclaw 部署、Vibe Coding、智能工具辅助科研（主要用于资料整理、流程优化和学习辅助）。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. 实习与组织经历 -->
+      <section class="card" id="experience">
+        <div class="section-head">
+          <span class="section-index">7</span>
+          <h2>实习与组织经历</h2>
+        </div>
+
+        <div class="section-body">
+          <div class="timeline">
+            <article class="timeline-item">
+              <h3>哈尔滨市城乡规划设计研究院｜国土空间规划助理实习生</h3>
+              <div class="time">2023.03 - 2023.06</div>
+              <ul>
+                <li><strong>数据处理：</strong>运用 ArcGIS 完成绥化市 20 余个县域的三调数据及基础设施现状整理和规划意见收集。</li>
+                <li><strong>文本编制：</strong>独立完成 200 余页规划文本中“三区三线”等内容的撰写及相关图表、图件制作。</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <h3>哈尔滨维塔视觉传媒有限公司｜平面设计师实习生</h3>
+              <div class="time">2021.09 - 2021.12</div>
+              <ul>
+                <li>独立完成教育、零售行业 80+ 张高点击率海报。</li>
+                <li>建立 PSD 图层标准化模板，减少无效沟通约 10 小时/周，团队作品效率提升 40%。</li>
+                <li>主导 3 场 500 人以上线下活动舞美设计，完成从后期制作到现场实施的衔接。</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <h3>地理科学学院｜班长，人文地理学</h3>
+              <div class="time">2022.09 - 2025.06</div>
+              <ul>
+                <li>精准传达 200+ 项政策通知，采用“信息分级 + FAQ 答疑”模式降低信息失真率。</li>
+                <li>组织学术沙龙、节庆联欢等 10 余场课余活动，同学满意度 100%。</li>
+                <li>建立课程资料与科研成果共享文档体系，累计节省 800+ 小时沟通成本。</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <h3>哈尔滨师范大学学生会｜副主席</h3>
+              <div class="time">2020.09 - 2021.06</div>
+              <ul>
+                <li>统筹宣传部与其他部门协同工作，带领新媒体矩阵粉丝量从 2.5 万提升至 3.5 万，创单篇推文转发量 10w+ 记录。</li>
+                <li>完成海报、H5 等物料的制作与技术培训，为 20 余场大型活动提供视觉支持。</li>
+                <li>代表学校对接 22 个二级学院及省内 40 余所高校，维系常态化沟通，促成联合活动 10 余场。</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. 荣誉奖励 -->
+      <section class="card" id="awards">
+        <div class="section-head">
+          <span class="section-index">8</span>
+          <h2>荣誉奖励</h2>
+        </div>
+
+        <div class="section-body">
+          <div class="three-col">
+            <div class="mini-card">
+              <h3>2024.06</h3>
+              <p>哈尔滨师范大学二等硕士生学业奖学金</p>
+            </div>
+            <div class="mini-card">
+              <h3>2023.11</h3>
+              <p>哈尔滨师范大学优秀研究生干部</p>
+            </div>
+            <div class="mini-card">
+              <h3>2023.04</h3>
+              <p>哈尔滨师范大学优秀共青团员</p>
+            </div>
+            <div class="mini-card">
+              <h3>2021.05</h3>
+              <p>哈尔滨师范大学抗疫优秀青年志愿者</p>
+            </div>
+            <div class="mini-card">
+              <h3>2021.05</h3>
+              <p>哈尔滨师范大学优秀学生团员</p>
+            </div>
+            <div class="mini-card">
+              <h3>2020.05</h3>
+              <p>哈尔滨师范大学优秀学生团员</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 康辉的个人作品集｜博士申请简历｜
+      <a href="mailto:hardsonk@163.com">hardsonk@163.com</a>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const backToTop = document.getElementById("backToTop");
+
+    menuBtn.addEventListener("click", function () {
+      mobileMenu.classList.toggle("open");
+      menuBtn.textContent = mobileMenu.classList.contains("open") ? "×" : "☰";
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        mobileMenu.classList.remove("open");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 480) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+</html>
