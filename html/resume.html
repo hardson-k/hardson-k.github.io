@@ -6,7 +6,7 @@
     <title>康辉的个人简历</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
      <style>
-        /* 保留原有的完整CSS样式 */
+      
         * {
             margin: 0;
             padding: 0;
@@ -190,7 +190,7 @@
             margin-bottom: 10px;
         }
         
-        /* 新增：论文按钮样式 */
+      
         .paper-item {
             display: flex;
             justify-content: space-between;
@@ -251,7 +251,42 @@
         .official-btn:hover {
             background-color: #e05555;
         }
-        
+
+        /* ================== 新增样式 Start ================== */
+        /* 掌握技能板块 */
+        .skills-wrapper {
+            margin-top: 20px;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+			margin: 10px;
+			
+        }
+        .skill-tag {
+            background: #f0f2ff;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--primary-dark);
+            border: 1px solid #d0d4ff;
+            font-weight: 500;
+			
+        }
+        .skill-tag.design {
+            background: #fff0f0;
+            color: #c0392b;
+            border-color: #ffd0d0;
+			padding: 10px;
+        }
+        .skill-tag.ai {
+            background: #e8f5e9;
+            color: #27ae60;
+            border-color: #c8e6c9;
+        }       
+        /* ================== 新增样式 End ================== */
+
         /* 页脚样式 */
         footer {
             text-align: center;
@@ -303,6 +338,13 @@
                 margin-top: 10px;
                 align-self: flex-end;
             }
+            .thesis-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .download-btn {
+                margin-top: 15px;
+            }
         }
     </style>
 </head>
@@ -349,7 +391,6 @@
                 </div>
                 
                 <!-- 教育背景 -->
-                		
 				<div class="section">
                     <div class="section-title">教育背景</div>
                     <div class="education-item">
@@ -358,10 +399,17 @@
                             <div class="item-time">2022.09-2025.06</div>
                         </div>
                         <div class="item-details">
+                            <p><strong>研究方向：城乡与国土规划×区域经济发展</strong></p>
                             <p>GPA: 4.1/5.0 (专业排名: 2/25)</p>
                             <p>主修课程: 3S技术应用、区域经济地理研究、旅游地理学、城市地理学等</p>
-                            <p>学术成果:</p>
-                            <!-- 修改后的学术成果部分 - 添加按钮 -->
+                                              
+                                
+                                </div>
+                            </div>
+                            <!-- ================== 新增结束 ================== -->
+
+                            <p style="margin-top: 20px;"><strong>学术成果：</strong></p>
+                       
                             <div class="paper-item">
                                 <div class="paper-info">
                                     <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
@@ -378,10 +426,16 @@
                                     <div class="paper-journal">《Front.Sustain. Food Syst.》(SCI二区，二作)</div>
                                 </div>
                                 <div class="paper-buttons">
-                                    <a href=" " target="_blank" class="paper-btn cnki-btn" ><del>知网链接</del></a>
-                                    <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-btn official-btn">官网链接</a>
+                                    <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-btn official-btn">————官网链接————</a>
                                 </div>
                             </div>
+							<div class="paper-item">
+								<div class="paper-info">
+                                    <div class="paper-title">黑龙江省县域协同发展能力空间分异特征及形成机制</div>
+                                    <div class="paper-journal">硕士学位论文</div>
+                                </div>
+                                <div class="paper-buttons">
+                                     <a href="../image/2022301161.pdf" target="_blank" class="paper-btn cnki-btn" padding=1px > ———<span>📥</span>&nbsp;&nbsp;查看全文———</a></div>
                         </div>
                     </div>
                     <div class="education-item">
@@ -395,22 +449,53 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ================== 新增：掌握技能板块 ================== -->
+                <div class="section" id="skills">
+                    <div class="section-title">掌握技能</div>
+                    <div class="skills-wrapper">
+                        <div class="skill-tags">
+                            <!-- 设计类 -->
+                            <span class="skill-tag design">Photoshop</span>
+                            <span class="skill-tag design">Illustrator</span>
+                            <span class="skill-tag design">InDesign</span>
+                            <span class="skill-tag design">Premiere Pro</span>
+                            <span class="skill-tag design">After Effects</span>
+                            <!-- GIS类 -->
+                            <span class="skill-tag">ArcGIS</span>
+                            <span class="skill-tag">QGIS</span>
+                            <span class="skill-tag">ENVI</span>
+                            <span class="skill-tag">国土空间规划(图/文/数据处理)</span>
+                            <!-- 办公与AI -->
+                            <span class="skill-tag ai">Word</span>
+							<span class="skill-tag ai">Excel</span>
+							<span class="skill-tag ai">PPT</span>
+							<span class="skill-tag ai">Canvas</span>
+                            <span class="skill-tag ai">Visio</span>
+							<span class="skill-tag ai">Publisher</span>
+							<span class="skill-tag ai">Indesign</span>
+							<span class="skill-tag ai">AI 辅助科研</span>
+                            <span class="skill-tag ai">Vibe Coding</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- ================== 新增结束 ================== -->
                 
                 <!-- 项目经历 -->
                 <div class="section">
                     <div class="section-title">项目经历</div>
                     <div class="experience-item">
                         <div class="item-header">
-                            <div class="item-title">国土空间总体规划编制</div>
+                            <div class="item-title">国土空间总体规划编制（区域经济与资源管理）</div>
                             <div class="item-time">2022.09-2025.03</div>
                         </div>
                         <div class="item-details">
-                            <p>深度参与导师平台的横向国土空间规划编制项目，项目总价值超100万元，理论与实践得到充分结合</p>
+                            <p>深度参与导师平台的横向国土空间规划编制项目，项目总价值超100万元，聚焦区域经济协调发展与资源优化配置</p>
                             <ul>
-                                <li>全域调研: 带队完成40个多行政单位调研，运用无人机航拍+GIS技术建立初步现状模型</li>
-                                <li>图纸绘制: 通过Illustrator+ArcGIS制图，独立完成国空20余项图件绘制，绘制修改超500张，支撑团队工作效率提高至每两周一次成果汇总</li>
-                                <li>文本规范: 编制规划文本总页数超500页，获省自然资源厅专家组逻辑清晰、可实施性强等评价</li>
-                                <li>技术贡献: 开展ArcGIS与Adobe软件协同培训达12场，累计培训超30人，提升团队出图效率35%</li>
+                                <li><strong>调研与空间分析：</strong>带队完成40个多行政单位调研，运用无人机航拍+GIS技术建立现状模型，为国空规划提供数据支撑</li>
+                                <li><strong>绘图与可视化：</strong>通过Illustrator+ArcGIS制图，独立完成国空20余项图件绘制，处理调研数据与图斑数据进行可视化表现，绘制修改超500张，支撑团队工作效率提高至每两周一次成果汇总</li>
+                                <li><strong>文本汇编与修整：</strong>编制规划文本总页数超500页，获省自然资源厅专家组"逻辑清晰、可实施性强"等评价</li>
+                                <li><strong>培训与AI提效：</strong>开展ArcGIS与Adobe软件协同培训达12场，累计培训超30人，提升团队出图效率35%，熟练运用AI工具优化工作流程，辅助数据计算</li>
                             </ul>
                         </div>
                     </div>
@@ -422,7 +507,7 @@
                         <div class="item-details">
                             <p>省部级政府资助项目，项目经费十万元，成果为学术论文</p>
                             <ul>
-                                <li>数据获取: 带队完成走访调研,通过调取年鉴、爬取等方式获得统计数据,并完成数据的初步整理、清洗、标准化</li>
+                                <li>数据获取: 带队完成走访调研,通过调取年鉴、爬取等方式获得统计数据,并完成数据的初步清洗与标准化</li>
                                 <li>图纸绘制: 充分利用制图技术，团队合作完成论文图件的绘制与修订</li>
                                 <li>帮助支持: 为团队后续成员展开培训并在毕业期间完成工作交接，毕业后仍进行技术支持</li>
                             </ul>
