@@ -3,604 +3,901 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>康辉的个人简历</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-     <style>
-      
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Noto Sans SC", sans-serif;
-        }
-        :root {
-            --primary-color: #202de1;
-            --primary-light: #4a5ae9;
-            --primary-dark: #1a25b4;
-            --accent-color: #ff6b6b;
-            --text-dark: #000000;
-            --text-light: #666666;
-            --bg-light: #f5f7fa;
-            --border-color: #e1e5eb;
-        }
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        /* 导航栏样式 */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--primary-color);
-            padding: 15px 30px;
-            color: white;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        .nav-links {
-            display: flex;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            padding: 8px 15px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            font-weight: 500;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            background-color: var(--primary-light);
-        }
-        /* 页面内容样式 */
-        .page-content {
-            padding: 40px;
-        }
-        .page-title {
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-        .page-subtitle {
-            font-size: 24px;
-            font-weight: 500;
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .section-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-dark);
-            border-left: 4px solid var(--primary-color);
-            padding-left: 10px;
-            margin-bottom: 20px;
-        }
-        /* 简历内容样式 */
-        .resume-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 20px;
-        }
-        .personal-info {
-            flex: 1;
-        }
-        .name {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-        .basic-info {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-        .basic-info div {
-            margin-right: 20px;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .contact-info div {
-            margin-right: 20px;
-            margin-bottom: 5px;
-        }
-        .photo-container {
-            width: 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .photo-frame {
-            width: 120px;
-            height: 150px;
-            border: 2px solid var(--border-color);
-            background-color: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .photo-label {
-            font-size: 14px;
-            color: var(--text-light);
-        }
-        .education-item, .experience-item {
-            margin-bottom: 20px;
-        }
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        .item-title {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--text-dark);
-        }
-        .item-time {
-            color: var(--text-light);
-        }
-        .item-details {
-            margin-left: 20px;
-        }
-        .item-details ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        .item-details li {
-            margin-bottom: 5px;
-        }
-        .honor-list {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .honor-item {
-            width: 50%;
-            margin-bottom: 10px;
-        }
-        
-      
-        .paper-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary-color);
-        }
-        .paper-info {
-            flex: 1;
-            margin-right: 15px;
-        }
-        .paper-title {
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-        .paper-journal {
-            font-size: 14px;
-            color: var(--text-light);
-        }
-        .paper-buttons {
-            display: flex;
-            gap: 10px;
-            flex-shrink: 0;
-			padding: inherit;
-        }
-        .paper-btn {
-            display: inline-block;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            min-width: 60px;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-			margin:3px;				;
-        }
-        .paper-btn:active {
-            transform: translateY(0);
-        }
-        .cnki-btn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        .cnki-btn:hover {
-            background-color: var(--primary-dark);
-        }
-        .official-btn {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        .official-btn:hover {
-            background-color: #e05555;
-        }
-
-        /* ================== 新增样式 Start ================== */
-        /* 掌握技能板块 */
-        .skills-wrapper {
-            margin-top: 20px;
-        }
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-			margin: 10px;
-			
-        }
-        .skill-tag {
-            background: #f0f2ff;
-            padding: 4px 14px;
-            border-radius: 25px;
-            font-size: 14px;
-            color: var(--primary-dark);
-            border: 1px solid #d0d4ff;
-            font-weight: 500;
-			
-        }
-        
-        /* ================== 新增样式 End ================== */
-
-        /* 页脚样式 */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f0f0f0;
-            color: var(--text-light);
-            font-size: 14px;
-            border-top: 1px solid var(--border-color);
-        }
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 10px;
-            }
-            .nav-links {
-                margin-top: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .nav-links a {
-                margin: 5px;
-            }
-            .page-content {
-                padding: 20px;
-            }
-            .resume-header {
-                flex-direction: column;
-            }
-            .photo-container {
-                width: 100%;
-                margin-top: 20px;
-                order: -1;
-            }
-            .basic-info, .contact-info {
-                flex-direction: column;
-            }
-            .basic-info div, .contact-info div {
-                margin: 5px 0;
-            }
-            .honor-item {
-                width: 100%;
-            }
-            /* 响应式：论文按钮在小屏幕下换行 */
-            .paper-item {
-                flex-direction: column;
-            }
-            .paper-buttons {
-                margin-top: 10px;
-                align-self: flex-end;
-            }
-            .thesis-footer {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .download-btn {
-                margin-top: 15px;
-            }
-        }
-    </style>
+    <title>康辉 - 个人简历</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="container">
-        <!-- 导航栏 - 新增主页按钮 -->
+        <!-- 导航栏 -->
         <nav class="navbar">
             <div class="logo">康辉的个人作品集</div>
+            <button class="hamburger" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
             <div class="nav-links">
-                <a href="../index.html" class="nav-link">主页</a>
-                <a href="resume.html" class="nav-link active">个人简历</a>
-                <a href="graphic-design.html" class="nav-link">平面设计作品</a>
-                <a href="spatial-planning.html" class="nav-link">国空规划作品</a>
-                <a href="video-works.html" class="nav-link">视频作品</a>
-				<a href="article.html" class="nav-link">精选推文</a>
+                <a href="../index.html">主页</a>
+                <a href="resume.html" class="active">个人简历</a>
+                <a href="portfolio-plan.html">空间规划作品</a>
+                <a href="portfolio-design.html">平面设计作品</a>
+                <a href="portfolio-video.html">视频作品</a>
+                <a href="portfolio-article.html">精选推文</a>
             </div>
         </nav>
 
-        <!-- 页面内容 (保持不变) -->
-        <div class="page-content">
-            <div id="resume" class="page active">
-                <h1 class="page-title">康辉的个人简历</h1>
-                
-                <!-- 头部信息 -->
+        <!-- Tab 切换栏 -->
+        <div class="tab-bar">
+            <button data-tab="main" class="active">综合总览</button>
+            <button data-tab="plan">规划设计方向</button>
+            <button data-tab="gov">公共管理方向</button>
+            <button data-tab="design">空间视觉方向</button>
+        </div>
+
+        <!-- ==================== #main 总览模式 ==================== -->
+        <div class="version-content active" data-version="main">
+            <div class="page-content">
+                <!-- 头部 -->
                 <div class="resume-header">
                     <div class="personal-info">
                         <div class="name">康辉</div>
-                        <div class="basic-info">
-                            <div>男</div>
-                            <div>硕士</div>
-                            <div>中共党员</div>
-                            <div>CET-4</div>
+                        <div class="meta-row">
+                            <span>男</span>
+                            <span>硕士</span>
+                            <span class="tag">中共党员</span>
+                            <span>C1驾照</span>
+                            <span>现居宁波</span>
+                            <span>随时到岗</span>
                         </div>
-                        <div class="contact-info">
-                            <div>电话: 13704615667</div>
-                            <div>邮箱: hardsonk@163.com</div>
-                        </div>
-                    </div>
-                    <div class="photo-container">
-                        <div class="photo-frame">
-                        <img src="../image/2024HIMO-w.jpg" width="3954" height="5271" alt=""/> </div>
-                        <div class="photo-label">个人照片</div>
-                    </div>
-                </div>
-                
-                <!-- 教育背景 -->
-				<div class="section">
-                    <div class="section-title">教育背景</div>
-                    <div class="education-item">
-                        <div class="item-header">
-                            <div class="item-title">硕士 - 哈尔滨师范大学地理学</div>
-                            <div class="item-time">2022.09-2025.06</div>
-                        </div>
-                        <div class="item-details">
-                            <p><strong>研究方向：城乡与国土规划×区域经济发展</strong></p>
-                            <p>GPA: 4.1/5.0 (专业排名: 2/25)</p>
-                            <p>主修课程: 3S技术应用、区域经济地理研究、旅游地理学、城市地理学等</p>
-                                              
-                                
-                                </div>
-                            </div>
-                            <!-- ================== 新增结束 ================== -->
-
-                            <p style="margin-top: 20px;"><strong>学术成果：</strong></p>
-                       
-                            <div class="paper-item">
-                                <div class="paper-info">
-                                    <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
-                                    <div class="paper-journal">《农业与技术》(省级，一作)</div>
-                                </div>
-                                <div class="paper-buttons">
-                                    <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-btn cnki-btn" padding=1px >知网链接</a>
-                                    <a href="http://www.nyyjs.net/CN/10.19754/j.nyyjs.20231030031" target="_blank" class="paper-btn official-btn">官网链接</a>
-                                </div>
-                            </div>
-                            <div class="paper-item">
-                                <div class="paper-info">
-                                    <div class="paper-title">The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</div>
-                                    <div class="paper-journal">《Front.Sustain. Food Syst.》(SCI二区，二作)</div>
-                                </div>
-                                <div class="paper-buttons">
-                                    <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-btn official-btn">————官网链接————</a>
-                                </div>
-                            </div>
-							<div class="paper-item">
-								<div class="paper-info">
-                                    <div class="paper-title">黑龙江省县域协同发展能力空间分异特征及形成机制</div>
-                                    <div class="paper-journal">硕士学位论文</div>
-                                </div>
-                                <div class="paper-buttons">
-                                     <a href="../image/2022301161.pdf" target="_blank" class="paper-btn cnki-btn" padding=1px > ———<span>📥</span>&nbsp;&nbsp;查看全文———</a></div>
+                        <div class="meta-row">
+                            <span>13704615667</span>
+                            <span>hardsonk@163.com</span>
+                            <a href="../index.html">作品集网站</a>
                         </div>
                     </div>
-                    <div class="education-item">
-                        <div class="item-header">
-                            <div class="item-title">本科 - 哈尔滨师范大学数字媒体技术</div>
-                            <div class="item-time">2018.09-2022.06</div>
-                        </div>
-                        <div class="item-details">
-                            <p>GPA: 4/5.0 (专业排名: 10/70)</p>
-                            <p>主修课程: Unity3D游戏制作、3D模型设计、三维动画、二维动画、web前端设计、ui设计等</p>
-                        </div>
+                    <div class="photo-box">
+                        <img src="../image/thumb/2024HIMO-w.webp" data-full="../image/2024HIMO-w.jpg" alt="个人照片">
                     </div>
                 </div>
 
-                <!-- ================== 新增：掌握技能板块 ================== -->
-                <div class="section" id="skills">
-                    <div class="section-title">掌握技能</div>
-                    <div class="skills-wrapper">
-						 <div class="item-title">平面设计-科研制图</div>
-                        <div class="skill-tags">
-                            <!-- 设计类 -->
-							<span class="skill-tag">Photoshop</span>
-                            <span class="skill-tag">Illustrator</span>
-                            <span class="skill-tag">InDesign</span>
-                            <span class="skill-tag">Premiere Pro</span>
-                            <span class="skill-tag">After Effects</span>
-							<span class="skill-tag">Publisher</span>
-							<span class="skill-tag">Indesign</span>
-							<span class="skill-tag">Canvas</span>
-                            <span class="skill-tag">Visio</span>
-						</div>
-                        <hr style="margin: 15px 0px; border: none; border-top: 1px solid #cfcfcf;">
-                        <div class="item-title">地理信息-国空规划</div>
-						<div class="skill-tags">
-                            <!-- GIS类 -->
-                            <span class="skill-tag">ArcGIS</span>
-                            <span class="skill-tag">QGIS</span>
-                            <span class="skill-tag">ENVI</span>
-                            <span class="skill-tag">国土空间规划(图/文/数据处理)</span>
-                          </div>
-                         <hr style="margin: 15px 0px; border: none; border-top: 1px solid #cfcfcfcf;">
-
-                          <div class="item-title">办公-代码-AI</div>
-						<div class="skill-tags">
-							<!-- 办公与AI -->
-                            <span class="skill-tag">Word</span>
-							<span class="skill-tag">Excel</span>
-							<span class="skill-tag">PPT</span>
-							<span class="skill-tag">Latex</span>
-							<span class="skill-tag">HTML前端开发</span>													<span <span class="skill-tag">AI 辅助科研</span>
-							<span class="skill-tag">Openclaw部署</span>
-							<span class="skill-tag">Python</span>							
-                            <span class="skill-tag">Vibe Coding</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- ================== 新增结束 ================== -->
-                
-                <!-- 项目经历 -->
+                <!-- 核心优势（综合） -->
                 <div class="section">
+                    <div class="section-title">核心优势</div>
+                    <div class="core-strengths">
+                        <ul>
+                            <li>近3年国土空间规划实战经验，独立编制"三区三线"等20余项法定图件，累计交付成果图件500+张</li>
+                            <li>GIS + 设计 + 数据复合能力：ArcGIS Pro / ENVI / Python + Adobe专业制图，出图与汇报全链路可独立交付</li>
+                            <li>学术支撑扎实：SCI英文论文1篇（第三作者，前两作者为共同一作）、省级期刊1篇（一作），研究方向聚焦乡村发展与耕地保护</li>
+                            <li>中共党员，6年学生干部经历（校学生会副主席 + 硕士班长），具备跨部门统筹与团队培训经验</li>
+                            <li>新媒体运营实战：主导校级公众号矩阵粉丝量从2.5万增长至3.5万（+40%），创单篇推文转发量10w+记录</li>
+                            <li>本科数字媒体技术背景，掌握三维建模、Unity3D、C4D、前端开发等技能，具备空间数据可视化潜力</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 项目经历摘要 -->
+                <div class="section" id="main-project">
                     <div class="section-title">项目经历</div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">国土空间总体规划编制（区域经济资源配置优化）</div>
-                            <div class="item-time">2022.09-2025.03</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">国土空间总体规划编制（横向课题）</div>
+                            <div class="entry-time">2022.09 - 2025.03</div>
                         </div>
-                        <div class="item-details">
-                            <p>深度参与导师平台的横向国土空间规划编制项目，项目总价值超100万元，聚焦区域经济协调发展与资源优化配置</p>
-                            <ul>
-                                <li><strong>调研与空间分析：</strong>带队完成40个多行政单位调研，运用无人机航拍+GIS技术建立现状模型，为国空规划提供数据支撑</li>
-                                <li><strong>绘图与可视化：</strong>通过Illustrator+ArcGIS制图，独立完成国空20余项图件绘制，处理调研数据与图斑数据进行可视化表现，绘制修改超500张，支撑团队工作效率提高至每两周一次成果汇总</li>
-                                <li><strong>文本汇编与修整：</strong>编制规划文本总页数超500页，获省自然资源厅专家组"逻辑清晰、可实施性强"等评价</li>
-                                <li><strong>培训与AI提效：</strong>开展ArcGIS与Adobe软件协同培训达12场，累计培训超30人，提升团队出图效率35%，熟练运用AI工具优化工作流程，辅助数据计算</li>
-                            </ul>
-                        </div>
+                        <p>深度参与导师平台百万级横向项目，聚焦黑龙江省绥化市下辖县乡镇级国土空间总体规划（2021-2035年）。带队完成40余个行政村调研，独立编制20余项法定图件，主笔规划文本500+页。</p>
+                        <a class="expand-link" data-goto-tab="plan" data-scroll-to="plan-project">展开详情</a>
                     </div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">县域城乡融合对耕地利用绿色转型的影响机制与调控</div>
-                            <div class="item-time">2024.12-2027.12</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">县域城乡融合对耕地利用绿色转型的影响机制与调控</div>
+                            <div class="entry-time">2024.12 - 2025.06</div>
                         </div>
-                        <div class="item-details">
-                            <p>省部级政府资助项目，项目经费十万元，成果为学术论文</p>
-                            <ul>
-                                <li>数据获取: 带队完成走访调研,通过调取年鉴、爬取等方式获得统计数据,并完成数据的初步清洗与标准化</li>
-                                <li>图纸绘制: 充分利用制图技术，团队合作完成论文图件的绘制与修订</li>
-                                <li>帮助支持: 为团队后续成员展开培训并在毕业期间完成工作交接，毕业后仍进行技术支持</li>
-                            </ul>
-                        </div>
+                        <p>省部级政府资助项目（经费10万元），本人参与阶段负责数据获取、清洗与标准化，以及论文图件绘制与修订。毕业后持续提供技术支持。</p>
+                        <a class="expand-link" data-goto-tab="plan" data-scroll-to="plan-project">展开详情</a>
                     </div>
                 </div>
-                
-                <!-- 校园经历 -->
-                <div class="section">
-                    <div class="section-title">校园经历</div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">地理科学学院 - 班长(人文地理学)</div>
-                            <div class="item-time">2022.09-2025.06</div>
-                        </div>
-                        <div class="item-details">
-                            <ul>
-                                <li>搭建双向沟通机制: 精准传达200+项政策通知，创新采用「信息分级+FAQ答疑」模式降低信息失真率</li>
-                                <li>统筹团结班级: 发扬善于交际特长，组织学术沙龙、节庆联欢等10余场课余活动，同学满意度100%(学院最高)</li>
-                                <li>开创共享文档协作体系: 实现课程资料/科研成果云端实时同步，累计节省800+小时沟通成本</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">哈尔滨师范大学学生会 - 副主席</div>
-                            <div class="item-time">2020.09-2021.06</div>
-                        </div>
-                        <div class="item-details">
-                            <ul>
-                                <li>学生会管理: 统筹宣传部与其他部门协同工作，带领新媒体矩阵粉丝量从2.5万至3.5万(40%)，创单篇推文转发量10w+记录</li>
-                                <li>技术支持: 完成海报、H5等物料的制作与技术培训，成功为校各大典礼、团省委宣讲活动等20余场大型活动提供全案视觉支持</li>
-                                <li>活动执行: 深度参与10余场校级赛事活动的全周期运营，统筹宣传、场控等，优化人员协作效率</li>
-                                <li>对外联络: 代表学校对接22个二级学院及省内40余所高校，维系常态化沟通，促成联合活动10余场</li>
-                                <li>社会责任: 积极投身志愿服务活动。疫情期间组建抗疫青年突击队，组织线上活动若干；投身一线抗疫活动，获优秀抗疫青年志愿者称号</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 实习经历 -->
-                <div class="section">
+
+                <!-- 实习经历摘要 -->
+                <div class="section" id="main-intern">
                     <div class="section-title">实习经历</div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">哈尔滨市城乡规划设计研究院 - 国土空间规划助理实习生</div>
-                            <div class="item-time">2023.03-2023.06</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨市城乡规划设计研究院 - 国土空间规划助理实习生</div>
+                            <div class="entry-time">2023.03 - 2023.06</div>
                         </div>
-                        <div class="item-details">
-                            <ul>
-                                <li>数据处理: 运用ArcGIS完成绥化市20余个县域的三调数据及基础设施现状的整理和规划意见收集</li>
-                                <li>文本编制: 独立完成200余页规划文本中"三区三线"等内容的撰写及相关图表和图件的制作</li>
-                            </ul>
-                        </div>
+                        <p>运用ArcGIS完成绥化市20余个县域三调数据整理；独立完成200余页规划文本中"三区三线"等内容撰写及图件制作。</p>
+                        <a class="expand-link" data-goto-tab="plan" data-scroll-to="plan-intern">展开详情</a>
                     </div>
-                    <div class="experience-item">
-                        <div class="item-header">
-                            <div class="item-title">哈尔滨维塔视觉传媒有限公司 - 平面设计师实习生</div>
-                            <div class="item-time">2021.09-2021.12</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨维塔视觉传媒有限公司 - 平面设计师实习生</div>
+                            <div class="entry-time">2021.09 - 2021.12</div>
                         </div>
-                        <div class="item-details">
-                            <ul>
-                                <li>设计经验: 独立完成教育/零售行业80+张高点击率海报</li>
-                                <li>流程优化: 建立PSD图层标准化模板，减少无效沟通10小时/周，团队作品效率提升40%</li>
-                                <li>跨界执行: 主导3场500人+线下活动舞美设计，实现后期制作到现场实施的完美落地</li>
-                            </ul>
-                        </div>
+                        <p>独立完成教育/零售行业80+张海报；建立PSD图层标准化模板，团队效率提升40%；主导3场500人+线下活动舞美设计。</p>
                     </div>
                 </div>
-                
-                <!-- 荣誉与奖励 -->
+
+                <!-- 教育背景摘要 -->
+                <div class="section" id="main-edu">
+                    <div class="section-title">教育背景</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 地理学（人文地理）硕士</div>
+                            <div class="entry-time">2022.09 - 2025.06</div>
+                        </div>
+                        <p>GPA 4.1/5.0，专业排名 2/25 | 研究方向：城乡与国土规划 x 区域经济发展</p>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 数字媒体技术 本科</div>
+                            <div class="entry-time">2018.09 - 2022.06</div>
+                        </div>
+                        <p>GPA 4.0/5.0，专业排名 10/70</p>
+                    </div>
+                </div>
+
+                <!-- 学术成果摘要 -->
+                <div class="section" id="main-academic">
+                    <div class="section-title">学术成果</div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
+                            <div class="paper-journal">《农业与技术》（省级期刊，第一作者）</div>
+                        </div>
+                        <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-link">知网</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</div>
+                            <div class="paper-journal">Frontiers in Sustainable Food Systems（SCI Q2，第三作者；第一、二作者为共同一作）</div>
+                        </div>
+                        <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-link">全文</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江省县域协同发展能力空间分异特征及形成机制</div>
+                            <div class="paper-journal">硕士学位论文</div>
+                        </div>
+                        <a href="../image/2022301161.pdf" target="_blank" class="paper-link">查看全文</a>
+                    </div>
+                </div>
+
+                <!-- 技能摘要 -->
+                <div class="section" id="main-skill">
+                    <div class="section-title">专业技能</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ArcGIS Pro</span>
+                        <span class="skill-tag">ENVI</span>
+                        <span class="skill-tag">QGIS</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">Illustrator</span>
+                        <span class="skill-tag">InDesign</span>
+                        <span class="skill-tag">Premiere Pro</span>
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">Cinema 4D</span>
+                        <span class="skill-tag">Unity3D</span>
+                        <span class="skill-tag">HTML/CSS/JS</span>
+                        <span class="skill-tag">LaTeX</span>
+                        <span class="skill-tag">Word/Excel/PPT</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">OpenClaw</span>
+                        <span class="skill-tag">航测数据处理</span>
+                    </div>
+                    <a class="expand-link" data-goto-tab="design" data-scroll-to="design-skill">查看分岗位技能详情</a>
+                </div>
+
+                <!-- 校园经历摘要 -->
+                <div class="section" id="main-campus">
+                    <div class="section-title">校园经历</div>
+                    <div class="entry">
+                        <p>校学生会副主席（主管宣传）：统筹新媒体矩阵运营，粉丝量2.5万增至3.5万（+40%），单篇推文转发10w+；为20+场校级大型活动提供全案视觉支持。硕士期间担任班长3年，精准传达200+项政策通知，组织学术沙龙等活动10余场。</p>
+                        <a class="expand-link" data-goto-tab="gov" data-scroll-to="gov-campus">展开详情</a>
+                    </div>
+                </div>
+
+                <!-- 荣誉 -->
                 <div class="section">
-                    <div class="section-title">荣誉与奖励</div>
-                    <div class="honor-list">
-                        <div class="honor-item">2020.05 哈尔滨师范大学优秀学生团员</div>
-                        <div class="honor-item">2021.05 哈尔滨师范大学优秀学生团员</div>
-                        <div class="honor-item">2021.05 哈尔滨师范大学抗疫优秀青年志愿者</div>
-                        <div class="honor-item">2023.04 哈尔滨师范大学优秀共青团员</div>
-                        <div class="honor-item">2023.11 哈尔滨师范大学优秀研究生干部</div>
-                        <div class="honor-item">2024.06 哈尔滨师范大学二等硕士生学业奖学金</div>
+                    <div class="section-title">荣誉奖励</div>
+                    <div class="honor-row">
+                        <span>2024.06 二等硕士生学业奖学金</span>
+                        <span>2023.11 优秀研究生干部</span>
+                        <span>2023.04 优秀共青团员</span>
+                        <span>2021.05 抗疫优秀青年志愿者</span>
+                        <span>2020.05 / 2021.05 优秀学生团员</span>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <!-- ==================== #plan 规划院版 ==================== -->
+        <div class="version-content" data-version="plan">
+            <div class="page-content">
+                <!-- 头部 -->
+                <div class="resume-header">
+                    <div class="personal-info">
+                        <div class="name">康辉</div>
+                        <div class="job-target">
+                            <span class="job-tag">规划师助理</span>
+                            <span class="job-tag">国土空间规划技术员</span>
+                            <span class="job-tag">GIS数据处理工程师</span>
+                            <span class="job-tag">空间信息处理岗</span>
+                        </div>
+                        <div class="meta-row">
+                            <span>男</span>
+                            <span>硕士</span>
+                            <span class="tag">中共党员</span>
+                            <span>C1驾照</span>
+                            <span>现居宁波</span>
+                            <span>随时到岗</span>
+                        </div>
+                        <div class="meta-row">
+                            <span>13704615667</span>
+                            <span>hardsonk@163.com</span>
+                            <a href="../index.html">作品集网站</a>
+                        </div>
+                    </div>
+                    <div class="photo-box">
+                        <img src="../image/thumb/2024HIMO-w.webp" data-full="../image/2024HIMO-w.jpg" alt="个人照片">
+                    </div>
+                </div>
+
+                <!-- 核心优势 -->
+                <div class="section">
+                    <div class="core-strengths">
+                        <ul>
+                            <li>近3年国土空间规划实战：参与百万级横向项目，独立编制"三区三线"划定等20余项法定图件，累计交付成果图件500+张</li>
+                            <li>GIS + 设计复合能力：ArcGIS Pro / QGIS / ENVI 空间分析与制图，Python 空间数据处理，Adobe 专业制图，出图与汇报材料全链路可独立交付</li>
+                            <li>学术支撑：SCI英文论文1篇（第三作者，共一）、省级期刊1篇（一作），研究方向聚焦乡村振兴与耕地保护</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 项目经历 -->
+                <div class="section" id="plan-project">
+                    <div class="section-title">项目经历</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">黑龙江省绥化市下辖县乡镇级国土空间总体规划（2021-2035年）</div>
+                            <div class="entry-time">2022.09 - 2025.03</div>
+                        </div>
+                        <p>横向课题，项目总价值超100万元，成果已入库待批复。聚焦镇村层面国土空间规划编制全流程。</p>
+                        <ul>
+                            <li><strong>基数调研：</strong>带队完成40余个行政村全域现状调研，运用无人机航拍 + ArcGIS构建现状空间数据库，支撑规划基数转换与"双评价"</li>
+                            <li><strong>法定图件编制：</strong>独立承担"三区三线"划定、村庄分类布局、国土空间格局优化等20余项法定图件编制，累计交付与修订成果图件500+张，保障团队以两周为周期稳定汇总成果并通过专家评审</li>
+                            <li><strong>规划文本编制：</strong>主笔"三区三线"划定等核心章节，累计编制规划文本与说明书500+页，成果获省自然资源厅专家组"逻辑清晰、可实施性强"书面评价</li>
+                            <li><strong>技术赋能：</strong>面向团队开展ArcGIS x Adobe协同制图培训12场（30+人次），推动出图流程标准化，团队平均出图周期缩短35%</li>
+                        </ul>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">县域城乡融合对耕地利用绿色转型的影响机制与调控</div>
+                            <div class="entry-time">2024.12 - 2025.06（本人参与阶段）</div>
+                        </div>
+                        <p>省部级政府资助项目，经费10万元，成果为学术论文。</p>
+                        <ul>
+                            <li>带队完成走访调研，通过调取年鉴、数据爬取等方式获得统计数据，完成数据初步清洗与标准化</li>
+                            <li>充分利用制图技术，团队合作完成论文图件的绘制与修订</li>
+                            <li>为团队后续成员展开培训并在毕业期间完成工作交接，毕业后仍进行技术支持</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 实习经历 -->
+                <div class="section" id="plan-intern">
+                    <div class="section-title">实习经历</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨市城乡规划设计研究院 - 国土空间规划助理实习生</div>
+                            <div class="entry-time">2023.03 - 2023.06</div>
+                        </div>
+                        <ul>
+                            <li>运用ArcGIS完成绥化市20余个县域的三调数据及基础设施现状整理和规划意见收集</li>
+                            <li>独立完成200余页规划文本中"三区三线"等内容的撰写及相关图表和图件的制作</li>
+                        </ul>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨维塔视觉传媒有限公司 - 平面设计师实习生</div>
+                            <div class="entry-time">2021.09 - 2021.12</div>
+                        </div>
+                        <ul>
+                            <li>独立完成教育/零售行业80+张高点击率海报</li>
+                            <li>建立PSD图层标准化模板，减少无效沟通10小时/周，团队作品效率提升40%</li>
+                            <li>主导3场500人+线下活动舞美设计并落地执行</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 教育背景 -->
+                <div class="section" id="plan-edu">
+                    <div class="section-title">教育背景</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 地理学（人文地理）硕士</div>
+                            <div class="entry-time">2022.09 - 2025.06</div>
+                        </div>
+                        <p>GPA 4.1/5.0，专业排名 2/25 | 研究方向：城乡与国土规划 x 区域经济发展</p>
+                        <p style="font-size:13px;color:#6b7280;">主修课程：3S技术应用、区域经济地理研究、旅游地理学、城市地理学</p>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 数字媒体技术 本科</div>
+                            <div class="entry-time">2018.09 - 2022.06</div>
+                        </div>
+                        <p>GPA 4.0/5.0，专业排名 10/70</p>
+                    </div>
+                </div>
+
+                <!-- 学术成果 -->
+                <div class="section" id="plan-academic">
+                    <div class="section-title">学术成果</div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
+                            <div class="paper-journal">《农业与技术》（省级期刊，第一作者）</div>
+                        </div>
+                        <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-link">知网</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</div>
+                            <div class="paper-journal">Frontiers in Sustainable Food Systems（SCI Q2，第三作者；第一、二作者为共同一作）</div>
+                        </div>
+                        <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-link">全文</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江省县域协同发展能力空间分异特征及形成机制</div>
+                            <div class="paper-journal">硕士学位论文</div>
+                        </div>
+                        <a href="../image/2022301161.pdf" target="_blank" class="paper-link">查看全文</a>
+                    </div>
+                </div>
+
+                <!-- 技能 -->
+                <div class="section" id="plan-skill">
+                    <div class="section-title">专业技能</div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">规划编制（精通）</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">国土空间总体规划</span>
+                            <span class="skill-tag">村庄规划</span>
+                            <span class="skill-tag">"三区三线"划定</span>
+                            <span class="skill-tag">规划文本编制</span>
+                            <span class="skill-tag">成果报批与专家评审配合</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">GIS与遥感（精通）</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ArcGIS Pro</span>
+                            <span class="skill-tag">ENVI</span>
+                            <span class="skill-tag">QGIS</span>
+                            <span class="skill-tag">航测数据处理</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">数据分析（熟练）</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (geopandas/pandas)</span>
+                            <span class="skill-tag">SPSS</span>
+                            <span class="skill-tag">Excel</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">图文与成果表达（精通）</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Illustrator</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">InDesign</span>
+                            <span class="skill-tag">LaTeX</span>
+                            <span class="skill-tag">Word/PPT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 校园经历（压缩） -->
+                <div class="section" id="plan-campus">
+                    <div class="section-title">校园经历</div>
+                    <div class="entry">
+                        <p>校学生会副主席（主管宣传，2020-2021）：统筹新媒体矩阵运营，粉丝量增长40%，为20+场校级活动提供全案视觉支持。硕士班长（2022-2025）：传达200+项政策通知，组织学术沙龙等活动10余场。</p>
+                    </div>
+                </div>
+
+                <!-- 择业期（移至末尾） -->
+                <div class="section">
+                    <div class="section-title">择业期</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">备考与专业能力进阶</div>
+                            <div class="entry-time">2025.06 - 至今</div>
+                        </div>
+                        <ul>
+                            <li>系统备考公务员及事业单位（自然资源系统方向）</li>
+                            <li>持续为导师团队省部级课题提供技术支撑，完成成果交接与后期图件修订</li>
+                            <li>自主进阶：Python空间数据分析、Web GIS可视化技术学习</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 荣誉 -->
+                <div class="section">
+                    <div class="section-title">荣誉奖励</div>
+                    <div class="honor-row">
+                        <span>2024.06 二等硕士生学业奖学金</span>
+                        <span>2023.11 优秀研究生干部</span>
+                        <span>2023.04 优秀共青团员</span>
+                        <span>2021.05 抗疫优秀青年志愿者</span>
+                        <span>2020.05 / 2021.05 优秀学生团员</span>
+                    </div>
+                </div>
+
+                <!-- 精选作品链接 -->
+                <div class="section" style="text-align:center;padding-top:12px;">
+                    <a href="portfolio-plan.html" style="display:inline-block;padding:10px 28px;background:var(--accent);color:#fff;border-radius:6px;font-weight:600;font-size:14px;">查看空间规划作品集</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== #gov 考编/辅导员版 ==================== -->
+        <div class="version-content" data-version="gov">
+            <div class="page-content">
+                <!-- 头部 -->
+                <div class="resume-header">
+                    <div class="personal-info">
+                        <div class="name">康辉</div>
+                        <div class="job-target">
+                            <span class="job-tag">高校辅导员</span>
+                            <span class="job-tag">自然资源系统技术岗</span>
+                            <span class="job-tag">党务工作者</span>
+                            <span class="job-tag">宣传与新媒体运营岗</span>
+                        </div>
+                        <div class="meta-row">
+                            <span>男</span>
+                            <span>硕士</span>
+                            <span class="tag">中共党员（正式）</span>
+                            <span>C1驾照</span>
+                            <span>现居宁波</span>
+                            <span>随时到岗</span>
+                        </div>
+                        <div class="meta-row">
+                            <span>13704615667</span>
+                            <span>hardsonk@163.com</span>
+                            <a href="../index.html">作品集网站</a>
+                        </div>
+                    </div>
+                    <div class="photo-box">
+                        <img src="../image/thumb/2024HIMO-w.webp" data-full="../image/2024HIMO-w.jpg" alt="个人照片">
+                    </div>
+                </div>
+
+                <!-- 核心优势 -->
+                <div class="section">
+                    <div class="core-strengths">
+                        <ul>
+                            <li>中共党员（正式），6年学生干部经历：本科3年校学生会（至副主席，主管宣传与新媒体运营），硕士3年班长；具备党团宣传、活动策划与行政协调综合能力</li>
+                            <li>新媒体运营实战经验丰富：主导校级公众号矩阵粉丝量从2.5万增长至3.5万（+40%），创单篇推文转发量10w+记录</li>
+                            <li>学术研究聚焦乡村振兴与耕地保护，与自然资源系统核心业务高度对口；具备公文写作与基层调研能力</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 校园经历（完整展开） -->
+                <div class="section" id="gov-campus">
+                    <div class="section-title">学生干部经历</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学学生会 - 副主席（主管宣传）</div>
+                            <div class="entry-time">2020.09 - 2021.06</div>
+                        </div>
+                        <p style="font-size:13px;color:#6b7280;margin-bottom:6px;">本科期间在校学生会任职3年（部员 - 副部长 - 副主席），主管宣传方向。</p>
+                        <ul>
+                            <li><strong>新媒体运营：</strong>统筹宣传部与其他部门协同工作，带领新媒体矩阵粉丝量从2.5万增至3.5万（+40%），创单篇推文转发量10w+记录</li>
+                            <li><strong>技术支持：</strong>完成海报、H5等物料的制作与技术培训，成功为校各大典礼、团省委宣讲活动等20余场大型活动提供全案视觉支持</li>
+                            <li><strong>活动执行：</strong>深度参与10余场校级赛事活动的全周期运营，统筹宣传、场控等环节</li>
+                            <li><strong>对外联络：</strong>代表学校对接22个二级学院及省内40余所高校，维系常态化沟通，促成联合活动10余场</li>
+                            <li><strong>社会责任：</strong>疫情期间组建抗疫青年突击队，组织线上活动若干；投身一线抗疫活动，获优秀抗疫青年志愿者称号</li>
+                        </ul>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">地理科学学院 - 班长（人文地理学）</div>
+                            <div class="entry-time">2022.09 - 2025.06</div>
+                        </div>
+                        <p style="font-size:13px;color:#6b7280;margin-bottom:6px;">硕士阶段三年均任职班长，协助辅导员处理行政工作、对接班级干部、与团支书共同开展党团建设活动。</p>
+                        <ul>
+                            <li><strong>信息管理：</strong>搭建双向沟通机制，精准传达200+项政策通知，创新采用"信息分级 + FAQ答疑"模式降低信息失真率</li>
+                            <li><strong>班级建设：</strong>组织学术沙龙、节庆联欢等10余场课余活动，提升班级凝聚力</li>
+                            <li><strong>协作优化：</strong>开创共享文档协作体系，实现课程资料与科研成果云端实时同步</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 教育背景 -->
+                <div class="section" id="gov-edu">
+                    <div class="section-title">教育背景</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 地理学（人文地理）硕士</div>
+                            <div class="entry-time">2022.09 - 2025.06</div>
+                        </div>
+                        <p>GPA 4.1/5.0，专业排名 2/25 | 政治面貌：中共党员（正式）</p>
+                        <p style="font-size:13px;color:#6b7280;">研究方向：城乡与国土规划 x 区域经济发展</p>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 数字媒体技术 本科</div>
+                            <div class="entry-time">2018.09 - 2022.06</div>
+                        </div>
+                        <p>GPA 4.0/5.0，专业排名 10/70</p>
+                    </div>
+                </div>
+
+                <!-- 项目经历（政策语言） -->
+                <div class="section" id="gov-project">
+                    <div class="section-title">项目与实践经历</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">黑龙江省绥化市下辖县乡镇级国土空间总体规划（2021-2035年）</div>
+                            <div class="entry-time">2022.09 - 2025.03</div>
+                        </div>
+                        <p>横向课题，项目总价值超100万元，成果已入库待批复。</p>
+                        <ul>
+                            <li><strong>基层调研：</strong>带队深入40余个行政村开展全域现状调研，运用无人机航拍与GIS技术建立现状数据库，为乡村振兴与耕地保护提供数据支撑</li>
+                            <li><strong>规划编制：</strong>独立承担"三区三线"划定等20余项法定图件编制，主笔规划文本500+页，成果获省自然资源厅专家组书面好评</li>
+                            <li><strong>团队培训：</strong>面向团队开展技术培训12场（30+人次），推动工作流程标准化</li>
+                        </ul>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">县域城乡融合对耕地利用绿色转型的影响机制与调控</div>
+                            <div class="entry-time">2024.12 - 2025.06（本人参与阶段）</div>
+                        </div>
+                        <p>省部级政府资助项目，聚焦耕地保护与乡村振兴核心议题。</p>
+                        <ul>
+                            <li>带队完成走访调研，获取并清洗多源统计数据</li>
+                            <li>团队合作完成论文图件绘制与修订，毕业后持续提供技术支持</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 实习经历 -->
+                <div class="section" id="gov-intern">
+                    <div class="section-title">实习经历</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨市城乡规划设计研究院 - 国土空间规划助理实习生</div>
+                            <div class="entry-time">2023.03 - 2023.06</div>
+                        </div>
+                        <ul>
+                            <li>运用ArcGIS完成绥化市20余个县域三调数据整理与规划意见收集</li>
+                            <li>独立完成200余页规划文本中"三区三线"等内容撰写及图件制作</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 学术成果 -->
+                <div class="section" id="gov-academic">
+                    <div class="section-title">学术成果</div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
+                            <div class="paper-journal">《农业与技术》（省级期刊，第一作者）| 聚焦乡村振兴与农村生活质量评估</div>
+                        </div>
+                        <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-link">知网</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</div>
+                            <div class="paper-journal">Frontiers in Sustainable Food Systems（SCI Q2，第三作者；第一、二作者为共同一作）| 城镇化对乡村振兴的影响效应</div>
+                        </div>
+                        <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-link">全文</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江省县域协同发展能力空间分异特征及形成机制</div>
+                            <div class="paper-journal">硕士学位论文</div>
+                        </div>
+                        <a href="../image/2022301161.pdf" target="_blank" class="paper-link">查看全文</a>
+                    </div>
+                </div>
+
+                <!-- 技能 -->
+                <div class="section" id="gov-skill">
+                    <div class="section-title">专业技能</div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">公文写作与组织协调</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">规划文本编制</span>
+                            <span class="skill-tag">调研报告撰写</span>
+                            <span class="skill-tag">政策解读与传达</span>
+                            <span class="skill-tag">跨部门统筹协调</span>
+                            <span class="skill-tag">活动策划与执行</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">数据分析与办公</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Excel</span>
+                            <span class="skill-tag">SPSS</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Word</span>
+                            <span class="skill-tag">PPT</span>
+                            <span class="skill-tag">LaTeX</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">新媒体与设计</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">微信公众号运营</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Illustrator</span>
+                            <span class="skill-tag">Premiere Pro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 择业期（移至末尾） -->
+                <div class="section">
+                    <div class="section-title">择业期</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">系统备考与能力储备</div>
+                            <div class="entry-time">2025.06 - 至今</div>
+                        </div>
+                        <ul>
+                            <li>系统备考公务员及事业单位（自然资源系统 / 高校辅导员方向）</li>
+                            <li>持续为导师团队省部级课题提供技术支撑，完成成果交接与后期图件修订</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 荣誉 -->
+                <div class="section">
+                    <div class="section-title">荣誉奖励</div>
+                    <div class="honor-row">
+                        <span>2024.06 二等硕士生学业奖学金</span>
+                        <span>2023.11 优秀研究生干部</span>
+                        <span>2023.04 优秀共青团员</span>
+                        <span>2021.05 抗疫优秀青年志愿者</span>
+                        <span>2020.05 / 2021.05 优秀学生团员</span>
+                    </div>
+                </div>
+
+                <!-- 精选作品链接 -->
+                <div class="section" style="text-align:center;padding-top:12px;">
+                    <a href="portfolio-article.html" style="display:inline-block;padding:10px 28px;background:var(--accent);color:#fff;border-radius:6px;font-weight:600;font-size:14px;">查看精选推文作品</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== #design 空间视觉方向 ==================== -->
+        <div class="version-content" data-version="design">
+            <div class="page-content">
+                <!-- 头部 -->
+                <div class="resume-header">
+                    <div class="personal-info">
+                        <div class="name">康辉</div>
+                        <div class="job-target">
+                            <span class="job-tag">空间数据可视化设计师</span>
+                            <span class="job-tag">新媒体设计师</span>
+                            <span class="job-tag">平面设计师</span>
+                            <span class="job-tag">影视后期制作</span>
+                        </div>
+                        <div class="meta-row">
+                            <span>男</span>
+                            <span>硕士</span>
+                            <span class="tag">中共党员</span>
+                            <span>C1驾照</span>
+                            <span>现居宁波</span>
+                            <span>随时到岗</span>
+                        </div>
+                        <div class="meta-row">
+                            <span>13704615667</span>
+                            <span>hardsonk@163.com</span>
+                            <a href="../index.html">作品集网站</a>
+                        </div>
+                    </div>
+                    <div class="photo-box">
+                        <img src="../image/thumb/2024HIMO-w.webp" data-full="../image/2024HIMO-w.jpg" alt="个人照片">
+                    </div>
+                </div>
+
+                <!-- 核心优势 -->
+                <div class="section">
+                    <div class="core-strengths">
+                        <ul>
+                            <li>GIS + 设计复合背景：地理学硕士 + 数字媒体技术本科，擅长将空间数据转化为视觉化表达，兼具GIS空间分析与平面/三维设计能力</li>
+                            <li>全链路设计能力：从数据采集、空间分析到成果可视化，独立完成海报、VI、UI、影视后期等全类型设计项目</li>
+                            <li>新媒体运营实战：主导校级公众号矩阵粉丝量从2.5万增长至3.5万（+40%），创单篇推文转发量10w+记录</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 技能（前置） -->
+                <div class="section" id="design-skill">
+                    <div class="section-title">专业技能</div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">平面设计（精通）</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Illustrator</span>
+                            <span class="skill-tag">InDesign</span>
+                            <span class="skill-tag">海报与VI设计</span>
+                            <span class="skill-tag">UI/UX设计</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">影视后期（熟练）</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">After Effects</span>
+                            <span class="skill-tag">Premiere Pro</span>
+                            <span class="skill-tag">Cinema 4D</span>
+                            <span class="skill-tag">Unity3D</span>
+                            <span class="skill-tag">动画与特效制作</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">GIS可视化</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ArcGIS Pro</span>
+                            <span class="skill-tag">QGIS</span>
+                            <span class="skill-tag">ENVI</span>
+                            <span class="skill-tag">空间分析与制图</span>
+                            <span class="skill-tag">航测数据处理</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">新媒体运营</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">微信公众号运营</span>
+                            <span class="skill-tag">内容策划与编辑</span>
+                            <span class="skill-tag">HTML/CSS/JavaScript</span>
+                            <span class="skill-tag">Canva</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">数据与办公</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (geopandas/pandas)</span>
+                            <span class="skill-tag">SPSS</span>
+                            <span class="skill-tag">Excel</span>
+                            <span class="skill-tag">Word/PPT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目经历（设计语言） -->
+                <div class="section" id="design-project">
+                    <div class="section-title">项目经历</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">黑龙江省绥化市下辖县乡镇级国土空间总体规划（2021-2035年）</div>
+                            <div class="entry-time">2022.09 - 2025.03</div>
+                        </div>
+                        <p>横向课题，项目总价值超100万元，成果已入库待批复。</p>
+                        <ul>
+                            <li><strong>空间数据可视化：</strong>运用ArcGIS Pro + Illustrator协同制图，独立完成20余项专题图件编制（用地现状、三区三线、规划分区、生活圈等），累计交付成果图件500+张</li>
+                            <li><strong>设计标准化：</strong>建立标准化出图流程与图层规范，团队平均出图周期缩短35%</li>
+                            <li><strong>数据处理与自动化：</strong>运用Python脚本批量处理空间数据，开展团队技术培训12场（30+人次）</li>
+                        </ul>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">县域城乡融合对耕地利用绿色转型的影响机制与调控</div>
+                            <div class="entry-time">2024.12 - 2025.06（本人参与阶段）</div>
+                        </div>
+                        <p>省部级政府资助项目，经费10万元。</p>
+                        <ul>
+                            <li>运用Python进行多源统计数据获取、清洗与标准化处理</li>
+                            <li>独立完成论文图件绘制与修订，毕业后持续提供技术支持</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 教育背景 -->
+                <div class="section" id="design-edu">
+                    <div class="section-title">教育背景</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 地理学（人文地理）硕士</div>
+                            <div class="entry-time">2022.09 - 2025.06</div>
+                        </div>
+                        <p>GPA 4.1/5.0，专业排名 2/25 | 研究方向：城乡与国土规划 x 区域经济发展</p>
+                        <p style="font-size:13px;color:#6b7280;">主修课程：3S技术应用、区域经济地理研究、城市地理学</p>
+                    </div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">哈尔滨师范大学 - 数字媒体技术 本科</div>
+                            <div class="entry-time">2018.09 - 2022.06</div>
+                        </div>
+                        <p>GPA 4.0/5.0，专业排名 10/70</p>
+                        <p style="font-size:13px;color:#6b7280;">主修课程：Unity3D游戏制作、3D模型设计、三维动画、Web前端设计、UI设计</p>
+                    </div>
+                </div>
+
+                <!-- 设计作品集链接 -->
+                <div class="section" id="design-portfolio">
+                    <div class="section-title">作品集</div>
+                    <p style="font-size:14px;margin-bottom:12px;">包含平面设计、影视后期、三维动画、空间规划图件等作品，展示全链路设计能力。</p>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <a href="portfolio-design.html" style="display:inline-block;padding:8px 20px;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:13px;">平面设计作品</a>
+                        <a href="portfolio-video.html" style="display:inline-block;padding:8px 20px;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:13px;">视频与后期作品</a>
+                        <a href="portfolio-plan.html" style="display:inline-block;padding:8px 20px;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:13px;">空间规划图件</a>
+                    </div>
+                </div>
+
+                <!-- 学术成果 -->
+                <div class="section" id="design-academic">
+                    <div class="section-title">学术成果</div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江乡村生活质量空间格局及影响因素</div>
+                            <div class="paper-journal">《农业与技术》（省级期刊，第一作者）</div>
+                        </div>
+                        <a href="https://kns.cnki.net/kcms2/article/abstract?v=CB7PaufGGSeMtMxtKMGdFRmRCK5QO67Zejv8LILTgSl7ZCXmvTcvFTUz_FNbsyv6O7O6B-e5Sn4C-Ys3mTzLlNeASFK7u_MK8lI42A-l3NKzLLd298VsADdZcM8KikbzDHp_0mOfdEov0pTgL1ffbQokm0Aucn11Y_WijdHUX3c=&uniplatform=NZKPT" target="_blank" class="paper-link">知网</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">The impact effect of county urbanization on rural revitalization and its spatial gradient in Northeast China</div>
+                            <div class="paper-journal">Frontiers in Sustainable Food Systems（SCI Q2，第三作者；第一、二作者为共同一作）| 贡献：多源数据处理、GTWR模型计算与成果制图</div>
+                        </div>
+                        <a href="https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2025.1596177/full" target="_blank" class="paper-link">全文</a>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-info">
+                            <div class="paper-title">黑龙江省县域协同发展能力空间分异特征及形成机制</div>
+                            <div class="paper-journal">硕士学位论文</div>
+                        </div>
+                        <a href="../image/2022301161.pdf" target="_blank" class="paper-link">查看全文</a>
+                    </div>
+                </div>
+
+                <!-- 校园经历（压缩） -->
+                <div class="section" id="design-campus">
+                    <div class="section-title">校园经历</div>
+                    <div class="entry">
+                        <p>校学生会副主席（主管宣传，2020-2021）：统筹新媒体矩阵运营，粉丝量增长40%，为20+场校级活动提供全案视觉与技术支持。硕士班长（2022-2025）：传达200+项政策通知，组织学术沙龙等活动10余场。</p>
+                    </div>
+                </div>
+
+                <!-- 择业期（移至末尾） -->
+                <div class="section">
+                    <div class="section-title">择业期</div>
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-title">备考与设计能力进阶</div>
+                            <div class="entry-time">2025.06 - 至今</div>
+                        </div>
+                        <ul>
+                            <li>系统备考公务员及事业单位</li>
+                            <li>持续为导师团队省部级课题提供技术支撑，完成成果交接与后期图件修订</li>
+                            <li>自主进阶：空间数据可视化设计、GIS制图流程优化、新媒体内容创作</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 荣誉 -->
+                <div class="section">
+                    <div class="section-title">荣誉奖励</div>
+                    <div class="honor-row">
+                        <span>2024.06 二等硕士生学业奖学金</span>
+                        <span>2023.11 优秀研究生干部</span>
+                        <span>2023.04 优秀共青团员</span>
+                        <span>2021.05 抗疫优秀青年志愿者</span>
+                        <span>2020.05 / 2021.05 优秀学生团员</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- 页脚 -->
-        <footer>
-            <p>© 2025 康辉的个人作品集 | 联系方式: hardsonk@163.com</p>
+        <footer class="site-footer">
+            <p>2025 康辉的个人作品集 | hardsonk@163.com</p>
         </footer>
     </div>
+
+    <!-- 回到顶部 -->
+    <button id="backToTop" title="回到顶部">&#8593;</button>
+
+    <script src="../js/main.js"></script>
 </body>
-	<script>onmouseover="this.style.color='#2980b9'" onmouseout="this.style.color='#3498db'" onclick="this.style.color='#1c5a7d'; setTimeout(() => {this.style.color='#3498db'}, 300)"</script>
 </html>
