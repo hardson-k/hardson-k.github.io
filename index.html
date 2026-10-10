@@ -5,9 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>康辉的主页</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* index 专属：全屏铺满 */
+        body { background: var(--bg-alt); }
+        .container-full {
+            max-width: 100%;
+            box-shadow: none;
+        }
+
+        /* 导航栏全宽 */
+        .container-full .navbar {
+            padding: 0 48px;
+        }
+
+        /* Hero 全宽 + 渐变背景 */
+        .hero-v2 {
+            background: var(--gradient-banner);
+            padding: 100px 48px 60px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-v2::before {
+            background: rgba(255,255,255,0.06);
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            right: -100px;
+        }
+        .hero-v2::after {
+            background: rgba(255,255,255,0.04);
+            width: 350px;
+            height: 350px;
+            bottom: -100px;
+            left: -80px;
+        }
+        .hero-v2 .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .hero-v2 h1 { color: #fff; }
+        .hero-v2 .hero-label { color: rgba(255,255,255,0.6); }
+        .hero-v2 .hero-text { color: rgba(255,255,255,0.9); }
+        .hero-v2 .hero-text strong { color: #fff; }
+        .hero-v2 .stat-card {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+        }
+        .hero-v2 .stat-card .stat-num { color: #fff; }
+        .hero-v2 .stat-card .stat-label { color: rgba(255,255,255,0.7); }
+
+        /* 统计数据改为横向排列，与文字同行 */
+        .hero-v2 .hero-intro {
+            display: flex;
+            gap: 48px;
+            align-items: flex-start;
+        }
+        .hero-v2 .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            flex-shrink: 0;
+            width: 280px;
+        }
+        .hero-v2 .stat-card {
+            padding: 14px 16px;
+            border-radius: 10px;
+        }
+
+        /* 版本卡片区域全宽 */
+        .version-cards-v2 {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 48px 40px;
+        }
+
+        /* 联系方式全宽 */
+        .contact-bar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 48px;
+        }
+
+        .container-full .site-footer {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 48px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .hero-v2 { padding: 60px 24px 40px; }
+            .hero-v2 .hero-intro { flex-direction: column; gap: 24px; }
+            .hero-v2 .hero-stats { width: 100%; grid-template-columns: 1fr 1fr; }
+            .version-cards-v2 { padding: 32px 24px; grid-template-columns: 1fr; }
+            .contact-bar, .container-full .site-footer { padding: 20px 24px; }
+            .container-full .navbar { padding: 0 24px; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container container-full">
         <!-- 导航栏 -->
         <nav class="navbar">
             <div class="logo">康辉的个人作品集</div>
@@ -22,7 +121,7 @@
             </div>
         </nav>
 
-        <!-- Hero - 激进视觉布局 -->
+        <!-- Hero -->
         <div class="hero-v2">
             <div class="hero-inner">
                 <p class="hero-label">Portfolio & Resume</p>
@@ -34,25 +133,28 @@
                     </div>
                     <div class="hero-stats">
                         <div class="stat-card">
-                            <div class="stat-num">500+</div>
-                            <div class="stat-label">法定图件</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-num">500+</div>
-                            <div class="stat-label">规划文本（页）</div>
-                        </div>
-                        <div class="stat-card">
                             <div class="stat-num">3年</div>
-                            <div class="stat-label">规划实战</div>
+                            <div class="stat-label">国土空间规划实战</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num">6年</div>
+                            <div class="stat-label">学生干部经历</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num">40+</div>
+                            <div class="stat-label">行政村深度调研</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num">全链路</div>
+                            <div class="stat-label">GIS + 三维 + 平面设计</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 版本入口卡片 - 非对称布局 -->
+        <!-- 版本入口卡片 -->
         <div class="version-cards-v2">
-            <!-- 规划设计（主卡片，1.2倍宽） -->
             <div class="version-card-v2">
                 <h3>规划设计</h3>
                 <div class="card-subtitle">规划师助理 / 国土空间规划技术员 / GIS数据处理 / 空间信息处理</div>
@@ -68,7 +170,6 @@
                 </div>
             </div>
 
-            <!-- 公共管理 -->
             <div class="version-card-v2">
                 <h3>公共管理</h3>
                 <div class="card-subtitle">高校辅导员 / 自然资源系统 / 党务工作者 / 宣传与新媒体运营</div>
@@ -84,7 +185,6 @@
                 </div>
             </div>
 
-            <!-- 空间视觉 -->
             <div class="version-card-v2">
                 <h3>空间视觉</h3>
                 <div class="card-subtitle">空间数据可视化设计师 / 新媒体设计师 / 平面设计师 / 影视后期</div>
