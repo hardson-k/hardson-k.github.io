@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>康辉的个人作品集</title>
+    <title>康辉的主页</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,53 +18,95 @@
                 <a href="index.html" class="active">主页</a>
                 <a href="html/resume.html">个人简历</a>
                 <a href="html/portfolio-plan.html">空间规划作品</a>
-                <a href="html/portfolio-design.html">平面设计作品</a>
-                <a href="html/portfolio-video.html">视频作品</a>
-                <a href="html/portfolio-article.html">精选推文</a>
+                <a href="html/portfolio-design.html">设计作品集</a>
             </div>
         </nav>
 
-        <!-- Hero -->
-        <div class="hero">
-            <h1>康辉</h1>
-            <p class="subtitle">地理学硕士 / 国土空间规划 / GIS与三维可视化</p>
-            <div class="intro">
-                <p>哈尔滨师范大学地理学硕士，本科数字媒体技术。<p><strong>擅长</strong>国土空间规划编制与GIS空间分析，近3年独立交付法定图件500+张、规划文本500+页，具备从数据采集、空间分析到成果可视化的全链路能力。<p><strong>求职方向</strong>涵盖城乡规划与设计、自然资源与公共管理、空间信息可视化与新媒体设计。</p>
+        <!-- Hero - 激进视觉布局 -->
+        <div class="hero-v2">
+            <div class="hero-inner">
+                <p class="hero-label">Portfolio & Resume</p>
+                <h1>康辉的主页</h1>
+
+                <div class="hero-intro">
+                    <div class="hero-text">
+                        <p>哈尔滨师范大学地理学硕士，本科数字媒体技术。<strong>擅长</strong>国土空间规划编制与GIS空间分析，近3年独立交付法定图件500+张、规划文本500+页，具备从数据采集、空间分析到成果可视化的全链路能力。<strong>求职方向</strong>涵盖城乡规划与设计、自然资源与公共管理、空间信息可视化与新媒体设计。</p>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-num">500+</div>
+                            <div class="stat-label">法定图件</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num">500+</div>
+                            <div class="stat-label">规划文本（页）</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num">3年</div>
+                            <div class="stat-label">规划实战</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- 版本入口卡片 -->
-        <div class="version-cards">
-            <div class="version-card">
+        <!-- 版本入口卡片 - 非对称布局 -->
+        <div class="version-cards-v2">
+            <!-- 规划设计（主卡片，1.2倍宽） -->
+            <div class="version-card-v2">
                 <h3>规划设计</h3>
-                <div class="target">规划师助理 / 国土空间规划技术员 / GIS数据处理 / 空间信息处理</div>
-                <div class="keywords">
+                <div class="card-subtitle">规划师助理 / 国土空间规划技术员 / GIS数据处理 / 空间信息处理</div>
+                <div class="card-desc">近3年乡镇级国土空间总体规划编制经验，涵盖基数调研、法定图件编制、规划文本撰写、专家评审配合全流程。兼具GIS空间分析与数据处理能力。</div>
+                <div class="card-keywords">
                     <span>三区三线</span>
                     <span>法定图件</span>
                     <span>ArcGIS · QGIS · ENVI</span>
                 </div>
-                <a href="html/resume.html#plan" class="card-btn">查看简历</a>
+                <div class="card-actions">
+                    <a href="html/resume.html#plan" class="card-btn card-btn-primary">查看简历</a>
+                    <a href="html/portfolio-plan.html" class="card-btn card-btn-secondary">空间规划作品</a>
+                </div>
             </div>
-            <div class="version-card">
+
+            <!-- 公共管理 -->
+            <div class="version-card-v2">
                 <h3>公共管理</h3>
-                <div class="target">高校辅导员 / 自然资源系统技术岗 / 党务工作者 / 宣传与新媒体运营</div>
-                <div class="keywords">
+                <div class="card-subtitle">高校辅导员 / 自然资源系统 / 党务工作者 / 宣传与新媒体运营</div>
+                <div class="card-desc">中共党员，6年学生干部经历（校学生会副主席 + 硕士班长），具备党团宣传、活动策划与行政协调综合能力。新媒体运营粉丝增长40%。</div>
+                <div class="card-keywords">
                     <span>中共党员</span>
                     <span>学生干部</span>
                     <span>党团宣传与新媒体运营</span>
                 </div>
-                <a href="html/resume.html#gov" class="card-btn">查看简历</a>
+                <div class="card-actions">
+                    <a href="html/resume.html#gov" class="card-btn card-btn-primary">查看简历</a>
+                    <a href="html/portfolio-design.html#section-article" class="card-btn card-btn-secondary">新媒体作品</a>
+                </div>
             </div>
-            <div class="version-card">
+
+            <!-- 空间视觉 -->
+            <div class="version-card-v2">
                 <h3>空间视觉</h3>
-                <div class="target">空间数据可视化设计师 / 新媒体设计师 / 平面设计师 / 影视后期制作</div>
-                <div class="keywords">
+                <div class="card-subtitle">空间数据可视化设计师 / 新媒体设计师 / 平面设计师 / 影视后期</div>
+                <div class="card-desc">地理学硕士 + 数字媒体技术本科的复合背景，擅长将空间数据转化为视觉化表达。涵盖平面设计、影视后期、GIS可视化全链路设计能力。</div>
+                <div class="card-keywords">
                     <span>GIS可视化</span>
                     <span>平面设计</span>
                     <span>影视后期</span>
                 </div>
-                <a href="html/resume.html#design" class="card-btn">查看简历</a>
+                <div class="card-actions">
+                    <a href="html/resume.html#design" class="card-btn card-btn-primary">查看简历</a>
+                    <a href="html/portfolio-design.html" class="card-btn card-btn-secondary">设计作品集</a>
+                </div>
             </div>
+        </div>
+
+        <!-- 联系方式 -->
+        <div class="contact-bar">
+            <span>13704615667</span>
+            <span>hardsonk@163.com</span>
+            <span>现居宁波</span>
+            <a href="https://github.com/hardson-k" target="_blank">GitHub</a>
         </div>
 
         <!-- 页脚 -->

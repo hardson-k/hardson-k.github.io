@@ -1,6 +1,6 @@
 /**
  * 康辉个人作品集 - 全站公共脚本
- * 功能：Tab切换/hash路由、汉堡菜单、图片灯箱、回到顶部
+ * 功能：Tab切换/hash路由、汉堡菜单、图片灯箱、回到顶部、折叠展开、悬浮导航
  */
 
 (function () {
@@ -17,13 +17,11 @@
   }
 
   function switchTab(tabId) {
-    // 更新 Tab 按钮高亮
     var buttons = document.querySelectorAll(".tab-bar button");
     buttons.forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-tab") === tabId);
     });
 
-    // 切换版本内容显示
     var panels = document.querySelectorAll(".version-content");
     panels.forEach(function (panel) {
       var isTarget = panel.getAttribute("data-version") === tabId;
@@ -31,7 +29,6 @@
       panel.classList.toggle("active", isTarget);
     });
 
-    // 同步 URL hash（避免重复触发 hashchange）
     if (location.hash !== "#" + tabId) {
       history.replaceState(null, "", "#" + tabId);
     }
@@ -44,39 +41,14 @@
     bar.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-tab]");
       if (!btn) return;
-      var tab = btn.getAttribute("data-tab");
-      switchTab(tab);
-      // 滚动到页面顶部
+      switchTab(btn.getAttribute("data-tab"));
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // 展开详情链接：点击后切换 Tab 并滚动到目标模块
-    document.addEventListener("click", function (e) {
-      var link = e.target.closest(".expand-link[data-goto-tab]");
-      if (!link) return;
-      e.preventDefault();
-      var targetTab = link.getAttribute("data-goto-tab");
-      var targetSection = link.getAttribute("data-scroll-to");
-      switchTab(targetTab);
-      if (targetSection) {
-        // 等 DOM 更新后再滚动
-        requestAnimationFrame(function () {
-          var el = document.getElementById(targetSection);
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
-
-    // 监听 hashchange
     window.addEventListener("hashchange", function () {
       switchTab(getTabFromHash());
     });
 
-    // 首次加载
     switchTab(getTabFromHash());
   }
 
@@ -92,7 +64,6 @@
       btn.classList.toggle("active");
     });
 
-    // 点击链接后自动关闭菜单（移动端）
     links.addEventListener("click", function (e) {
       if (e.target.tagName === "A") {
         links.classList.remove("open");
@@ -104,7 +75,6 @@
   // ========== 图片灯箱 ==========
 
   function initLightbox() {
-    // 创建灯箱 DOM
     var overlay = document.createElement("div");
     overlay.className = "lightbox-overlay";
     overlay.innerHTML = '<img src="" alt="放大查看">';
@@ -116,7 +86,6 @@
       overlay.classList.remove("show");
     });
 
-    // 给所有带 data-full 属性的图片绑定点击事件
     document.addEventListener("click", function (e) {
       var target = e.target.closest("img[data-full]");
       if (!target) return;
@@ -146,12 +115,71 @@
     var current = location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll(".nav-links a").forEach(function (a) {
       var href = a.getAttribute("href");
-      // 去掉 ../ 前缀
       var clean = href.replace(/^\.\.\//, "").replace(/^\.\//, "");
       if (clean === current) {
         a.classList.add("active");
       }
     });
+  }
+
+  // ========== 折叠展开（#main 综合总览） ==========
+
+  function initCollapsible() {
+    document.addEventListener("click", function (e) {
+      var toggle = e.target.closest(".collapse-toggle");
+      if (!toggle) return;
+
+      var targetId = toggle.getAttribute("data-target");
+      var content = document.getElementById(targetId);
+      if (!content) return;
+
+      var isExpanded = content.classList.toggle("expanded");
+      toggle.classList.toggle("expanded", isExpanded);
+
+      var label = toggle.querySelector(".label");
+      if (label) {
+        label.textContent = isExpanded ? "收起" : "展开更多";
+      }
+    });
+  }
+
+  // ========== 悬浮子导航（设计作品集） ==========
+
+  function initSubNav() {
+    var nav = document.querySelector(".sub-nav");
+    if (!nav) return;
+
+    var links = nav.querySelectorAll("a");
+    var sections = [];
+
+    links.forEach(function (link) {
+      var href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        var section = document.getElementById(href.slice(1));
+        if (section) {
+          sections.push({ el: section, link: link });
+        }
+      }
+    });
+
+    if (sections.length === 0) return;
+
+    function onScroll() {
+      var scrollY = window.pageYOffset + 120;
+
+      var current = sections[0];
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].el.offsetTop <= scrollY) {
+          current = sections[i];
+        }
+      }
+
+      links.forEach(function (l) { l.classList.remove("active"); });
+      current.link.classList.add("active");
+    }
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
   }
 
   // ========== 初始化 ==========
@@ -162,5 +190,7 @@
     initLightbox();
     initBackToTop();
     initNavActive();
+    initCollapsible();
+    initSubNav();
   });
 })();
