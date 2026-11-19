@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云文档中心</title>
+    <link rel="icon" type="image/x-icon" href="../image/favicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 云文档页专用样式（cf- 前缀，不影响其他页面） */
+        .cf-tip {
+            max-width: 760px;
+            margin: 0 auto 24px;
+            padding: 12px 16px;
+            background: var(--accent-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .cf-tip strong { color: var(--text); }
+
+        .cf-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .cf-search {
+            flex: 1 1 240px;
+            padding: 9px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff;
+            color: var(--text);
+        }
+        .cf-search:focus {
+            outline: none;
+            border-color: var(--accent-light);
+            box-shadow: 0 0 0 3px var(--accent-bg);
+        }
+        .cf-sort {
+            padding: 9px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            background: #fff;
+            color: var(--text);
+            cursor: pointer;
+        }
+        .cf-btn {
+            padding: 9px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--text);
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .cf-btn:hover {
+            border-color: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .cf-status {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+        }
+
+        .cf-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+        }
+        .cf-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.18s;
+        }
+        .cf-item:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 4px 14px rgba(65, 105, 225, 0.12);
+            transform: translateY(-2px);
+        }
+        .cf-icon {
+            flex: 0 0 auto;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            color: #fff;
+            background: var(--accent);
+        }
+        .cf-icon.t-pdf { background: #d64545; }
+        .cf-icon.t-doc { background: #2b6cb0; }
+        .cf-icon.t-xls { background: #2f855a; }
+        .cf-icon.t-ppt { background: #dd6b20; }
+        .cf-icon.t-img { background: #805ad5; }
+        .cf-icon.t-zip { background: #718096; }
+        .cf-icon.t-code { background: #2c7a7b; }
+        .cf-icon.t-media { background: #b83280; }
+        .cf-icon.t-other { background: #a0aec0; }
+
+        .cf-meta { flex: 1 1 auto; min-width: 0; }
+        .cf-name {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.5;
+            word-break: break-all;
+        }
+        .cf-item:hover .cf-name { color: var(--accent); }
+        .cf-sub {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .cf-gh {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--accent-light);
+        }
+        .cf-gh:hover { color: var(--accent); text-decoration: underline; }
+
+        .cf-state {
+            padding: 48px 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .cf-state code {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 8px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .cf-error { color: #c53030; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">云文档中心</div>
+            <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+            <div class="nav-links">
+                <a href="../index.html">主页</a>
+                <a href="resume.html">个人简历</a>
+                <a href="cloudfiles.html" class="active">云文档</a>
+            </div>
+        </nav>
+
+        <div class="page-content">
+            <h1 style="font-size:28px;font-weight:700;color:var(--primary);text-align:center;margin-bottom:6px;">云文档</h1>
+            <p style="text-align:center;color:var(--text-light);margin-bottom:20px;">备考资料 / 存储备份 / 不涉密文件</p>
+
+            <div class="cf-tip">
+                <strong>公开提示：</strong>本库托管在公开仓库中，文件对任何掌握链接的人可见可下载，请勿上传涉密或个人敏感材料。
+                上传方式见 <a href="https://github.com/hardson-k/hardson-k.github.io/tree/master/uploads" style="color:var(--accent);">uploads 目录说明</a>。
+            </div>
+
+            <div class="cf-toolbar">
+                <input class="cf-search" id="cfSearch" type="search" placeholder="搜索文件名…" autocomplete="off">
+                <select class="cf-sort" id="cfSort">
+                    <option value="name">按名称排序</option>
+                    <option value="size">按大小排序</option>
+                    <option value="type">按类型排序</option>
+                </select>
+                <button class="cf-btn" id="cfRefresh" type="button">刷新</button>
+            </div>
+
+            <div class="cf-status" id="cfStatus">正在加载文件列表…</div>
+            <div class="cf-list" id="cfList"></div>
+            <div class="cf-state" id="cfState" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        var OWNER = 'hardson-k';
+        var REPO = 'hardson-k.github.io';
+        var DIR = 'uploads';
+        var REF = 'master';
+        var CACHE_KEY = 'cf_cache_v1';
+        var CACHE_MS = 60 * 1000;
+
+        var els = {
+            list: document.getElementById('cfList'),
+            state: document.getElementById('cfState'),
+            status: document.getElementById('cfStatus'),
+            search: document.getElementById('cfSearch'),
+            sort: document.getElementById('cfSort'),
+            refresh: document.getElementById('cfRefresh')
+        };
+
+        var files = [];
+        var lastUpdated = '';
+
+        function typeOf(name) {
+            var m = /\.([a-z0-9]+)$/i.exec(name);
+            return m ? m[1].toLowerCase() : '';
+        }
+
+        function iconOf(ext) {
+            if (ext === 'pdf') return ['t-pdf', 'PDF'];
+            if (['doc', 'docx', 'wps', 'rtf', 'txt', 'md'].indexOf(ext) > -1) return ['t-doc', (ext || 'DOC').toUpperCase()];
+            if (['xls', 'xlsx', 'csv'].indexOf(ext) > -1) return ['t-xls', (ext || 'XLS').toUpperCase()];
+            if (['ppt', 'pptx', 'key'].indexOf(ext) > -1) return ['t-ppt', (ext || 'PPT').toUpperCase()];
+            if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp'].indexOf(ext) > -1) return ['t-img', (ext || 'IMG').toUpperCase()];
+            if (['zip', 'rar', '7z', 'tar', 'gz'].indexOf(ext) > -1) return ['t-zip', (ext || 'ZIP').toUpperCase()];
+            if (['mp4', 'mov', 'avi', 'mkv', 'mp3', 'wav'].indexOf(ext) > -1) return ['t-media', (ext || 'MP4').toUpperCase()];
+            if (['js', 'ts', 'py', 'json', 'html', 'css', 'java', 'sql'].indexOf(ext) > -1) return ['t-code', (ext || 'CODE').toUpperCase()];
+            return ['t-other', ext ? ext.slice(0, 4).toUpperCase() : 'FILE'];
+        }
+
+        function canPreview(ext) {
+            return ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp',
+                    'txt', 'md', 'json', 'csv', 'mp4', 'webm', 'mp3', 'wav'].indexOf(ext) > -1;
+        }
+
+        function fmtSize(bytes) {
+            if (!bytes && bytes !== 0) return '';
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+        }
+
+        function esc(s) {
+            return String(s).replace(/[&<>"']/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+
+        function showState(html, isError) {
+            els.list.innerHTML = '';
+            els.state.innerHTML = html;
+            els.state.style.display = 'block';
+            els.state.className = 'cf-state' + (isError ? ' cf-error' : '');
+            els.status.textContent = '';
+        }
+
+        function render() {
+            var kw = els.search.value.trim().toLowerCase();
+            var sortBy = els.sort.value;
+
+            var rows = files.filter(function (f) {
+                return !kw || f.name.toLowerCase().indexOf(kw) > -1;
+            });
+
+            rows.sort(function (a, b) {
+                if (a.type === 'dir' && b.type !== 'dir') return -1;
+                if (b.type === 'dir' && a.type !== 'dir') return 1;
+                if (sortBy === 'size') return (b.size || 0) - (a.size || 0);
+                if (sortBy === 'type') {
+                    var ea = typeOf(a.name), eb = typeOf(b.name);
+                    if (ea !== eb) return ea < eb ? -1 : 1;
+                    return a.name.localeCompare(b.name, 'zh');
+                }
+                return a.name.localeCompare(b.name, 'zh');
+            });
+
+            if (!rows.length) {
+                showState(kw ? '没有匹配「' + esc(kw) + '」的文件' : '还没有文件，用上传脚本把文件放进 uploads 目录即可');
+                return;
+            }
+
+            els.state.style.display = 'none';
+            els.list.innerHTML = rows.map(function (f) {
+                var ext = f.type === 'dir' ? '' : typeOf(f.name);
+                var ic = iconOf(ext);
+                var url = f.download_url ||
+                    'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/' + REF + '/' +
+                    encodeURIComponent(f.path).replace(/%2F/g, '/');
+                var label = f.type === 'dir' ? '打开' : (canPreview(ext) ? '预览 / 下载' : '下载');
+                var sub = [];
+                if (f.type === 'dir') sub.push('文件夹');
+                else if (f.size !== undefined) sub.push(fmtSize(f.size));
+                if (ext) sub.unshift(ext.toUpperCase());
+
+                return '<div class="cf-item">' +
+                    '<div class="cf-icon ' + ic[0] + '">' + esc(ic[1]) + '</div>' +
+                    '<div class="cf-meta">' +
+                    '<a class="cf-name" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + label + '">' + esc(f.name) + '</a>' +
+                    '<span class="cf-sub">' + esc(sub.join(' · ')) + '</span>' +
+                    (f.html_url ? '<a class="cf-gh" href="' + esc(f.html_url) + '" target="_blank" rel="noopener">在 GitHub 查看</a>' : '') +
+                    '</div></div>';
+            }).join('');
+
+            var total = rows.reduce(function (s, f) { return s + (f.size || 0); }, 0);
+            els.status.textContent = '共 ' + rows.length + ' 项 · ' + fmtSize(total) +
+                (lastUpdated ? ' · 最近更新 ' + lastUpdated : '');
+        }
+
+        function readCache() {
+            try {
+                var c = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+                if (c && Date.now() - c.t < CACHE_MS) return c;
+            } catch (e) {}
+            return null;
+        }
+
+        function writeCache(data, updated) {
+            try {
+                sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), data: data, updated: updated }));
+            } catch (e) {}
+        }
+
+        function githubFetch(url) {
+            return fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } }).then(function (r) {
+                if (r.status === 404) return { notFound: true };
+                if (r.status === 403 || r.status === 429) return { limited: true };
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json().then(function (j) { return { data: j }; });
+            });
+        }
+
+        function fmtDate(iso) {
+            if (!iso) return '';
+            var d = new Date(iso);
+            if (isNaN(d)) return '';
+            var p = function (n) { return n < 10 ? '0' + n : '' + n; };
+            return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+        }
+
+        function load(force) {
+            if (!force) {
+                var c = readCache();
+                if (c) {
+                    files = c.data;
+                    lastUpdated = c.updated || '';
+                    render();
+                    return;
+                }
+            }
+            els.status.textContent = '正在加载文件列表…';
+
+            var base = 'https://api.github.com/repos/' + OWNER + '/' + REPO;
+            githubFetch(base + '/contents/' + DIR + '?ref=' + REF).then(function (res) {
+                if (res.notFound) {
+                    showState('uploads 目录还没有内容。<br>先在项目里执行上传脚本，或手动提交文件到 uploads 目录。');
+                    return;
+                }
+                if (res.limited) {
+                    var old = readCache();
+                    if (old) { files = old.data; lastUpdated = old.updated || ''; render(); return; }
+                    showState('接口调用已达上限（未登录限 60 次/小时），请稍后再刷新。', true);
+                    return;
+                }
+                if (!res.data) { showState('接口返回异常，请稍后重试。', true); return; }
+
+                files = (res.data || []).filter(function (f) { return f.name !== 'README.md'; });
+
+                return githubFetch(base + '/commits?path=' + DIR + '&sha=' + REF + '&per_page=1')
+                    .then(function (cres) {
+                        var updated = '';
+                        if (cres.data && cres.data.length) {
+                            updated = fmtDate((cres.data[0].commit && cres.data[0].commit.committer && cres.data[0].commit.committer.date) || cres.data[0].commitDate);
+                        }
+                        lastUpdated = updated;
+                        writeCache(files, updated);
+                        render();
+                    })
+                    .catch(function () { lastUpdated = ''; writeCache(files, ''); render(); });
+            }).catch(function (err) {
+                showState('加载失败：' + esc(err.message) + '<br>本地预览请用 http 方式打开页面，直接双击 html 文件可能被浏览器限制。', true);
+            });
+        }
+
+        els.search.addEventListener('input', render);
+        els.sort.addEventListener('change', render);
+        els.refresh.addEventListener('click', function () {
+            try { sessionStorage.removeItem(CACHE_KEY); } catch (e) {}
+            load(true);
+        });
+
+        load(false);
+    })();
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
