@@ -3,37 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>云文档中心</title>
     <link rel="icon" type="image/x-icon" href="../image/favicon.png">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* 云文档页专用样式（cf- 前缀，不影响其他页面） */
-        .cf-tip {
-            max-width: 760px;
-            margin: 0 auto 24px;
-            padding: 12px 16px;
-            background: var(--accent-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-        .cf-tip strong { color: var(--text); }
+        /* 云文档页专用（cf- 前缀，不影响其他页面） */
+        .cf-head { text-align: center; margin-bottom: 18px; }
+        .cf-head h1 { font-size: 26px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+        .cf-head p { color: var(--text-light); font-size: 13px; }
 
+        .cf-warn {
+            max-width: 820px;
+            margin: 0 auto 18px;
+            padding: 10px 14px;
+            background: #fff8f0;
+            border: 1px solid #f0d9b8;
+            border-left: 3px solid #d9822b;
+            border-radius: 8px;
+            font-size: 12.5px;
+            color: #8a5a1b;
+            line-height: 1.75;
+        }
+
+        /* 模式条 */
+        .cf-modebar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .cf-badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 11px;
+            border-radius: 20px;
+            background: var(--bg-alt);
+            color: var(--text-light);
+            border: 1px solid var(--border);
+        }
+        .cf-badge.on {
+            background: rgba(47, 133, 90, 0.1);
+            color: #2f855a;
+            border-color: rgba(47, 133, 90, 0.3);
+        }
+        .cf-badge.off {
+            background: var(--accent-bg);
+            color: var(--accent);
+            border-color: rgba(100, 149, 237, 0.35);
+        }
+        .cf-quota { font-size: 12px; color: var(--text-light); margin-left: auto; }
+        .cf-back { font-size: 12px; color: var(--text-light); }
+        .cf-back:hover { color: var(--accent); }
+
+        /* 拖拽上传区 */
+        .cf-drop {
+            border: 1.5px dashed var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            text-align: center;
+            margin-bottom: 16px;
+            background: var(--bg-alt);
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .cf-drop:hover { border-color: var(--accent-light); background: var(--accent-bg); }
+        .cf-drop.hot { border-color: var(--accent); background: var(--accent-bg); }
+        .cf-drop.locked { cursor: not-allowed; opacity: 0.6; }
+        .cf-drop strong { color: var(--accent); }
+        .cf-drop .cf-drop-hint {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .cf-drop input { display: none; }
+
+        /* 工具条 */
         .cf-toolbar {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         .cf-search {
-            flex: 1 1 240px;
-            padding: 9px 14px;
+            flex: 1 1 200px;
+            min-width: 0;
+            padding: 8px 12px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-family: inherit;
             background: #fff;
             color: var(--text);
@@ -43,48 +106,62 @@
             border-color: var(--accent-light);
             box-shadow: 0 0 0 3px var(--accent-bg);
         }
-        .cf-sort {
-            padding: 9px 12px;
+        .cf-sel, .cf-btn {
+            padding: 8px 12px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-family: inherit;
             background: #fff;
             color: var(--text);
             cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
         }
-        .cf-btn {
-            padding: 9px 14px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+        .cf-sel:hover, .cf-btn:hover { border-color: var(--accent-light); color: var(--accent); }
+        .cf-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .cf-btn.key { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .cf-btn.key:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .cf-btn.danger:hover { border-color: #d64545; color: #d64545; }
+        .cf-seg { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .cf-seg button {
+            padding: 8px 11px;
+            border: none;
             background: #fff;
-            color: var(--text);
-            font-size: 13px;
+            font-size: 12.5px;
             font-family: inherit;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        .cf-seg button.on { background: var(--accent-bg); color: var(--accent); font-weight: 600; }
+
+        /* 类型筛选 */
+        .cf-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+        .cf-tab {
+            padding: 4px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: #fff;
+            font-size: 12px;
+            font-family: inherit;
+            color: var(--text-light);
             cursor: pointer;
             transition: all 0.15s;
         }
-        .cf-btn:hover {
-            border-color: var(--accent-light);
-            color: var(--accent);
-        }
+        .cf-tab:hover { border-color: var(--accent-light); color: var(--accent); }
+        .cf-tab.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .cf-tab .cf-n { opacity: 0.65; margin-left: 4px; }
 
-        .cf-status {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 14px;
-        }
+        .cf-status { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; }
 
-        .cf-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 14px;
-        }
+        /* 列表 */
+        .cf-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; }
+        .cf-list.list-view { grid-template-columns: 1fr; }
         .cf-item {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
+            gap: 11px;
+            padding: 14px;
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -92,107 +169,224 @@
         }
         .cf-item:hover {
             border-color: var(--accent-light);
-            box-shadow: 0 4px 14px rgba(65, 105, 225, 0.12);
-            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(65, 105, 225, 0.1);
         }
+        .cf-list.list-view .cf-item { align-items: center; padding: 10px 14px; }
+
         .cf-icon {
             flex: 0 0 auto;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
-            letter-spacing: 0.3px;
             color: #fff;
             background: var(--accent);
         }
-        .cf-icon.t-pdf { background: #d64545; }
-        .cf-icon.t-doc { background: #2b6cb0; }
-        .cf-icon.t-xls { background: #2f855a; }
-        .cf-icon.t-ppt { background: #dd6b20; }
-        .cf-icon.t-img { background: #805ad5; }
-        .cf-icon.t-zip { background: #718096; }
-        .cf-icon.t-code { background: #2c7a7b; }
-        .cf-icon.t-media { background: #b83280; }
-        .cf-icon.t-other { background: #a0aec0; }
+        .t-pdf { background: #d64545; }
+        .t-doc { background: #2b6cb0; }
+        .t-xls { background: #2f855a; }
+        .t-ppt { background: #dd6b20; }
+        .t-img { background: #805ad5; }
+        .t-zip { background: #718096; }
+        .t-code { background: #2c7a7b; }
+        .t-media { background: #b83280; }
+        .t-other { background: #a0aec0; }
 
         .cf-meta { flex: 1 1 auto; min-width: 0; }
         .cf-name {
             display: block;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
             color: var(--text);
             line-height: 1.5;
             word-break: break-all;
         }
-        .cf-item:hover .cf-name { color: var(--accent); }
-        .cf-sub {
-            display: block;
-            margin-top: 4px;
-            font-size: 12px;
+        .cf-name:hover { color: var(--accent); }
+        .cf-sub { display: block; margin-top: 3px; font-size: 11.5px; color: var(--text-light); }
+        .cf-ops { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+        .cf-list.list-view .cf-ops { margin-top: 0; }
+        .cf-op {
+            padding: 3px 9px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            font-size: 11.5px;
+            font-family: inherit;
             color: var(--text-light);
-        }
-        .cf-gh {
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
             display: inline-block;
-            margin-top: 8px;
-            font-size: 12px;
-            color: var(--accent-light);
         }
-        .cf-gh:hover { color: var(--accent); text-decoration: underline; }
+        .cf-op:hover { border-color: var(--accent-light); color: var(--accent); }
+        .cf-op.del:hover { border-color: #d64545; color: #d64545; }
 
-        .cf-state {
-            padding: 48px 20px;
-            text-align: center;
-            color: var(--text-light);
-            font-size: 14px;
-            line-height: 1.9;
-        }
+        .cf-state { padding: 44px 20px; text-align: center; color: var(--text-light); font-size: 13.5px; line-height: 1.9; }
         .cf-state code {
             display: inline-block;
-            margin-top: 6px;
+            margin-top: 4px;
             padding: 2px 8px;
             background: var(--bg-alt);
             border: 1px solid var(--border);
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 11.5px;
         }
         .cf-error { color: #c53030; }
+
+        /* 上传队列 */
+        .cf-queue { margin-bottom: 14px; }
+        .cf-qitem {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 12.5px;
+        }
+        .cf-qname { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .cf-bar { width: 90px; height: 4px; border-radius: 2px; background: var(--bg-alt); overflow: hidden; flex-shrink: 0; }
+        .cf-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.3s; }
+        .cf-qst { width: 52px; text-align: right; font-size: 11.5px; color: var(--text-light); flex-shrink: 0; }
+        .cf-qst.ok { color: #2f855a; }
+        .cf-qst.bad { color: #d64545; }
+
+        /* 弹层 */
+        .cf-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 40, 0.55);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .cf-modal.show { display: flex; }
+        .cf-box {
+            background: #fff;
+            border-radius: 12px;
+            max-width: 520px;
+            width: 100%;
+            padding: 22px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+        }
+        .cf-box h3 { font-size: 16px; color: var(--primary); margin-bottom: 12px; }
+        .cf-box p { font-size: 13px; line-height: 1.8; color: var(--text); }
+        .cf-box .cf-muted { color: var(--text-light); font-size: 12px; }
+        .cf-box label { display: block; margin-top: 12px; font-size: 12px; color: var(--text-light); }
+        .cf-box input, .cf-box textarea {
+            width: 100%;
+            margin-top: 5px;
+            padding: 9px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            background: #fff;
+            color: var(--text);
+        }
+        .cf-box input:focus { outline: none; border-color: var(--accent-light); box-shadow: 0 0 0 3px var(--accent-bg); }
+        .cf-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+        .cf-box.danger h3 { color: #c53030; }
+        .cf-box.danger .cf-btn.key { background: #d64545; border-color: #d64545; }
+
+        /* 预览 */
+        .cf-box.wide { max-width: 900px; }
+        .cf-pv { max-height: 72vh; overflow: auto; margin-top: 12px; text-align: center; }
+        .cf-pv img, .cf-pv video { max-width: 100%; border-radius: 8px; }
+        .cf-pv iframe { width: 100%; height: 70vh; border: none; border-radius: 8px; background: var(--bg-alt); }
+        .cf-pv pre {
+            text-align: left;
+            font-size: 12.5px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-break: break-all;
+            background: var(--bg-alt);
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        /* Toast */
+        .cf-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            transform: translate(-50%, 20px);
+            padding: 10px 20px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 13px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s;
+            z-index: 1100;
+            max-width: 90%;
+        }
+        .cf-toast.show { opacity: 1; transform: translate(-50%, 0); }
+        .cf-toast.bad { background: #c53030; }
+        .cf-toast.ok { background: #2f855a; }
+
+        .cf-skel { height: 66px; border-radius: 12px; background: linear-gradient(90deg, #f3f4f6 25%, #e9ecef 37%, #f3f4f6 63%); background-size: 400% 100%; animation: cfsh 1.3s ease infinite; }
+        @keyframes cfsh { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
+        @media (max-width: 768px) {
+            .cf-list { grid-template-columns: 1fr; }
+            .cf-quota { width: 100%; margin-left: 0; order: 5; }
+            .cf-list.list-view .cf-item { flex-wrap: wrap; }
+            .cf-list.list-view .cf-ops { width: 100%; }
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <nav class="navbar">
-            <div class="logo">云文档中心</div>
-            <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
-            <div class="nav-links">
-                <a href="../index.html">主页</a>
-                <a href="resume.html">个人简历</a>
-                <a href="cloudfiles.html" class="active">云文档</a>
-            </div>
-        </nav>
-
         <div class="page-content">
-            <h1 style="font-size:28px;font-weight:700;color:var(--primary);text-align:center;margin-bottom:6px;">云文档</h1>
-            <p style="text-align:center;color:var(--text-light);margin-bottom:20px;">备考资料 / 存储备份 / 不涉密文件</p>
-
-            <div class="cf-tip">
-                <strong>公开提示：</strong>本库托管在公开仓库中，文件对任何掌握链接的人可见可下载，请勿上传涉密或个人敏感材料。
-                上传方式见 <a href="https://github.com/hardson-k/hardson-k.github.io/tree/master/uploads" style="color:var(--accent);">uploads 目录说明</a>。
+            <div class="cf-head">
+                <h1>云文档中心</h1>
+                <p>个人文档库 · 备考资料 / 文件备份 / 链接分享</p>
             </div>
+
+            <div class="cf-warn">
+                <strong>公开仓库提示：</strong>本库托管于公开仓库，文件对任何掌握直链的人可见可下载，搜索引擎屏蔽只能降低被检索概率，不构成访问限制。请勿存放身份证、账号密码、合同原件等敏感材料。
+            </div>
+
+            <div class="cf-modebar">
+                <span class="cf-badge" id="cfMode">检查授权状态…</span>
+                <button class="cf-btn" id="cfTokenBtn" type="button">配置管理令牌</button>
+                <a class="cf-back" href="../index.html">返回作品站</a>
+                <span class="cf-quota" id="cfQuota"></span>
+            </div>
+
+            <div class="cf-drop locked" id="cfDrop">
+                <strong>拖拽文件到此处</strong> 或点击选择上传
+                <span class="cf-drop-hint" id="cfDropHint">未配置管理令牌，当前为只读模式</span>
+                <input type="file" id="cfFile" multiple>
+            </div>
+
+            <div class="cf-queue" id="cfQueue"></div>
 
             <div class="cf-toolbar">
                 <input class="cf-search" id="cfSearch" type="search" placeholder="搜索文件名…" autocomplete="off">
-                <select class="cf-sort" id="cfSort">
-                    <option value="name">按名称排序</option>
-                    <option value="size">按大小排序</option>
-                    <option value="type">按类型排序</option>
+                <select class="cf-sel" id="cfSort">
+                    <option value="name">按名称</option>
+                    <option value="size">按大小</option>
+                    <option value="type">按类型</option>
                 </select>
+                <div class="cf-seg" id="cfView">
+                    <button type="button" data-view="grid" class="on">网格</button>
+                    <button type="button" data-view="list">列表</button>
+                </div>
                 <button class="cf-btn" id="cfRefresh" type="button">刷新</button>
             </div>
+
+            <div class="cf-tabs" id="cfTabs"></div>
 
             <div class="cf-status" id="cfStatus">正在加载文件列表…</div>
             <div class="cf-list" id="cfList"></div>
@@ -200,207 +394,661 @@
         </div>
     </div>
 
+    <!-- 弹层 -->
+    <div class="cf-modal" id="cfModal">
+        <div class="cf-box" id="cfBox"></div>
+    </div>
+    <div class="cf-toast" id="cfToast"></div>
+
+    <script src="../js/main.js"></script>
     <script>
     (function () {
+        "use strict";
+
         var OWNER = 'hardson-k';
         var REPO = 'hardson-k.github.io';
-        var DIR = 'uploads';
         var REF = 'master';
-        var CACHE_KEY = 'cf_cache_v1';
+        var DIR = 'uploads';
+        var TK = 'cf_token_v1';
+        var CK = 'cf_cache_v3';
+        var SK = 'cf_sort_v3';
+        var VK = 'cf_view_v3';
         var CACHE_MS = 60 * 1000;
+        var SOFT_MB = 25;
+        var HARD_MB = 95;
+        var BLOB_MAX = 25;
 
-        var els = {
-            list: document.getElementById('cfList'),
-            state: document.getElementById('cfState'),
-            status: document.getElementById('cfStatus'),
-            search: document.getElementById('cfSearch'),
-            sort: document.getElementById('cfSort'),
-            refresh: document.getElementById('cfRefresh')
-        };
+        var el = {};
+        ['cfDrop', 'cfDropHint', 'cfFile', 'cfQueue', 'cfSearch', 'cfSort', 'cfView',
+         'cfRefresh', 'cfTabs', 'cfStatus', 'cfList', 'cfState', 'cfMode',
+         'cfTokenBtn', 'cfQuota', 'cfModal', 'cfBox', 'cfToast'].forEach(function (id) {
+            el[id] = document.getElementById(id);
+        });
 
         var files = [];
         var lastUpdated = '';
+        var userName = '';
+        var cat = 'all';
+        var view = localStorage.getItem(VK) || 'grid';
+        var sort = localStorage.getItem(SK) || 'name';
+        el.cfSort.value = sort;
+        applyView();
 
-        function typeOf(name) {
-            var m = /\.([a-z0-9]+)$/i.exec(name);
-            return m ? m[1].toLowerCase() : '';
-        }
-
-        function iconOf(ext) {
-            if (ext === 'pdf') return ['t-pdf', 'PDF'];
-            if (['doc', 'docx', 'wps', 'rtf', 'txt', 'md'].indexOf(ext) > -1) return ['t-doc', (ext || 'DOC').toUpperCase()];
-            if (['xls', 'xlsx', 'csv'].indexOf(ext) > -1) return ['t-xls', (ext || 'XLS').toUpperCase()];
-            if (['ppt', 'pptx', 'key'].indexOf(ext) > -1) return ['t-ppt', (ext || 'PPT').toUpperCase()];
-            if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp'].indexOf(ext) > -1) return ['t-img', (ext || 'IMG').toUpperCase()];
-            if (['zip', 'rar', '7z', 'tar', 'gz'].indexOf(ext) > -1) return ['t-zip', (ext || 'ZIP').toUpperCase()];
-            if (['mp4', 'mov', 'avi', 'mkv', 'mp3', 'wav'].indexOf(ext) > -1) return ['t-media', (ext || 'MP4').toUpperCase()];
-            if (['js', 'ts', 'py', 'json', 'html', 'css', 'java', 'sql'].indexOf(ext) > -1) return ['t-code', (ext || 'CODE').toUpperCase()];
-            return ['t-other', ext ? ext.slice(0, 4).toUpperCase() : 'FILE'];
-        }
-
-        function canPreview(ext) {
-            return ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp',
-                    'txt', 'md', 'json', 'csv', 'mp4', 'webm', 'mp3', 'wav'].indexOf(ext) > -1;
-        }
-
-        function fmtSize(bytes) {
-            if (!bytes && bytes !== 0) return '';
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-            return (bytes / 1024 / 1024).toFixed(2) + ' MB';
-        }
-
+        /* ---------- 基础工具 ---------- */
         function esc(s) {
             return String(s).replace(/[&<>"']/g, function (c) {
                 return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
             });
         }
+        function typeOf(n) { var m = /\.([a-z0-9]+)$/i.exec(n); return m ? m[1].toLowerCase() : ''; }
 
-        function showState(html, isError) {
-            els.list.innerHTML = '';
-            els.state.innerHTML = html;
-            els.state.style.display = 'block';
-            els.state.className = 'cf-state' + (isError ? ' cf-error' : '');
-            els.status.textContent = '';
+        var CATS = {
+            doc: ['pdf', 'doc', 'docx', 'wps', 'rtf', 'txt', 'md', 'wri'],
+            xls: ['xls', 'xlsx', 'csv'],
+            ppt: ['ppt', 'pptx', 'key'],
+            img: ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp', 'heic'],
+            media: ['mp4', 'mov', 'avi', 'mkv', 'webm', 'mp3', 'wav', 'm4a'],
+            zip: ['zip', 'rar', '7z', 'tar', 'gz'],
+            code: ['js', 'ts', 'py', 'json', 'html', 'htm', 'css', 'java', 'sql', 'ipynb']
+        };
+        function catOf(ext) {
+            for (var k in CATS) if (CATS[k].indexOf(ext) > -1) return k;
+            return 'other';
         }
-
-        function render() {
-            var kw = els.search.value.trim().toLowerCase();
-            var sortBy = els.sort.value;
-
-            var rows = files.filter(function (f) {
-                return !kw || f.name.toLowerCase().indexOf(kw) > -1;
-            });
-
-            rows.sort(function (a, b) {
-                if (a.type === 'dir' && b.type !== 'dir') return -1;
-                if (b.type === 'dir' && a.type !== 'dir') return 1;
-                if (sortBy === 'size') return (b.size || 0) - (a.size || 0);
-                if (sortBy === 'type') {
-                    var ea = typeOf(a.name), eb = typeOf(b.name);
-                    if (ea !== eb) return ea < eb ? -1 : 1;
-                    return a.name.localeCompare(b.name, 'zh');
-                }
-                return a.name.localeCompare(b.name, 'zh');
-            });
-
-            if (!rows.length) {
-                showState(kw ? '没有匹配「' + esc(kw) + '」的文件' : '还没有文件，用上传脚本把文件放进 uploads 目录即可');
-                return;
-            }
-
-            els.state.style.display = 'none';
-            els.list.innerHTML = rows.map(function (f) {
-                var ext = f.type === 'dir' ? '' : typeOf(f.name);
-                var ic = iconOf(ext);
-                var url = f.download_url ||
-                    'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/' + REF + '/' +
-                    encodeURIComponent(f.path).replace(/%2F/g, '/');
-                var label = f.type === 'dir' ? '打开' : (canPreview(ext) ? '预览 / 下载' : '下载');
-                var sub = [];
-                if (f.type === 'dir') sub.push('文件夹');
-                else if (f.size !== undefined) sub.push(fmtSize(f.size));
-                if (ext) sub.unshift(ext.toUpperCase());
-
-                return '<div class="cf-item">' +
-                    '<div class="cf-icon ' + ic[0] + '">' + esc(ic[1]) + '</div>' +
-                    '<div class="cf-meta">' +
-                    '<a class="cf-name" href="' + esc(url) + '" target="_blank" rel="noopener" title="' + label + '">' + esc(f.name) + '</a>' +
-                    '<span class="cf-sub">' + esc(sub.join(' · ')) + '</span>' +
-                    (f.html_url ? '<a class="cf-gh" href="' + esc(f.html_url) + '" target="_blank" rel="noopener">在 GitHub 查看</a>' : '') +
-                    '</div></div>';
-            }).join('');
-
-            var total = rows.reduce(function (s, f) { return s + (f.size || 0); }, 0);
-            els.status.textContent = '共 ' + rows.length + ' 项 · ' + fmtSize(total) +
-                (lastUpdated ? ' · 最近更新 ' + lastUpdated : '');
+        function iconOf(ext) {
+            var c = catOf(ext);
+            if (c === 'other') return ['t-other', ext ? ext.slice(0, 4).toUpperCase() : 'FILE'];
+            return ['t-' + c, ext ? ext.toUpperCase().slice(0, 4) : 'FILE'];
         }
-
-        function readCache() {
-            try {
-                var c = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
-                if (c && Date.now() - c.t < CACHE_MS) return c;
-            } catch (e) {}
-            return null;
+        function fmtSize(b) {
+            if (b === undefined || b === null) return '';
+            if (b < 1024) return b + ' B';
+            if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+            if (b < 1073741824) return (b / 1048576).toFixed(2) + ' MB';
+            return (b / 1073741824).toFixed(2) + ' GB';
         }
-
-        function writeCache(data, updated) {
-            try {
-                sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), data: data, updated: updated }));
-            } catch (e) {}
-        }
-
-        function githubFetch(url) {
-            return fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } }).then(function (r) {
-                if (r.status === 404) return { notFound: true };
-                if (r.status === 403 || r.status === 429) return { limited: true };
-                if (!r.ok) throw new Error('HTTP ' + r.status);
-                return r.json().then(function (j) { return { data: j }; });
-            });
-        }
-
         function fmtDate(iso) {
-            if (!iso) return '';
             var d = new Date(iso);
             if (isNaN(d)) return '';
             var p = function (n) { return n < 10 ? '0' + n : '' + n; };
             return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
         }
+        function stamp() {
+            var d = new Date(), p = function (n) { return n < 10 ? '0' + n : '' + n; };
+            return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
+        }
+        function rawUrl(name) {
+            return 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/' + REF + '/' +
+                   DIR + '/' + encodeURIComponent(name).replace(/%2F/g, '/');
+        }
+        function mediaUrl(name) {
+            return 'https://media.githubusercontent.com/media/' + OWNER + '/' + REPO + '/' + REF + '/' +
+                   DIR + '/' + encodeURIComponent(name).replace(/%2F/g, '/');
+        }
+        function siteUrl(name) {
+            return 'https://' + OWNER + '.github.io/' + DIR + '/' + encodeURIComponent(name).replace(/%2F/g, '/');
+        }
 
-        function load(force) {
-            if (!force) {
-                var c = readCache();
-                if (c) {
-                    files = c.data;
-                    lastUpdated = c.updated || '';
-                    render();
-                    return;
-                }
-            }
-            els.status.textContent = '正在加载文件列表…';
+        function toast(msg, kind) {
+            el.cfToast.textContent = msg;
+            el.cfToast.className = 'cf-toast show' + (kind ? ' ' + kind : '');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(function () { el.cfToast.className = 'cf-toast'; }, 2600);
+        }
 
-            var base = 'https://api.github.com/repos/' + OWNER + '/' + REPO;
-            githubFetch(base + '/contents/' + DIR + '?ref=' + REF).then(function (res) {
-                if (res.notFound) {
-                    showState('uploads 目录还没有内容。<br>先在项目里执行上传脚本，或手动提交文件到 uploads 目录。');
-                    return;
-                }
-                if (res.limited) {
-                    var old = readCache();
-                    if (old) { files = old.data; lastUpdated = old.updated || ''; render(); return; }
-                    showState('接口调用已达上限（未登录限 60 次/小时），请稍后再刷新。', true);
-                    return;
-                }
-                if (!res.data) { showState('接口返回异常，请稍后重试。', true); return; }
+        /* ---------- 弹层 ---------- */
+        function openBox(html, wide) {
+            el.cfBox.innerHTML = html;
+            el.cfBox.className = 'cf-box' + (wide ? ' wide' : '');
+            el.cfModal.classList.add('show');
+        }
+        function closeBox() { el.cfModal.classList.remove('show'); }
+        el.cfModal.addEventListener('click', function (e) { if (e.target === el.cfModal) closeBox(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBox(); });
 
-                files = (res.data || []).filter(function (f) { return f.name !== 'README.md'; });
-
-                return githubFetch(base + '/commits?path=' + DIR + '&sha=' + REF + '&per_page=1')
-                    .then(function (cres) {
-                        var updated = '';
-                        if (cres.data && cres.data.length) {
-                            updated = fmtDate((cres.data[0].commit && cres.data[0].commit.committer && cres.data[0].commit.committer.date) || cres.data[0].commitDate);
-                        }
-                        lastUpdated = updated;
-                        writeCache(files, updated);
-                        render();
-                    })
-                    .catch(function () { lastUpdated = ''; writeCache(files, ''); render(); });
-            }).catch(function (err) {
-                showState('加载失败：' + esc(err.message) + '<br>本地预览请用 http 方式打开页面，直接双击 html 文件可能被浏览器限制。', true);
+        function confirmBox(title, body, okText, danger) {
+            return new Promise(function (resolve) {
+                openBox('<h3>' + esc(title) + '</h3>' + body +
+                    '<div class="cf-actions"><button class="cf-btn" id="cfNo" type="button">取消</button>' +
+                    '<button class="cf-btn key" id="cfYes" type="button">' + esc(okText) + '</button></div>');
+                if (danger) el.cfBox.classList.add('danger');
+                el.cfBox.querySelector('#cfNo').onclick = function () { closeBox(); resolve(false); };
+                el.cfBox.querySelector('#cfYes').onclick = function () { closeBox(); resolve(true); };
             });
         }
 
-        els.search.addEventListener('input', render);
-        els.sort.addEventListener('change', render);
-        els.refresh.addEventListener('click', function () {
-            try { sessionStorage.removeItem(CACHE_KEY); } catch (e) {}
-            load(true);
+        /* ---------- API ---------- */
+        function token() { return localStorage.getItem(TK) || ''; }
+
+        function noteRate(res) {
+            var r = res.headers.get('x-ratelimit-remaining');
+            var x = res.headers.get('x-ratelimit-reset');
+            if (r === null) return;
+            var t = x ? fmtDate(x * 1000) : '';
+            el.cfQuota.textContent = 'API 剩余 ' + r + (t ? ' · 重置 ' + t : '');
+        }
+
+        function api(path, opt) {
+            opt = opt || {};
+            var h = { 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+            var tk = token();
+            if (tk) h['Authorization'] = 'Bearer ' + tk;
+            if (opt.body && typeof opt.body === 'object') h['Content-Type'] = 'application/json';
+            return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + path, {
+                method: opt.method || 'GET',
+                headers: h,
+                body: opt.body ? (typeof opt.body === 'object' ? JSON.stringify(opt.body) : opt.body) : undefined
+            }).then(function (res) {
+                noteRate(res);
+                if (res.status === 401) { bad('令牌无效或已过期，请重新配置'); throw new Error('AUTH'); }
+                if (res.status === 403 || res.status === 429) {
+                    return res.json().then(function (j) { throw new Error(j.message || '接口限流，请稍后再试'); },
+                        function () { throw new Error('接口限流，请稍后再试'); });
+                }
+                if (res.status === 204 || res.status === 205) return null;
+                if (!res.ok) {
+                    return res.text().then(function (t) {
+                        var m = t; try { m = JSON.parse(t).message; } catch (e) {}
+                        throw new Error(m || ('HTTP ' + res.status));
+                    });
+                }
+                return res.json();
+            });
+        }
+
+        function blobToBase64(buf) {
+            var bytes = new Uint8Array(buf), CHUNK = 0x8000, bin = '';
+            for (var i = 0; i < bytes.length; i += CHUNK) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+            }
+            return btoa(bin);
+        }
+
+        /* ---------- 模式显示 ---------- */
+        function renderMode() {
+            if (userName) {
+                el.cfMode.textContent = '管理已启用 · ' + userName;
+                el.cfMode.className = 'cf-badge on';
+                el.cfTokenBtn.textContent = '管理令牌设置';
+                el.cfDrop.classList.remove('locked');
+                el.cfDropHint.textContent = '单个文件 ≤ 25 MB 推荐，' + HARD_MB + ' MB 以上无法推送';
+            } else {
+                el.cfMode.textContent = '只读浏览模式';
+                el.cfMode.className = 'cf-badge off';
+                el.cfTokenBtn.textContent = '配置管理令牌';
+                el.cfDrop.classList.add('locked');
+                el.cfDropHint.textContent = '未配置管理令牌，当前为只读模式';
+            }
+        }
+
+        /* ---------- 加载列表 ---------- */
+        function cached() {
+            try {
+                var c = JSON.parse(sessionStorage.getItem(CK) || 'null');
+                if (c && Date.now() - c.t < CACHE_MS) return c;
+            } catch (e) {}
+            return null;
+        }
+        function putCache(d, u) {
+            try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), data: d, u: u })); } catch (e) {}
+        }
+
+        function skeleton() {
+            el.cfState.style.display = 'none';
+            el.cfList.innerHTML = new Array(6).fill('<div class="cf-skel"></div>').join('');
+        }
+
+        function showState(html, err) {
+            el.cfList.innerHTML = '';
+            el.cfState.innerHTML = html;
+            el.cfState.style.display = 'block';
+            el.cfState.className = 'cf-state' + (err ? ' cf-error' : '');
+            el.cfStatus.textContent = '';
+        }
+
+        function load(force) {
+            if (!force) {
+                var c = cached();
+                if (c) { files = c.data; lastUpdated = c.u || ''; render(); return; }
+            }
+            skeleton();
+            el.cfStatus.textContent = '正在加载文件列表…';
+
+            fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + DIR + '?ref=' + REF, {
+                headers: { 'Accept': 'application/vnd.github+json' }
+            }).then(function (res) {
+                noteRate(res);
+                if (res.status === 404) return { nf: true };
+                if (res.status === 403 || res.status === 429) return { lim: true };
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json().then(function (j) { return { data: j }; });
+            }).then(function (r) {
+                if (r.nf) {
+                    files = []; lastUpdated = ''; putCache(files, '');
+                    showState('文件库还是空的。' + (token() ? '' : '配置管理令牌后可在线上传，或在本地把文件放进 uploads 目录后推送。'));
+                    render();
+                    return;
+                }
+                if (r.lim) {
+                    var old = cached();
+                    if (old) { files = old.data; render(); return; }
+                    showState('GitHub 接口调用已达上限（未登录限 60 次/小时），请稍后重试。', true);
+                    return;
+                }
+                files = (r.data || []).filter(function (f) { return f.type === 'file' && f.name !== 'README.md'; });
+                lastUpdated = '';
+                putCache(files, '');
+                render();
+                return api('/commits?path=' + DIR + '&sha=' + REF + '&per_page=1').then(function (cs) {
+                    if (cs && cs.length) {
+                        var c0 = cs[0].commit || {};
+                        lastUpdated = fmtDate((c0.committer && c0.committer.date) || c0.date);
+                        putCache(files, lastUpdated);
+                        render();
+                    }
+                });
+            }).catch(function (err) {
+                showState('加载失败：' + esc(err.message) +
+                    '<br><span class="cf-muted">本地预览请通过 http 方式打开；双击 html 文件可能受浏览器跨域限制。</span>', true);
+            });
+        }
+
+        /* ---------- 渲染 ---------- */
+        function applyView() {
+            el.cfView.querySelectorAll('button').forEach(function (b) {
+                b.classList.toggle('on', b.getAttribute('data-view') === view);
+            });
+            el.cfList.classList.toggle('list-view', view === 'list');
+        }
+
+        function renderTabs() {
+            var counts = { all: files.length };
+            files.forEach(function (f) {
+                var c = catOf(typeOf(f.name));
+                counts[c] = (counts[c] || 0) + 1;
+            });
+            var order = [['all', '全部'], ['doc', '文档'], ['xls', '表格'], ['ppt', '演示'],
+                         ['img', '图片'], ['media', '影音'], ['zip', '压缩包'], ['code', '代码'], ['other', '其他']];
+            el.cfTabs.innerHTML = order.filter(function (o) {
+                return o[0] === 'all' || counts[o[0]];
+            }).map(function (o) {
+                return '<button class="cf-tab' + (cat === o[0] ? ' on' : '') + '" type="button" data-cat="' + o[0] + '">' +
+                    esc(o[1]) + '<span class="cf-n">' + (counts[o[0]] || 0) + '</span></button>';
+            }).join('');
+        }
+
+        function render() {
+            renderTabs();
+            var kw = el.cfSearch.value.trim().toLowerCase();
+            var rows = files.filter(function (f) {
+                if (kw && f.name.toLowerCase().indexOf(kw) === -1) return false;
+                if (cat !== 'all' && catOf(typeOf(f.name)) !== cat) return false;
+                return true;
+            });
+
+            rows.sort(function (a, b) {
+                if (sort === 'size') return (b.size || 0) - (a.size || 0);
+                if (sort === 'type') {
+                    var ea = typeOf(a.name), eb = typeOf(b.name);
+                    if (ea !== eb) return ea < eb ? -1 : 1;
+                }
+                return a.name.localeCompare(b.name, 'zh');
+            });
+
+            if (!rows.length) {
+                showState(files.length ? '没有符合当前筛选的文件' :
+                    '文件库还是空的' + (token() ? '，拖拽上方区域即可上传。' : '。'));
+                el.cfStatus.textContent = '';
+                return;
+            }
+            el.cfState.style.display = 'none';
+
+            var canManage = !!userName;
+            el.cfList.innerHTML = rows.map(function (f) {
+                var ext = typeOf(f.name), ic = iconOf(ext);
+                var dl = f.download_url || rawUrl(f.name);
+                var sub = [ext.toUpperCase(), fmtSize(f.size)].filter(Boolean).join(' · ');
+                var ops = '<a class="cf-op" href="' + esc(dl) + '" target="_blank" rel="noopener">打开</a>' +
+                          '<button class="cf-op" type="button" data-act="copy" data-name="' + esc(f.name) + '">复制链接</button>';
+                if (canManage) {
+                    ops += '<button class="cf-op" type="button" data-act="rename" data-name="' + esc(f.name) + '">重命名</button>' +
+                           '<button class="cf-op del" type="button" data-act="del" data-name="' + esc(f.name) + '">删除</button>';
+                }
+                return '<div class="cf-item">' +
+                    '<div class="cf-icon ' + ic[0] + '">' + esc(ic[1]) + '</div>' +
+                    '<div class="cf-meta">' +
+                    '<a class="cf-name" href="' + esc(dl) + '" target="_blank" rel="noopener" title="' + esc(f.name) + '">' + esc(f.name) + '</a>' +
+                    '<span class="cf-sub">' + esc(sub) + '</span>' +
+                    '<div class="cf-ops">' + ops + '</div>' +
+                    '</div></div>';
+            }).join('');
+
+            var total = rows.reduce(function (s, f) { return s + (f.size || 0); }, 0);
+            el.cfStatus.textContent = '显示 ' + rows.length + ' / 共 ' + files.length +
+                ' 个文件 · 当前 ' + fmtSize(total) + (lastUpdated ? ' · 库最后更新 ' + lastUpdated : '');
+        }
+
+        /* ---------- 提交原语：一次 commit 完成多操作 ---------- */
+        function refSha() {
+            return api('/git/ref/heads/' + REF).then(function (r) { return r.object.sha; });
+        }
+
+        function commitTree(message, baseTreeSha, parentSha, entries) {
+            return api('/git/trees', {
+                method: 'POST',
+                body: { base_tree: baseTreeSha, tree: entries }
+            }).then(function (tree) {
+                return api('/git/commits', {
+                    method: 'POST',
+                    body: { message: message, tree: tree.sha, parents: [parentSha] }
+                });
+            }).then(function (commit) {
+                return api('/git/ref/heads/' + REF, {
+                    method: 'PATCH',
+                    body: { sha: commit.sha }
+                });
+            });
+        }
+
+        function baseCommit() {
+            return refSha().then(function (sha) {
+                return api('/git/commits/' + sha).then(function (c) { return { sha: sha, tree: c.tree.sha }; });
+            });
+        }
+
+        function makeBlob(name, buf, onProg) {
+            onProg(20);
+            return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/git/blobs', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/vnd.github+json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token()
+                },
+                body: JSON.stringify({ content: blobToBase64(buf), encoding: 'base64' })
+            }).then(function (res) {
+                noteRate(res);
+                if (!res.ok) {
+                    return res.text().then(function (t) {
+                        var m = t; try { m = JSON.parse(t).message; } catch (e) {}
+                        throw new Error(m || ('HTTP ' + res.status));
+                    });
+                }
+                return res.json();
+            }).then(function (b) { onProg(85); return b.sha; });
+        }
+
+        /* ---------- 上传 ---------- */
+        function queueRow(name, size) {
+            var d = document.createElement('div');
+            d.className = 'cf-qitem';
+            d.innerHTML = '<span class="cf-qname" title="' + esc(name) + '">' + esc(name) + '</span>' +
+                '<span class="cf-sub" style="width:70px;text-align:right;flex-shrink:0">' + esc(fmtSize(size)) + '</span>' +
+                '<span class="cf-bar"><i></i></span><span class="cf-qst">排队</span>';
+            el.cfQueue.appendChild(d);
+            return {
+                el: d,
+                prog: function (p) { d.querySelector('.cf-bar i').style.width = p + '%'; },
+                st: function (t, k) { var s = d.querySelector('.cf-qst'); s.textContent = t; s.className = 'cf-qst' + (k ? ' ' + k : ''); }
+            };
+        }
+
+        function freeName(name) {
+            var exist = {};
+            files.forEach(function (f) { exist[f.name.toLowerCase()] = 1; });
+            if (!exist[name.toLowerCase()]) return name;
+            var m = /^(.*?)(\.[^.]+)?$/.exec(name);
+            return m[1] + '-' + stamp() + (m[2] || '');
+        }
+
+        function upload(list) {
+            if (!userName) { toast('请先配置管理令牌', 'bad'); return; }
+            var picked = Array.prototype.slice.call(list).map(function (f) {
+                return { file: f, name: freeName(f.name), size: f.size,
+                         big: f.size > SOFT_MB * 1048576, over: f.size > HARD_MB * 1048576 };
+            });
+            var ok = picked.filter(function (p) { return !p.over; });
+            picked.filter(function (p) { return p.over; }).forEach(function (p) {
+                var r = queueRow(p.name, p.size);
+                r.st('过大', 'bad');
+                setTimeout(function () { r.el.remove(); }, 6000);
+            });
+            if (!ok.length) { toast('没有可上传的文件', 'bad'); return; }
+
+            var jobs = ok.map(function (p) { return { p: p, row: queueRow(p.name, p.size) }; });
+            if (picked.some(function (p) { return p.big && !p.over; })) {
+                toast('有文件超过 ' + SOFT_MB + ' MB，推送可能较慢', 'bad');
+            }
+
+            Promise.all(jobs.map(function (j) {
+                j.row.st('读取');
+                return j.p.file.arrayBuffer().then(function (buf) {
+                    return makeBlob(j.p.name, buf, function (pr) {
+                        j.row.prog(pr);
+                        j.row.st(pr < 85 ? '编码' : '准备');
+                    });
+                }).then(function (sha) { j.sha = sha; j.row.prog(90); j.row.st('待提交'); })
+                  .catch(function (e) { j.err = e.message; j.row.st('失败', 'bad'); });
+            })).then(function () {
+                var good = jobs.filter(function (j) { return j.sha; });
+                if (!good.length) { toast('上传失败', 'bad'); afterManage(); return; }
+                var failed = jobs.filter(function (j) { return !j.sha; });
+                failed.forEach(function (j) { j.row.st(j.err || '失败', 'bad'); });
+
+                return baseCommit().then(function (bc) {
+                    return commitTree(
+                        'docs(uploads): 新增 ' + good.length + ' 个云文档',
+                        bc.tree, bc.sha,
+                        good.map(function (j) {
+                            return { path: DIR + '/' + j.p.name, mode: '100644', type: 'blob', sha: j.sha };
+                        })
+                    );
+                }).then(function () {
+                    good.forEach(function (j) { j.row.prog(100); j.row.st('完成', 'ok'); });
+                    toast('已上传 ' + good.length + ' 个文件', 'ok');
+                    setTimeout(function () {
+                        jobs.forEach(function (j) { if (j.sha) j.el_remove = setTimeout(function () { j.row.el.remove(); }, 800); });
+                        afterManage();
+                    }, 400);
+                }).catch(function (e) {
+                    jobs.forEach(function (j) { if (!j.err) j.row.st('失败', 'bad'); });
+                    toast('提交失败：' + e.message, 'bad');
+                    afterManage();
+                });
+            });
+        }
+
+        function afterManage() {
+            try { sessionStorage.removeItem(CK); } catch (e) {}
+            setTimeout(function () { load(true); }, 1200);
+        }
+
+        /* ---------- 删除 / 重命名 / 复制 ---------- */
+        function delFile(name) {
+            var f = find(name);
+            confirmBox('删除文件',
+                '<p>将从文件库中删除：</p><p><strong>' + esc(name) + '</strong></p>' +
+                '<p class="cf-muted">此操作会写入一次提交，历史版本仍可经 Git 记录找回，但直链会立即失效。</p>',
+                '确认删除', true).then(function (yes) {
+                if (!yes) return;
+                return baseCommit().then(function (bc) {
+                    return commitTree('docs(uploads): 删除 ' + name, bc.tree, bc.sha,
+                        [{ path: DIR + '/' + name, mode: '100644', type: 'blob', sha: null }]);
+                }).then(function () {
+                    toast('已删除', 'ok');
+                    afterManage();
+                }).catch(function (e) { toast('删除失败：' + e.message, 'bad'); });
+            });
+        }
+
+        function renameFile(name) {
+            openBox('<h3>重命名</h3><p class="cf-muted">当前名称：' + esc(name) + '</p>' +
+                '<label>新文件名（含扩展名）</label><input id="cfNewName" value="' + esc(name) + '">' +
+                '<div class="cf-actions"><button class="cf-btn" id="cfNo" type="button">取消</button>' +
+                '<button class="cf-btn key" id="cfYes" type="button">确定</button></div>');
+            var inp = el.cfBox.querySelector('#cfNewName');
+            inp.focus();
+            inp.setSelectionRange(0, name.replace(/\.[^.]+$/, '').length);
+            el.cfBox.querySelector('#cfNo').onclick = closeBox;
+            el.cfBox.querySelector('#cfYes').onclick = function () {
+                var nn = inp.value.trim();
+                if (!nn || nn === name) { closeBox(); return; }
+                if (/[\\/:*?"<>|]/.test(nn)) { toast('文件名含非法字符', 'bad'); return; }
+                closeBox();
+                var src = find(name);
+                fetch(rawUrl(name))
+                    .then(function (r) {
+                        if (!r.ok) throw new Error('读取原文件失败 HTTP ' + r.status);
+                        return r.arrayBuffer();
+                    })
+                    .then(function (buf) { return makeBlob(nn, buf, function () {}); })
+                    .then(function (sha) {
+                        return baseCommit().then(function (bc) {
+                            return commitTree('docs(uploads): 重命名 ' + name + ' → ' + nn, bc.tree, bc.sha, [
+                                { path: DIR + '/' + nn, mode: '100644', type: 'blob', sha: sha },
+                                { path: DIR + '/' + name, mode: '100644', type: 'blob', sha: null }
+                            ]);
+                        });
+                    })
+                    .then(function () { toast('已重命名', 'ok'); afterManage(); })
+                    .catch(function (e) { toast('重命名失败：' + e.message, 'bad'); });
+            };
+        }
+
+        function find(name) {
+            for (var i = 0; i < files.length; i++) if (files[i].name === name) return files[i];
+            return null;
+        }
+
+        function copyLink(name) {
+            var url = siteUrl(name);
+            function fallback() {
+                var ta = document.createElement('textarea');
+                ta.value = url; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+                document.body.appendChild(ta); ta.select();
+                try { document.execCommand('copy'); toast('直链已复制', 'ok'); }
+                catch (e) { openBox('<h3>文件直链</h3><input value="' + esc(url) + '" readonly>'); }
+                ta.remove();
+            }
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(function () { toast('直链已复制', 'ok'); }, fallback);
+            } else fallback();
+        }
+
+        /* ---------- 令牌设置 ---------- */
+        function tokenPanel() {
+            openBox('<h3>配置管理令牌</h3>' +
+                '<p class="cf-muted">配置后可在本页直接上传、重命名、删除文件，无需回到本地操作。令牌仅保存在本浏览器 localStorage，不会上传到任何服务器。</p>' +
+                '<label>GitHub Personal Access Token</label>' +
+                '<input id="cfTkIn" type="password" placeholder="github_pat_... 或 ghp_..." autocomplete="off">' +
+                '<p class="cf-muted" style="margin-top:10px">建议创建 Fine-grained token：<strong>仅本仓库</strong>授权，<strong>Contents: Read and write</strong>，不设其他权限。用完可在 GitHub 上撤销。</p>' +
+                '<div class="cf-actions"><button class="cf-btn danger" id="cfTkClear" type="button">清除本机令牌</button>' +
+                '<button class="cf-btn" id="cfTkCancel" type="button">关闭</button>' +
+                '<button class="cf-btn key" id="cfTkSave" type="button">验证并保存</button></div>');
+
+            el.cfBox.querySelector('#cfTkCancel').onclick = closeBox;
+            el.cfBox.querySelector('#cfTkClear').onclick = function () {
+                localStorage.removeItem(TK);
+                userName = '';
+                renderMode();
+                closeBox();
+                toast('本机令牌已清除');
+                render();
+            };
+            el.cfBox.querySelector('#cfTkSave').onclick = function () {
+                var v = el.cfBox.querySelector('#cfTkIn').value.trim();
+                if (!v) { toast('请输入令牌', 'bad'); return; }
+                var btn = el.cfBox.querySelector('#cfTkSave');
+                btn.disabled = true; btn.textContent = '验证中…';
+                var old = token();
+                localStorage.setItem(TK, v);
+                fetch('https://api.github.com/user', { headers: { 'Authorization': 'Bearer ' + v } })
+                    .then(function (r) {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.json();
+                    })
+                    .then(function (u) {
+                        userName = u.login || '已授权';
+                        renderMode();
+                        closeBox();
+                        toast('已启用管理模式', 'ok');
+                        render();
+                    })
+                    .catch(function () {
+                        if (old) localStorage.setItem(TK, old); else localStorage.removeItem(TK);
+                        btn.disabled = false; btn.textContent = '验证并保存';
+                        toast('令牌无效或权限不足', 'bad');
+                    });
+            };
+        }
+
+        function probeToken() {
+            if (!token()) { renderMode(); return; }
+            fetch('https://api.github.com/user', { headers: { 'Authorization': 'Bearer ' + token() } })
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (u) {
+                    if (u && u.login) userName = u.login;
+                    else localStorage.removeItem(TK);
+                    renderMode();
+                    render();
+                })
+                .catch(function () { renderMode(); });
+        }
+
+        function bad(msg) { toast(msg, 'bad'); }
+
+        /* ---------- 事件绑定 ---------- */
+        el.cfDrop.addEventListener('click', function () {
+            if (!userName) { tokenPanel(); return; }
+            el.cfFile.click();
+        });
+        el.cfDrop.addEventListener('dragover', function (e) { e.preventDefault(); el.cfDrop.classList.add('hot'); });
+        el.cfDrop.addEventListener('dragleave', function () { el.cfDrop.classList.remove('hot'); });
+        el.cfDrop.addEventListener('drop', function (e) {
+            e.preventDefault();
+            el.cfDrop.classList.remove('hot');
+            if (!userName) { tokenPanel(); return; }
+            if (e.dataTransfer && e.dataTransfer.files.length) upload(e.dataTransfer.files);
+        });
+        el.cfFile.addEventListener('change', function () {
+            if (this.files.length) { upload(this.files); this.value = ''; }
         });
 
+        el.cfTokenBtn.addEventListener('click', tokenPanel);
+        el.cfRefresh.addEventListener('click', function () {
+            try { sessionStorage.removeItem(CK); } catch (e) {}
+            load(true);
+        });
+        el.cfSearch.addEventListener('input', render);
+        el.cfSort.addEventListener('change', function () { sort = this.value; localStorage.setItem(SK, sort); render(); });
+        el.cfView.addEventListener('click', function (e) {
+            var b = e.target.closest('button[data-view]');
+            if (!b) return;
+            view = b.getAttribute('data-view');
+            localStorage.setItem(VK, view);
+            applyView();
+        });
+        el.cfTabs.addEventListener('click', function (e) {
+            var b = e.target.closest('.cf-tab');
+            if (!b) return;
+            cat = b.getAttribute('data-cat');
+            render();
+        });
+
+        el.cfList.addEventListener('click', function (e) {
+            var b = e.target.closest('button[data-act]');
+            if (!b) return;
+            var name = b.getAttribute('data-name'), act = b.getAttribute('data-act');
+            if (act === 'copy') copyLink(name);
+            else if (act === 'del') delFile(name);
+            else if (act === 'rename') renameFile(name);
+        });
+
+        /* ---------- 启动 ---------- */
+        renderMode();
         load(false);
+        probeToken();
     })();
     </script>
-    <script src="../js/main.js"></script>
 </body>
 </html>
