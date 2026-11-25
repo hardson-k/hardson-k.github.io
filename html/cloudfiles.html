@@ -538,6 +538,7 @@
             return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + path, {
                 method: opt.method || 'GET',
                 headers: h,
+                cache: 'no-store',
                 body: opt.body ? (typeof opt.body === 'object' ? JSON.stringify(opt.body) : opt.body) : undefined
             }).then(function (res) {
                 noteRate(res);
@@ -613,16 +614,20 @@
             el.cfStatus.textContent = '';
         }
 
-        function load(force) {
-            if (!force) {
+        function load(force, atSha) {
+            if (!force && !atSha) {
                 var c = cached();
                 if (c) { files = c.data; lastUpdated = c.u || ''; render(); return; }
             }
+            var refQ = atSha || REF;
             skeleton();
             el.cfStatus.textContent = '正在加载文件列表…';
 
-            fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + DIR + '?ref=' + REF, {
-                headers: { 'Accept': 'application/vnd.github+json' }
+            var h = { 'Accept': 'application/vnd.github+json' };
+            if (token()) h['Authorization'] = 'Bearer ' + token();
+            fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + DIR + '?ref=' + refQ, {
+                headers: h,
+                cache: 'no-store'
             }).then(function (res) {
                 noteRate(res);
                 if (res.status === 404) return { nf: true };
@@ -631,6 +636,7 @@
                 return res.json().then(function (j) { return { data: j }; });
             }).then(function (r) {
                 if (r.nf) {
+                    if (atSha) { load(true, null); return; }
                     files = []; lastUpdated = ''; putCache(files, '');
                     showState('文件库还是空的。' + (token() ? '' : '配置管理令牌后可在线上传，或在本地把文件放进 uploads 目录后推送。'));
                     render();
@@ -646,7 +652,7 @@
                 lastUpdated = '';
                 putCache(files, '');
                 render();
-                return api('/commits?path=' + DIR + '&sha=' + REF + '&per_page=1').then(function (cs) {
+                return api('/commits?path=' + DIR + '&sha=' + refQ + '&per_page=1').then(function (cs) {
                     if (cs && cs.length) {
                         var c0 = cs[0].commit || {};
                         lastUpdated = fmtDate((c0.committer && c0.committer.date) || c0.date);
@@ -753,7 +759,7 @@
                 return api('/git/refs/heads/' + REF, {
                     method: 'PATCH',
                     body: { sha: commit.sha }
-                });
+                }).then(function () { return commit.sha; });
             });
         }
 
@@ -895,12 +901,12 @@
                             return { path: DIR + '/' + j.p.name, mode: '100644', type: 'blob', sha: j.sha };
                         })
                     );
-                }).then(function () {
+                }).then(function (newSha) {
                     good.forEach(function (j) { j.row.prog(100); j.row.st('完成', 'ok'); });
                     toast('已上传 ' + good.length + ' 个文件', 'ok');
                     setTimeout(function () {
                         jobs.forEach(function (j) { if (j.sha) j.el_remove = setTimeout(function () { j.row.el.remove(); }, 800); });
-                        afterManage();
+                        afterManage(newSha);
                     }, 400);
                 }).catch(function (e) {
                     jobs.forEach(function (j) { if (!j.err) j.row.st('失败', 'bad'); });
@@ -910,9 +916,9 @@
             });
         }
 
-        function afterManage() {
+        function afterManage(atSha) {
             try { sessionStorage.removeItem(CK); } catch (e) {}
-            setTimeout(function () { load(true); }, 1200);
+            setTimeout(function () { load(true, atSha); }, 600);
         }
 
         /* ---------- 删除 / 重命名 / 复制 ---------- */
@@ -926,9 +932,9 @@
                 return baseCommit().then(function (bc) {
                     return commitTree('docs(uploads): 删除 ' + name, bc.tree, bc.sha,
                         [{ path: DIR + '/' + name, mode: '100644', type: 'blob', sha: null }]);
-                }).then(function () {
+                }).then(function (newSha) {
                     toast('已删除', 'ok');
-                    afterManage();
+                    afterManage(newSha);
                 }).catch(function (e) { toast('删除失败：' + e.message, 'bad'); });
             });
         }
@@ -962,7 +968,7 @@
                             ]);
                         });
                     })
-                    .then(function () { toast('已重命名', 'ok'); afterManage(); })
+                    .then(function (newSha) { toast('已重命名', 'ok'); afterManage(newSha); })
                     .catch(function (e) { toast('重命名失败：' + e.message, 'bad'); });
             };
         }
