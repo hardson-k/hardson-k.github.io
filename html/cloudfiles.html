@@ -743,7 +743,7 @@
                     body: { message: message, tree: tree.sha, parents: [parentSha] }
                 });
             }).then(function (commit) {
-                return api('/git/ref/heads/' + REF, {
+                return api('/git/refs/heads/' + REF, {
                     method: 'PATCH',
                     body: { sha: commit.sha }
                 });
