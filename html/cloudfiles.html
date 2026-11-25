@@ -428,6 +428,7 @@
         var files = [];
         var lastUpdated = '';
         var userName = '';
+        var canWrite = false;
         var cat = 'all';
         var view = localStorage.getItem(VK) || 'grid';
         var sort = localStorage.getItem(SK) || 'name';
@@ -566,12 +567,18 @@
 
         /* ---------- 模式显示 ---------- */
         function renderMode() {
-            if (userName) {
+            if (userName && canWrite) {
                 el.cfMode.textContent = '管理已启用 · ' + userName;
                 el.cfMode.className = 'cf-badge on';
                 el.cfTokenBtn.textContent = '管理令牌设置';
                 el.cfDrop.classList.remove('locked');
                 el.cfDropHint.textContent = '单个文件 ≤ 25 MB 推荐，' + HARD_MB + ' MB 以上无法推送';
+            } else if (userName && !canWrite) {
+                el.cfMode.textContent = '仅读取 · 令牌无写权限';
+                el.cfMode.className = 'cf-badge off';
+                el.cfTokenBtn.textContent = '重新配置令牌';
+                el.cfDrop.classList.add('locked');
+                el.cfDropHint.textContent = '令牌可浏览，但缺少 Contents 写权限，点击重新配置';
             } else {
                 el.cfMode.textContent = '只读浏览模式';
                 el.cfMode.className = 'cf-badge off';
@@ -703,7 +710,7 @@
             }
             el.cfState.style.display = 'none';
 
-            var canManage = !!userName;
+            var canManage = !!(userName && canWrite);
             el.cfList.innerHTML = rows.map(function (f) {
                 var ext = typeOf(f.name), ic = iconOf(ext);
                 var dl = f.download_url || rawUrl(f.name);
@@ -778,6 +785,45 @@
             }).then(function (b) { onProg(85); return b.sha; });
         }
 
+        /* ---------- 错误诊断 ---------- */
+        function isPermErr(e) {
+            e = e || '';
+            return /not accessible by personal access token|Resource not accessible|permission|403/i.test(e);
+        }
+        function shortErr(e) {
+            if (!e) return '失败';
+            if (isPermErr(e)) return '无写权限';
+            if (/401|AUTH/i.test(e)) return '令牌失效';
+            if (/404/i.test(e)) return '路径错误';
+            if (/429|rate limit/i.test(e)) return '限流';
+            if (/NetworkError|Failed to fetch/i.test(e)) return '网络错误';
+            return '失败';
+        }
+        function diagnose(failed) {
+            var perm = failed.filter(function (j) { return isPermErr(j.err); }).length;
+            if (perm === failed.length && failed.length)
+                return '令牌缺少 Contents 写权限：请到 GitHub 把该令牌的 Contents 设为 Read and write';
+            return '上传失败：' + ((failed[0] && failed[0].err) || '未知错误');
+        }
+
+        /* 写入探测：创建一个游离 blob，不提交、不改分支，无副作用 */
+        function probeWrite(tk) {
+            return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/git/blobs', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/vnd.github+json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + tk
+                },
+                body: JSON.stringify({ content: 'cGFnZQ==', encoding: 'base64' })
+            }).then(function (res) {
+                noteRate(res);
+                canWrite = res.ok;
+                try { sessionStorage.setItem('cf_w_ok', canWrite ? '1' : '0'); } catch (e) {}
+                return canWrite;
+            }).catch(function () { canWrite = false; return false; });
+        }
+
         /* ---------- 上传 ---------- */
         function queueRow(name, size) {
             var d = document.createElement('div');
@@ -789,7 +835,12 @@
             return {
                 el: d,
                 prog: function (p) { d.querySelector('.cf-bar i').style.width = p + '%'; },
-                st: function (t, k) { var s = d.querySelector('.cf-qst'); s.textContent = t; s.className = 'cf-qst' + (k ? ' ' + k : ''); }
+                st: function (t, k, tip) {
+                    var s = d.querySelector('.cf-qst');
+                    s.textContent = t; s.className = 'cf-qst' + (k ? ' ' + k : '');
+                    if (tip) { s.title = tip; d.title = tip; }
+                    if (k === 'bad') d.style.borderColor = 'rgba(220,38,38,.45)';
+                }
             };
         }
 
@@ -802,7 +853,8 @@
         }
 
         function upload(list) {
-            if (!userName) { toast('请先配置管理令牌', 'bad'); return; }
+            if (!userName) { toast('请先配置管理令牌', 'bad'); tokenPanel(); return; }
+            if (!canWrite) { toast('令牌无 Contents 写权限，请重新配置', 'bad'); tokenPanel(); return; }
             var picked = Array.prototype.slice.call(list).map(function (f) {
                 return { file: f, name: freeName(f.name), size: f.size,
                          big: f.size > SOFT_MB * 1048576, over: f.size > HARD_MB * 1048576 };
@@ -831,9 +883,9 @@
                   .catch(function (e) { j.err = e.message; j.row.st('失败', 'bad'); });
             })).then(function () {
                 var good = jobs.filter(function (j) { return j.sha; });
-                if (!good.length) { toast('上传失败', 'bad'); afterManage(); return; }
                 var failed = jobs.filter(function (j) { return !j.sha; });
-                failed.forEach(function (j) { j.row.st(j.err || '失败', 'bad'); });
+                failed.forEach(function (j) { j.row.st(shortErr(j.err), 'bad', j.err || '失败'); });
+                if (!good.length) { toast(diagnose(failed), 'bad'); return; }
 
                 return baseCommit().then(function (bc) {
                     return commitTree(
@@ -969,10 +1021,14 @@
                     })
                     .then(function (u) {
                         userName = u.login || '已授权';
-                        renderMode();
-                        closeBox();
-                        toast('已启用管理模式', 'ok');
-                        render();
+                        btn.textContent = '检查写权限…';
+                        return probeWrite(v).then(function (w) {
+                            renderMode();
+                            closeBox();
+                            if (w) toast('管理模式已启用（含写权限）', 'ok');
+                            else toast('令牌可读取，但缺少 Contents 写权限，上传将失败', 'bad');
+                            render();
+                        });
                     })
                     .catch(function () {
                         if (old) localStorage.setItem(TK, old); else localStorage.removeItem(TK);
@@ -988,9 +1044,11 @@
                 .then(function (r) { return r.ok ? r.json() : null; })
                 .then(function (u) {
                     if (u && u.login) userName = u.login;
-                    else localStorage.removeItem(TK);
+                    else { localStorage.removeItem(TK); renderMode(); render(); return; }
+                    try { canWrite = sessionStorage.getItem('cf_w_ok') === '1'; } catch (e) {}
                     renderMode();
                     render();
+                    return probeWrite(token()).then(function () { renderMode(); });
                 })
                 .catch(function () { renderMode(); });
         }
@@ -999,7 +1057,7 @@
 
         /* ---------- 事件绑定 ---------- */
         el.cfDrop.addEventListener('click', function () {
-            if (!userName) { tokenPanel(); return; }
+            if (!userName || !canWrite) { tokenPanel(); return; }
             el.cfFile.click();
         });
         el.cfDrop.addEventListener('dragover', function (e) { e.preventDefault(); el.cfDrop.classList.add('hot'); });
@@ -1007,7 +1065,7 @@
         el.cfDrop.addEventListener('drop', function (e) {
             e.preventDefault();
             el.cfDrop.classList.remove('hot');
-            if (!userName) { tokenPanel(); return; }
+            if (!userName || !canWrite) { tokenPanel(); return; }
             if (e.dataTransfer && e.dataTransfer.files.length) upload(e.dataTransfer.files);
         });
         el.cfFile.addEventListener('change', function () {
